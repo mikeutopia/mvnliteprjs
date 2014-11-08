@@ -1,5 +1,6 @@
 package com.cienet.mat.encrypt;
 
+import java.math.BigInteger;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -10,6 +11,8 @@ import java.security.Signature;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
@@ -242,6 +245,9 @@ public class RSACoder extends Coder {
 	 * @throws Exception
 	 */
 	public static Map<String, Object> initKey() throws Exception {
+
+		System.err.println("INIT KEY START");
+
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
 		keyPairGen.initialize(1024);
 
@@ -250,13 +256,38 @@ public class RSACoder extends Coder {
 		// 公钥
 		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
 
+		BigInteger puMod = publicKey.getModulus();
+
+		BigInteger puPe = publicKey.getPublicExponent();
+
+		System.err.println("PULIC KEY START");
+		System.err.println("PULIC MOD=" + puMod.toString());
+		System.err.println("PULIC PEX=" + puPe.toString());
+		System.err.println("PULIC KEY END");
+
+		RSAPublicKeySpec puKs = new RSAPublicKeySpec(puMod, puPe);
+		publicKey = (RSAPublicKey) KeyFactory.getInstance(KEY_ALGORITHM).generatePublic(puKs);
 		// 私钥
+
 		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+
+		BigInteger prMod = privateKey.getModulus();
+		BigInteger prPe = privateKey.getPrivateExponent();
+
+		System.err.println("PRIVATE KEY START");
+		System.err.println("PRIVATE MOD=" + prMod.toString());
+		System.err.println("PRIVATE PEX=" + prPe.toString());
+		System.err.println("PRIVATE KEY END");
+
+		RSAPrivateKeySpec prKs = new RSAPrivateKeySpec(prMod, prPe);
+		privateKey = (RSAPrivateKey) KeyFactory.getInstance(KEY_ALGORITHM).generatePrivate(prKs);
 
 		Map<String, Object> keyMap = new HashMap<String, Object>(2);
 
 		keyMap.put(PUBLIC_KEY, publicKey);
 		keyMap.put(PRIVATE_KEY, privateKey);
+
+		System.err.println("INIT KEY END");
 		return keyMap;
 	}
 }
