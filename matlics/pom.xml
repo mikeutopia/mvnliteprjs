@@ -14,12 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>it.sauronsoftware.cron4j</groupId>
-			<artifactId>cron4j</artifactId>
-			<version>2.2.5</version>
-		</dependency>
+	<dependencies>		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
