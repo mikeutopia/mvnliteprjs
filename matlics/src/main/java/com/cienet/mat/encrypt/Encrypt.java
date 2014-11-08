@@ -1,19 +1,19 @@
 package com.cienet.mat.encrypt;
 
 public class Encrypt {
-	private static String code = "dsfafsdafds";
-
-	public static void main(String[] args) throws Exception {
-		// testPr2Pu();
-		String mm = encryptByPrivateKey(code);
-		System.out.println(mm);
-
-		String oo = decryptByPublicKey(mm);
-		System.out.println(oo);
-	}
+	// private static String code = "dsfafsdafds";
+	//
+	// public static void main(String[] args) throws Exception {
+	// // testPr2Pu();
+	// String mm = encryptByPrivateKey(code);
+	// System.out.println(mm);
+	//
+	// String oo = decryptByPublicKey(mm);
+	// System.out.println(oo);
+	// }
 
 	public static String encryptByPrivateKey(String src) throws Exception {
-		byte[] encodedData = CoderUtil.encryptByPrivateKey(code.getBytes("utf8"), Const.PRIVATE_KEY);
+		byte[] encodedData = CoderUtil.encryptByPrivateKey(src.getBytes("utf8"), Const.PRIVATE_KEY);
 		return CoderUtil.bytesToStr(encodedData);
 	}
 
@@ -24,7 +24,7 @@ public class Encrypt {
 	}
 
 	public static String encryptByPublicKey(String src) throws Exception {
-		byte[] encodedData = CoderUtil.encryptByPublicKey(code.getBytes("utf8"), Const.PUBLIC_KEY);
+		byte[] encodedData = CoderUtil.encryptByPublicKey(src.getBytes("utf8"), Const.PUBLIC_KEY);
 		return CoderUtil.bytesToStr(encodedData);
 	}
 
@@ -35,6 +35,7 @@ public class Encrypt {
 	}
 
 	public static void testPr2Pu() throws Exception {
+		String code = "dsfafsdafds";
 		byte[] encodedData = CoderUtil.encryptByPrivateKey(code.getBytes("utf8"), Const.PRIVATE_KEY);
 		CoderUtil.printBytes(encodedData);
 		String ss = CoderUtil.bytesToStr(encodedData);
