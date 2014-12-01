@@ -49,32 +49,19 @@ public class LocationServer {
 		}
 	}
 
-	private static TServer getInstance() throws Exception {
+	public static TServer getInstance() throws Exception {
 		if (tServer == null) {
 			synchronized (LocationServer.class) {
 				if (tServer == null) {
-					// Integer svrPort =
-					// PgdProxyUtil.getProxy().getSvcCfg().getThrLocaSvrPort();
-					TProcessor tprocessor = new LocationService.Processor<Iface>(new LocationServiceImpl());
-					// new LocationService.AsyncProcessor<AsyncIface>(new
-					// LocationServiceAsyncImpl());
-					// TNonblockingServerSocket tnbSocketTransport = new
-					// TNonblockingServerSocket(svrPort);
-					// TNonblockingServer.Args tnbArgs = new
-					// TNonblockingServer.Args(tnbSocketTransport);
-					// tnbArgs.processor(tprocessor);
-					// tnbArgs.transportFactory(new TFramedTransport.Factory());
-					// tnbArgs.protocolFactory(new TCompactProtocol.Factory());
-					// tServer = new TNonblockingServer(tnbArgs);
 
-					TServerSocket serverTransport = new TServerSocket(8090);
+					TProcessor tprocessor = new LocationService.Processor<Iface>(new LocationServiceImpl());
+
+					TServerSocket serverTransport = new TServerSocket(8091);
 					TThreadPoolServer.Args ttpsArgs = new TThreadPoolServer.Args(serverTransport);
 					ttpsArgs.processor(tprocessor);
 					ttpsArgs.protocolFactory(new TBinaryProtocol.Factory());
 
-					// 线程池服务模型，使用标准的阻塞式IO，预先创建一组线程处理请求。
-					TServer server = new TThreadPoolServer(ttpsArgs);
-					server.serve();
+					tServer = new TThreadPoolServer(ttpsArgs);
 				}
 			}
 		}
