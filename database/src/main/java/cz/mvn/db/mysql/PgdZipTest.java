@@ -1,8 +1,5 @@
 package cz.mvn.db.mysql;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class PgdZipTest {
 			java.sql.Statement dltAllSt = conn.createStatement();
 			dltAllSt.execute("delete from pgd_DeviceHistLocZip");
 			dltAllSt.close();
-			Date day = new Date((System.currentTimeMillis() / dayTime - 2) * dayTime);
+			Date day = new Date((System.currentTimeMillis() / dayTime) * dayTime);
 			List<String> dImeis = queryIemis(day);
 			System.out.println(dImeis);
 			int batchSize = 3;
@@ -63,18 +60,14 @@ public class PgdZipTest {
 
 		String qSql = "select e.* from pgd_DeviceHistLoc e where e.deviceImei=? and e.gpsTime>=? and e.gpsTime<? order by e.gpsTime desc  ";
 
-		String insertSql = "INSERT INTO pgd_DeviceHistLocZip (dayKey,recDay,deviceImei,recData) VALUES(?,?,?,?)";
+		String insertSql = "INSERT INTO pgd_DeviceHistLocZip (dayImei,recDay,deviceImei,recData) VALUES(?,?,?,?)";
 		String deleteSql = "DELETE FROM pgd_DeviceHistLoc where deviceImei=? and gpsTime<?";
 
 		java.sql.PreparedStatement istStmt = null;
 		java.sql.PreparedStatement dtlStmt = null;
-		ByteArrayOutputStream baos = null;
-		ObjectOutputStream oos = null;
 		try {
 			dtlStmt = conn.prepareStatement(deleteSql);
 			istStmt = conn.prepareStatement(insertSql);
-			baos = new ByteArrayOutputStream();
-			oos = new ObjectOutputStream(baos);
 			for (String imei : imeis) {
 				System.out.println(imei);
 				List<DeviceHistLoc> locs = QueryResult.queryLocs(conn, qSql, QueryCbs.toDeviceHistLoc(), imei,
@@ -86,13 +79,7 @@ public class PgdZipTest {
 				istStmt.setString(1, dayStr + imei);
 				istStmt.setDate(2, dday);
 				istStmt.setString(3, imei);
-				baos.reset();
-				oos.reset();
-				oos.writeObject(locs);
-				byte[] locsAsBytes = baos.toByteArray();
-				// System.out.println(locsAsBytes.length / (8 * 1024));
-				ByteArrayInputStream bais = new ByteArrayInputStream(locsAsBytes);
-				istStmt.setBinaryStream(4, bais, locsAsBytes.length);
+				istStmt.setObject(4, locs);
 				istStmt.addBatch();
 
 				dtlStmt.setString(1, imei);
@@ -100,19 +87,13 @@ public class PgdZipTest {
 				dtlStmt.addBatch();
 			}
 			istStmt.executeBatch();
-			dtlStmt.executeBatch();
+			// dtlStmt.executeBatch();
 			conn.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (baos != null) {
-					baos.close();
-				}
-				if (oos != null) {
-					oos.close();
-				}
 				if (istStmt != null) {
 					istStmt.close();
 				}
@@ -133,8 +114,8 @@ public class PgdZipTest {
 		Timestamp fromTime = new Timestamp(cal.getTimeInMillis());
 		cal.add(Calendar.DAY_OF_YEAR, 1);
 		Timestamp toTime = new Timestamp(cal.getTimeInMillis());
-
-		String sql = "select distinct deviceImei from pgd_DeviceHistLoc where gpsTime>=? and gpsTime<? and historyOid<8";
+		System.out.println(fromTime + "\t" + toTime);
+		String sql = "select distinct deviceImei from pgd_DeviceHistLoc where gpsTime>=? and gpsTime<? ";
 		return QueryResult.queryLocs(conn, sql, QueryCbs.transToString("deviceImei"), fromTime, toTime);
 	}
 }
