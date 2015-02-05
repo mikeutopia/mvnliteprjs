@@ -52,7 +52,7 @@ public class LocationClient {
 			LocationService.Client client = new LocationService.Client(protocol);
 			transport.open();
 			int secCnt = 10000;
-			int secs = 200;
+			int secs = 10000;
 			long startTime = System.currentTimeMillis() - 10000L * secs;
 			int bc = 2000;
 			for (int i = 0; i <= secs; i++) {
@@ -86,7 +86,7 @@ public class LocationClient {
 		List<DeviceLocation> locs = new ArrayList<DeviceLocation>();
 		for (int i = from; i < to; i++) {
 			DeviceLocation loc = new DeviceLocation();
-			loc.setIMEI("imei" + (100000 + i));
+			loc.setIMEI("imei" + (10000000000L + i));
 			loc.setTimestamp(time);
 			loc.setLocation(new Location((time + 8D + i * 30) % 360 - 180, (time + 7D + i * 40) % 360 - 180));
 			locs.add(loc);
