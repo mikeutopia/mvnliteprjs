@@ -4,7 +4,7 @@ import org.apache.thrift.server.TServer;
 
 public class ThriftServerStatusTest {
 	public static void main(String[] args) throws Exception {
-		final TServer server = LocationServer.getInstance();
+		final TServer server = AppServer.getInstance();
 		System.out.println("aaaaaaaaaaaaaaaaaa");
 		new Thread(new Runnable() {
 			@Override

@@ -10,13 +10,13 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
-import com.g2sky.pgd.intf.thrift.gen.DeviceLocation;
-import com.g2sky.pgd.intf.thrift.gen.Location;
-import com.g2sky.pgd.intf.thrift.gen.LocationService;
+import com.g2sky.pgd.intf.thrift.appservice.AppService;
+import com.g2sky.pgd.intf.thrift.appservice.DeviceLocation;
+import com.g2sky.pgd.intf.thrift.appservice.Location;
 
 public class LocationClient {
 
-	public static final String SERVER_IP = "127.0.0.1";
+	public static final String SERVER_IP = "192.168.31.248";
 	public static final int SERVER_PORT = 8090;
 	public static final int TIMEOUT = 30000;
 
@@ -28,7 +28,7 @@ public class LocationClient {
 			TProtocol protocol = new TBinaryProtocol(transport);
 			// TProtocol protocol = new TCompactProtocol(transport);
 			// TProtocol protocol = new TJSONProtocol(transport);
-			LocationService.Client client = new LocationService.Client(protocol);
+			AppService.Client client = new AppService.Client(protocol);
 			transport.open();
 			boolean result = client.setBatchLocation(locs);
 			System.out.println("Thrify client result =: " + result);
@@ -49,10 +49,10 @@ public class LocationClient {
 			TProtocol protocol = new TBinaryProtocol(transport);
 			// TProtocol protocol = new TCompactProtocol(transport);
 			// TProtocol protocol = new TJSONProtocol(transport);
-			LocationService.Client client = new LocationService.Client(protocol);
+			AppService.Client client = new AppService.Client(protocol);
 			transport.open();
-			int secCnt = 10000;
-			int secs = 10000;
+			int secCnt = 4000;
+			int secs = 180;
 			long startTime = System.currentTimeMillis() - 10000L * secs;
 			int bc = 2000;
 			for (int i = 0; i <= secs; i++) {
@@ -86,7 +86,7 @@ public class LocationClient {
 		List<DeviceLocation> locs = new ArrayList<DeviceLocation>();
 		for (int i = from; i < to; i++) {
 			DeviceLocation loc = new DeviceLocation();
-			loc.setIMEI("imei" + (10000000000L + i));
+			loc.setIMEI("imei" + (100000 + i));
 			loc.setTimestamp(time);
 			loc.setLocation(new Location((time + 8D + i * 30) % 360 - 180, (time + 7D + i * 40) % 360 - 180));
 			locs.add(loc);
