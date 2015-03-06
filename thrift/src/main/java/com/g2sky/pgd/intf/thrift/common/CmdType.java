@@ -11,20 +11,15 @@ import java.util.Map;
 import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum MsgType implements org.apache.thrift.TEnum {
-  DeviceRegister(1),
-  CtrlCmd(2),
-  CodeAuth(3),
-  DeviceInfoUpdate(4),
-  DeviceLastInformTime(5),
-  LoadDeviceInfo(6),
-  VersionInfoSync(7),
-  LoadVersionInfo(8),
-  WarnMsgReport(9);
+public enum CmdType implements org.apache.thrift.TEnum {
+  APPCMDREQ(1),
+  APPCMDRSP(2),
+  COMMCMDREQ(3),
+  COMMCMDRSP(4);
 
   private final int value;
 
-  private MsgType(int value) {
+  private CmdType(int value) {
     this.value = value;
   }
 
@@ -39,26 +34,16 @@ public enum MsgType implements org.apache.thrift.TEnum {
    * Find a the enum type by its integer value, as defined in the Thrift IDL.
    * @return null if the value is not found.
    */
-  public static MsgType findByValue(int value) { 
+  public static CmdType findByValue(int value) { 
     switch (value) {
       case 1:
-        return DeviceRegister;
+        return APPCMDREQ;
       case 2:
-        return CtrlCmd;
+        return APPCMDRSP;
       case 3:
-        return CodeAuth;
+        return COMMCMDREQ;
       case 4:
-        return DeviceInfoUpdate;
-      case 5:
-        return DeviceLastInformTime;
-      case 6:
-        return LoadDeviceInfo;
-      case 7:
-        return VersionInfoSync;
-      case 8:
-        return LoadVersionInfo;
-      case 9:
-        return WarnMsgReport;
+        return COMMCMDRSP;
       default:
         return null;
     }

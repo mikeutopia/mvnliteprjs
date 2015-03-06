@@ -32,25 +32,25 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, CommCommandRSP._Fields>, java.io.Serializable, Cloneable, Comparable<CommCommandRSP> {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("CommCommandRSP");
+public class DeviceTimeStamp implements org.apache.thrift.TBase<DeviceTimeStamp, DeviceTimeStamp._Fields>, java.io.Serializable, Cloneable, Comparable<DeviceTimeStamp> {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("DeviceTimeStamp");
 
-  private static final org.apache.thrift.protocol.TField REQ_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("reqID", org.apache.thrift.protocol.TType.I64, (short)1);
-  private static final org.apache.thrift.protocol.TField PARAMETER_FIELD_DESC = new org.apache.thrift.protocol.TField("parameter", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+  private static final org.apache.thrift.protocol.TField IMSI_FIELD_DESC = new org.apache.thrift.protocol.TField("imsi", org.apache.thrift.protocol.TType.STRING, (short)1);
+  private static final org.apache.thrift.protocol.TField TIMESTAMP_FIELD_DESC = new org.apache.thrift.protocol.TField("timestamp", org.apache.thrift.protocol.TType.I64, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new CommCommandRSPStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new CommCommandRSPTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new DeviceTimeStampStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new DeviceTimeStampTupleSchemeFactory());
   }
 
-  public long reqID; // required
-  public BaseMsg parameter; // required
+  public String imsi; // required
+  public long timestamp; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    REQ_ID((short)1, "reqID"),
-    PARAMETER((short)2, "parameter");
+    IMSI((short)1, "imsi"),
+    TIMESTAMP((short)2, "timestamp");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -65,10 +65,10 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // REQ_ID
-          return REQ_ID;
-        case 2: // PARAMETER
-          return PARAMETER;
+        case 1: // IMSI
+          return IMSI;
+        case 2: // TIMESTAMP
+          return TIMESTAMP;
         default:
           return null;
       }
@@ -109,116 +109,116 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
   }
 
   // isset id assignments
-  private static final int __REQID_ISSET_ID = 0;
+  private static final int __TIMESTAMP_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.REQ_ID, new org.apache.thrift.meta_data.FieldMetaData("reqID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.IMSI, new org.apache.thrift.meta_data.FieldMetaData("imsi", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.TIMESTAMP, new org.apache.thrift.meta_data.FieldMetaData("timestamp", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
-    tmpMap.put(_Fields.PARAMETER, new org.apache.thrift.meta_data.FieldMetaData("parameter", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, BaseMsg.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(CommCommandRSP.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DeviceTimeStamp.class, metaDataMap);
   }
 
-  public CommCommandRSP() {
+  public DeviceTimeStamp() {
   }
 
-  public CommCommandRSP(
-    long reqID,
-    BaseMsg parameter)
+  public DeviceTimeStamp(
+    String imsi,
+    long timestamp)
   {
     this();
-    this.reqID = reqID;
-    setReqIDIsSet(true);
-    this.parameter = parameter;
+    this.imsi = imsi;
+    this.timestamp = timestamp;
+    setTimestampIsSet(true);
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public CommCommandRSP(CommCommandRSP other) {
+  public DeviceTimeStamp(DeviceTimeStamp other) {
     __isset_bitfield = other.__isset_bitfield;
-    this.reqID = other.reqID;
-    if (other.isSetParameter()) {
-      this.parameter = new BaseMsg(other.parameter);
+    if (other.isSetImsi()) {
+      this.imsi = other.imsi;
     }
+    this.timestamp = other.timestamp;
   }
 
-  public CommCommandRSP deepCopy() {
-    return new CommCommandRSP(this);
+  public DeviceTimeStamp deepCopy() {
+    return new DeviceTimeStamp(this);
   }
 
   @Override
   public void clear() {
-    setReqIDIsSet(false);
-    this.reqID = 0;
-    this.parameter = null;
+    this.imsi = null;
+    setTimestampIsSet(false);
+    this.timestamp = 0;
   }
 
-  public long getReqID() {
-    return this.reqID;
+  public String getImsi() {
+    return this.imsi;
   }
 
-  public CommCommandRSP setReqID(long reqID) {
-    this.reqID = reqID;
-    setReqIDIsSet(true);
+  public DeviceTimeStamp setImsi(String imsi) {
+    this.imsi = imsi;
     return this;
   }
 
-  public void unsetReqID() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __REQID_ISSET_ID);
+  public void unsetImsi() {
+    this.imsi = null;
   }
 
-  /** Returns true if field reqID is set (has been assigned a value) and false otherwise */
-  public boolean isSetReqID() {
-    return EncodingUtils.testBit(__isset_bitfield, __REQID_ISSET_ID);
+  /** Returns true if field imsi is set (has been assigned a value) and false otherwise */
+  public boolean isSetImsi() {
+    return this.imsi != null;
   }
 
-  public void setReqIDIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __REQID_ISSET_ID, value);
-  }
-
-  public BaseMsg getParameter() {
-    return this.parameter;
-  }
-
-  public CommCommandRSP setParameter(BaseMsg parameter) {
-    this.parameter = parameter;
-    return this;
-  }
-
-  public void unsetParameter() {
-    this.parameter = null;
-  }
-
-  /** Returns true if field parameter is set (has been assigned a value) and false otherwise */
-  public boolean isSetParameter() {
-    return this.parameter != null;
-  }
-
-  public void setParameterIsSet(boolean value) {
+  public void setImsiIsSet(boolean value) {
     if (!value) {
-      this.parameter = null;
+      this.imsi = null;
     }
+  }
+
+  public long getTimestamp() {
+    return this.timestamp;
+  }
+
+  public DeviceTimeStamp setTimestamp(long timestamp) {
+    this.timestamp = timestamp;
+    setTimestampIsSet(true);
+    return this;
+  }
+
+  public void unsetTimestamp() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __TIMESTAMP_ISSET_ID);
+  }
+
+  /** Returns true if field timestamp is set (has been assigned a value) and false otherwise */
+  public boolean isSetTimestamp() {
+    return EncodingUtils.testBit(__isset_bitfield, __TIMESTAMP_ISSET_ID);
+  }
+
+  public void setTimestampIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __TIMESTAMP_ISSET_ID, value);
   }
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
-    case REQ_ID:
+    case IMSI:
       if (value == null) {
-        unsetReqID();
+        unsetImsi();
       } else {
-        setReqID((Long)value);
+        setImsi((String)value);
       }
       break;
 
-    case PARAMETER:
+    case TIMESTAMP:
       if (value == null) {
-        unsetParameter();
+        unsetTimestamp();
       } else {
-        setParameter((BaseMsg)value);
+        setTimestamp((Long)value);
       }
       break;
 
@@ -227,11 +227,11 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
-    case REQ_ID:
-      return Long.valueOf(getReqID());
+    case IMSI:
+      return getImsi();
 
-    case PARAMETER:
-      return getParameter();
+    case TIMESTAMP:
+      return Long.valueOf(getTimestamp());
 
     }
     throw new IllegalStateException();
@@ -244,10 +244,10 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
     }
 
     switch (field) {
-    case REQ_ID:
-      return isSetReqID();
-    case PARAMETER:
-      return isSetParameter();
+    case IMSI:
+      return isSetImsi();
+    case TIMESTAMP:
+      return isSetTimestamp();
     }
     throw new IllegalStateException();
   }
@@ -256,30 +256,30 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof CommCommandRSP)
-      return this.equals((CommCommandRSP)that);
+    if (that instanceof DeviceTimeStamp)
+      return this.equals((DeviceTimeStamp)that);
     return false;
   }
 
-  public boolean equals(CommCommandRSP that) {
+  public boolean equals(DeviceTimeStamp that) {
     if (that == null)
       return false;
 
-    boolean this_present_reqID = true;
-    boolean that_present_reqID = true;
-    if (this_present_reqID || that_present_reqID) {
-      if (!(this_present_reqID && that_present_reqID))
+    boolean this_present_imsi = true && this.isSetImsi();
+    boolean that_present_imsi = true && that.isSetImsi();
+    if (this_present_imsi || that_present_imsi) {
+      if (!(this_present_imsi && that_present_imsi))
         return false;
-      if (this.reqID != that.reqID)
+      if (!this.imsi.equals(that.imsi))
         return false;
     }
 
-    boolean this_present_parameter = true && this.isSetParameter();
-    boolean that_present_parameter = true && that.isSetParameter();
-    if (this_present_parameter || that_present_parameter) {
-      if (!(this_present_parameter && that_present_parameter))
+    boolean this_present_timestamp = true;
+    boolean that_present_timestamp = true;
+    if (this_present_timestamp || that_present_timestamp) {
+      if (!(this_present_timestamp && that_present_timestamp))
         return false;
-      if (!this.parameter.equals(that.parameter))
+      if (this.timestamp != that.timestamp)
         return false;
     }
 
@@ -292,29 +292,29 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
   }
 
   @Override
-  public int compareTo(CommCommandRSP other) {
+  public int compareTo(DeviceTimeStamp other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
 
     int lastComparison = 0;
 
-    lastComparison = Boolean.valueOf(isSetReqID()).compareTo(other.isSetReqID());
+    lastComparison = Boolean.valueOf(isSetImsi()).compareTo(other.isSetImsi());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetReqID()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.reqID, other.reqID);
+    if (isSetImsi()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.imsi, other.imsi);
       if (lastComparison != 0) {
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetParameter()).compareTo(other.isSetParameter());
+    lastComparison = Boolean.valueOf(isSetTimestamp()).compareTo(other.isSetTimestamp());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetParameter()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.parameter, other.parameter);
+    if (isSetTimestamp()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.timestamp, other.timestamp);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -336,19 +336,19 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("CommCommandRSP(");
+    StringBuilder sb = new StringBuilder("DeviceTimeStamp(");
     boolean first = true;
 
-    sb.append("reqID:");
-    sb.append(this.reqID);
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("parameter:");
-    if (this.parameter == null) {
+    sb.append("imsi:");
+    if (this.imsi == null) {
       sb.append("null");
     } else {
-      sb.append(this.parameter);
+      sb.append(this.imsi);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("timestamp:");
+    sb.append(this.timestamp);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -357,9 +357,6 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (parameter != null) {
-      parameter.validate();
-    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -380,15 +377,15 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
     }
   }
 
-  private static class CommCommandRSPStandardSchemeFactory implements SchemeFactory {
-    public CommCommandRSPStandardScheme getScheme() {
-      return new CommCommandRSPStandardScheme();
+  private static class DeviceTimeStampStandardSchemeFactory implements SchemeFactory {
+    public DeviceTimeStampStandardScheme getScheme() {
+      return new DeviceTimeStampStandardScheme();
     }
   }
 
-  private static class CommCommandRSPStandardScheme extends StandardScheme<CommCommandRSP> {
+  private static class DeviceTimeStampStandardScheme extends StandardScheme<DeviceTimeStamp> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, CommCommandRSP struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, DeviceTimeStamp struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -398,19 +395,18 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
           break;
         }
         switch (schemeField.id) {
-          case 1: // REQ_ID
-            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
-              struct.reqID = iprot.readI64();
-              struct.setReqIDIsSet(true);
+          case 1: // IMSI
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.imsi = iprot.readString();
+              struct.setImsiIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // PARAMETER
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.parameter = new BaseMsg();
-              struct.parameter.read(iprot);
-              struct.setParameterIsSet(true);
+          case 2: // TIMESTAMP
+            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+              struct.timestamp = iprot.readI64();
+              struct.setTimestampIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -426,63 +422,62 @@ public class CommCommandRSP implements org.apache.thrift.TBase<CommCommandRSP, C
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, CommCommandRSP struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, DeviceTimeStamp struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(REQ_ID_FIELD_DESC);
-      oprot.writeI64(struct.reqID);
-      oprot.writeFieldEnd();
-      if (struct.parameter != null) {
-        oprot.writeFieldBegin(PARAMETER_FIELD_DESC);
-        struct.parameter.write(oprot);
+      if (struct.imsi != null) {
+        oprot.writeFieldBegin(IMSI_FIELD_DESC);
+        oprot.writeString(struct.imsi);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(TIMESTAMP_FIELD_DESC);
+      oprot.writeI64(struct.timestamp);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
   }
 
-  private static class CommCommandRSPTupleSchemeFactory implements SchemeFactory {
-    public CommCommandRSPTupleScheme getScheme() {
-      return new CommCommandRSPTupleScheme();
+  private static class DeviceTimeStampTupleSchemeFactory implements SchemeFactory {
+    public DeviceTimeStampTupleScheme getScheme() {
+      return new DeviceTimeStampTupleScheme();
     }
   }
 
-  private static class CommCommandRSPTupleScheme extends TupleScheme<CommCommandRSP> {
+  private static class DeviceTimeStampTupleScheme extends TupleScheme<DeviceTimeStamp> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, CommCommandRSP struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, DeviceTimeStamp struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetReqID()) {
+      if (struct.isSetImsi()) {
         optionals.set(0);
       }
-      if (struct.isSetParameter()) {
+      if (struct.isSetTimestamp()) {
         optionals.set(1);
       }
       oprot.writeBitSet(optionals, 2);
-      if (struct.isSetReqID()) {
-        oprot.writeI64(struct.reqID);
+      if (struct.isSetImsi()) {
+        oprot.writeString(struct.imsi);
       }
-      if (struct.isSetParameter()) {
-        struct.parameter.write(oprot);
+      if (struct.isSetTimestamp()) {
+        oprot.writeI64(struct.timestamp);
       }
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, CommCommandRSP struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, DeviceTimeStamp struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
-        struct.reqID = iprot.readI64();
-        struct.setReqIDIsSet(true);
+        struct.imsi = iprot.readString();
+        struct.setImsiIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.parameter = new BaseMsg();
-        struct.parameter.read(iprot);
-        struct.setParameterIsSet(true);
+        struct.timestamp = iprot.readI64();
+        struct.setTimestampIsSet(true);
       }
     }
   }

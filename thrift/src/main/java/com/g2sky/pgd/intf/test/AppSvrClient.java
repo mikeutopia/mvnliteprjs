@@ -1,4 +1,6 @@
-package com.g2sky.pgd.intf.thrift;
+package com.g2sky.pgd.intf.test;
+
+import java.util.UUID;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -8,16 +10,17 @@ import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
 import com.g2sky.pgd.intf.thrift.appservice.AppService;
-import com.g2sky.pgd.intf.thrift.common.AppCommandRSP;
-import com.g2sky.pgd.intf.thrift.common.CommCommandREQ;
+import com.g2sky.pgd.intf.thrift.common.CmdType;
+import com.g2sky.pgd.intf.thrift.common.CommandMsg;
+import com.g2sky.pgd.intf.thrift.common.MsgType;
 
 public class AppSvrClient {
 
-	public static final String SERVER_IP = "192.168.31.248";
+	public static final String SERVER_IP = "127.0.0.1";
 
 	public static final int SERVER_PORT = 8090;
 
-	public static final int TIMEOUT = 30000;
+	public static final int TIMEOUT = 3000;
 
 	private static TTransport transport = null;
 
@@ -25,7 +28,7 @@ public class AppSvrClient {
 
 	private static AppService.Client appClient = null;
 
-	private static AppService.Client getCommClient() throws TTransportException {
+	private static AppService.Client getAppClient() throws TTransportException {
 		if (appClient == null) {
 			synchronized (AppSvrClient.class) {
 				if (appClient == null) {
@@ -61,23 +64,36 @@ public class AppSvrClient {
 		return transport;
 	}
 
-	public static void sendAsyncCommandREQ(CommCommandREQ req) throws TException {
+	public static AppService.Client getAppClient1() throws TException {
+		TTransport transport = null;
 		try {
-			getCommClient().sendAsyncCommandREQ(req);
+			transport = new TSocket(SERVER_IP, SERVER_PORT, TIMEOUT);
+			// 协议要和服务端一致
+			TProtocol protocol = new TBinaryProtocol(transport);
+			// TProtocol protocol = new TCompactProtocol(transport);
+			// TProtocol protocol = new TJSONProtocol(transport);
+			AppService.Client client = new AppService.Client(protocol);
+			transport.open();
+			return client;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new TException(e);
 		}
-
+		return null;
 	}
 
-	public static void sendAsyncCommandRSP(AppCommandRSP rsp) throws TException {
-		try {
-			getCommClient().sendAsyncCommandRSP(rsp);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new TException(e);
-		}
+	public static void main(String[] args) throws Exception {
+		testProcessAsyncCommand();
 	}
 
+	private static void testProcessAsyncCommand() throws TException {
+		CommandMsg msg = new CommandMsg();
+		msg.setMsgID(UUID.randomUUID().toString());
+		msg.setCmdType(CmdType.COMMCMDREQ);
+		msg.setMsgType(MsgType.CodeAuth);
+		msg.setVer(1);
+		msg.setBody("{\"imei\":\"jsdkf\"}");
+		System.out.println("APPCLINET SEND:" + msg);
+		getAppClient().processAsyncCommand(msg);
+
+	}
 }

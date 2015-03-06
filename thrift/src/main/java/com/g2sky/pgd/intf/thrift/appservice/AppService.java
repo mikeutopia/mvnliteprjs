@@ -36,29 +36,49 @@ public class AppService {
 
   public interface Iface {
 
-    public boolean setSingleLocation(DeviceLocation loc) throws org.apache.thrift.TException;
+    public boolean setSingleLocation(com.g2sky.pgd.intf.thrift.common.DeviceLocation loc) throws org.apache.thrift.TException;
 
-    public boolean setBatchLocation(List<DeviceLocation> locs) throws org.apache.thrift.TException;
+    public boolean setBatchLocation(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs) throws org.apache.thrift.TException;
 
-    public List<DeviceLocation> pullAllLocationInfo() throws org.apache.thrift.TException;
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> pullAllLocationInfo() throws org.apache.thrift.TException;
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.CommCommandREQ req) throws org.apache.thrift.TException;
+    public boolean setDeviceAddress(String imsi, String ip, int port) throws org.apache.thrift.TException;
 
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp) throws org.apache.thrift.TException;
+    public boolean setEncryptionFactor(String imsi, byte encryptionFactor) throws org.apache.thrift.TException;
+
+    public boolean setTimeStamp(List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist) throws org.apache.thrift.TException;
+
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> getAllDevicesInfo() throws org.apache.thrift.TException;
+
+    public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> getAllFirmwareFilesInfo() throws org.apache.thrift.TException;
+
+    public boolean registerDevice(com.g2sky.pgd.intf.thrift.common.RegisterInfo info) throws org.apache.thrift.TException;
+
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void setSingleLocation(DeviceLocation loc, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void setSingleLocation(com.g2sky.pgd.intf.thrift.common.DeviceLocation loc, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void setBatchLocation(List<DeviceLocation> locs, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void setBatchLocation(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void pullAllLocationInfo(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.CommCommandREQ req, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void setDeviceAddress(String imsi, String ip, int port, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void setEncryptionFactor(String imsi, byte encryptionFactor, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void setTimeStamp(List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void getAllDevicesInfo(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void getAllFirmwareFilesInfo(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void registerDevice(com.g2sky.pgd.intf.thrift.common.RegisterInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -82,13 +102,13 @@ public class AppService {
       super(iprot, oprot);
     }
 
-    public boolean setSingleLocation(DeviceLocation loc) throws org.apache.thrift.TException
+    public boolean setSingleLocation(com.g2sky.pgd.intf.thrift.common.DeviceLocation loc) throws org.apache.thrift.TException
     {
       send_setSingleLocation(loc);
       return recv_setSingleLocation();
     }
 
-    public void send_setSingleLocation(DeviceLocation loc) throws org.apache.thrift.TException
+    public void send_setSingleLocation(com.g2sky.pgd.intf.thrift.common.DeviceLocation loc) throws org.apache.thrift.TException
     {
       setSingleLocation_args args = new setSingleLocation_args();
       args.setLoc(loc);
@@ -105,13 +125,13 @@ public class AppService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "setSingleLocation failed: unknown result");
     }
 
-    public boolean setBatchLocation(List<DeviceLocation> locs) throws org.apache.thrift.TException
+    public boolean setBatchLocation(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs) throws org.apache.thrift.TException
     {
       send_setBatchLocation(locs);
       return recv_setBatchLocation();
     }
 
-    public void send_setBatchLocation(List<DeviceLocation> locs) throws org.apache.thrift.TException
+    public void send_setBatchLocation(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs) throws org.apache.thrift.TException
     {
       setBatchLocation_args args = new setBatchLocation_args();
       args.setLocs(locs);
@@ -128,7 +148,7 @@ public class AppService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "setBatchLocation failed: unknown result");
     }
 
-    public List<DeviceLocation> pullAllLocationInfo() throws org.apache.thrift.TException
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> pullAllLocationInfo() throws org.apache.thrift.TException
     {
       send_pullAllLocationInfo();
       return recv_pullAllLocationInfo();
@@ -140,7 +160,7 @@ public class AppService {
       sendBase("pullAllLocationInfo", args);
     }
 
-    public List<DeviceLocation> recv_pullAllLocationInfo() throws org.apache.thrift.TException
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> recv_pullAllLocationInfo() throws org.apache.thrift.TException
     {
       pullAllLocationInfo_result result = new pullAllLocationInfo_result();
       receiveBase(result, "pullAllLocationInfo");
@@ -150,43 +170,162 @@ public class AppService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "pullAllLocationInfo failed: unknown result");
     }
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.CommCommandREQ req) throws org.apache.thrift.TException
+    public boolean setDeviceAddress(String imsi, String ip, int port) throws org.apache.thrift.TException
     {
-      send_sendAsyncCommandREQ(req);
-      recv_sendAsyncCommandREQ();
+      send_setDeviceAddress(imsi, ip, port);
+      return recv_setDeviceAddress();
     }
 
-    public void send_sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.CommCommandREQ req) throws org.apache.thrift.TException
+    public void send_setDeviceAddress(String imsi, String ip, int port) throws org.apache.thrift.TException
     {
-      sendAsyncCommandREQ_args args = new sendAsyncCommandREQ_args();
-      args.setReq(req);
-      sendBase("sendAsyncCommandREQ", args);
+      setDeviceAddress_args args = new setDeviceAddress_args();
+      args.setImsi(imsi);
+      args.setIp(ip);
+      args.setPort(port);
+      sendBase("setDeviceAddress", args);
     }
 
-    public void recv_sendAsyncCommandREQ() throws org.apache.thrift.TException
+    public boolean recv_setDeviceAddress() throws org.apache.thrift.TException
     {
-      sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
-      receiveBase(result, "sendAsyncCommandREQ");
-      return;
+      setDeviceAddress_result result = new setDeviceAddress_result();
+      receiveBase(result, "setDeviceAddress");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "setDeviceAddress failed: unknown result");
     }
 
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp) throws org.apache.thrift.TException
+    public boolean setEncryptionFactor(String imsi, byte encryptionFactor) throws org.apache.thrift.TException
     {
-      send_sendAsyncCommandRSP(rsp);
-      recv_sendAsyncCommandRSP();
+      send_setEncryptionFactor(imsi, encryptionFactor);
+      return recv_setEncryptionFactor();
     }
 
-    public void send_sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp) throws org.apache.thrift.TException
+    public void send_setEncryptionFactor(String imsi, byte encryptionFactor) throws org.apache.thrift.TException
     {
-      sendAsyncCommandRSP_args args = new sendAsyncCommandRSP_args();
-      args.setRsp(rsp);
-      sendBase("sendAsyncCommandRSP", args);
+      setEncryptionFactor_args args = new setEncryptionFactor_args();
+      args.setImsi(imsi);
+      args.setEncryptionFactor(encryptionFactor);
+      sendBase("setEncryptionFactor", args);
     }
 
-    public void recv_sendAsyncCommandRSP() throws org.apache.thrift.TException
+    public boolean recv_setEncryptionFactor() throws org.apache.thrift.TException
     {
-      sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
-      receiveBase(result, "sendAsyncCommandRSP");
+      setEncryptionFactor_result result = new setEncryptionFactor_result();
+      receiveBase(result, "setEncryptionFactor");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "setEncryptionFactor failed: unknown result");
+    }
+
+    public boolean setTimeStamp(List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist) throws org.apache.thrift.TException
+    {
+      send_setTimeStamp(timestamplist);
+      return recv_setTimeStamp();
+    }
+
+    public void send_setTimeStamp(List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist) throws org.apache.thrift.TException
+    {
+      setTimeStamp_args args = new setTimeStamp_args();
+      args.setTimestamplist(timestamplist);
+      sendBase("setTimeStamp", args);
+    }
+
+    public boolean recv_setTimeStamp() throws org.apache.thrift.TException
+    {
+      setTimeStamp_result result = new setTimeStamp_result();
+      receiveBase(result, "setTimeStamp");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "setTimeStamp failed: unknown result");
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> getAllDevicesInfo() throws org.apache.thrift.TException
+    {
+      send_getAllDevicesInfo();
+      return recv_getAllDevicesInfo();
+    }
+
+    public void send_getAllDevicesInfo() throws org.apache.thrift.TException
+    {
+      getAllDevicesInfo_args args = new getAllDevicesInfo_args();
+      sendBase("getAllDevicesInfo", args);
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> recv_getAllDevicesInfo() throws org.apache.thrift.TException
+    {
+      getAllDevicesInfo_result result = new getAllDevicesInfo_result();
+      receiveBase(result, "getAllDevicesInfo");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getAllDevicesInfo failed: unknown result");
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> getAllFirmwareFilesInfo() throws org.apache.thrift.TException
+    {
+      send_getAllFirmwareFilesInfo();
+      return recv_getAllFirmwareFilesInfo();
+    }
+
+    public void send_getAllFirmwareFilesInfo() throws org.apache.thrift.TException
+    {
+      getAllFirmwareFilesInfo_args args = new getAllFirmwareFilesInfo_args();
+      sendBase("getAllFirmwareFilesInfo", args);
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> recv_getAllFirmwareFilesInfo() throws org.apache.thrift.TException
+    {
+      getAllFirmwareFilesInfo_result result = new getAllFirmwareFilesInfo_result();
+      receiveBase(result, "getAllFirmwareFilesInfo");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getAllFirmwareFilesInfo failed: unknown result");
+    }
+
+    public boolean registerDevice(com.g2sky.pgd.intf.thrift.common.RegisterInfo info) throws org.apache.thrift.TException
+    {
+      send_registerDevice(info);
+      return recv_registerDevice();
+    }
+
+    public void send_registerDevice(com.g2sky.pgd.intf.thrift.common.RegisterInfo info) throws org.apache.thrift.TException
+    {
+      registerDevice_args args = new registerDevice_args();
+      args.setInfo(info);
+      sendBase("registerDevice", args);
+    }
+
+    public boolean recv_registerDevice() throws org.apache.thrift.TException
+    {
+      registerDevice_result result = new registerDevice_result();
+      receiveBase(result, "registerDevice");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "registerDevice failed: unknown result");
+    }
+
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) throws org.apache.thrift.TException
+    {
+      send_processAsyncCommand(command);
+      recv_processAsyncCommand();
+    }
+
+    public void send_processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) throws org.apache.thrift.TException
+    {
+      processAsyncCommand_args args = new processAsyncCommand_args();
+      args.setCommand(command);
+      sendBase("processAsyncCommand", args);
+    }
+
+    public void recv_processAsyncCommand() throws org.apache.thrift.TException
+    {
+      processAsyncCommand_result result = new processAsyncCommand_result();
+      receiveBase(result, "processAsyncCommand");
       return;
     }
 
@@ -208,7 +347,7 @@ public class AppService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void setSingleLocation(DeviceLocation loc, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void setSingleLocation(com.g2sky.pgd.intf.thrift.common.DeviceLocation loc, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       setSingleLocation_call method_call = new setSingleLocation_call(loc, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -216,8 +355,8 @@ public class AppService {
     }
 
     public static class setSingleLocation_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private DeviceLocation loc;
-      public setSingleLocation_call(DeviceLocation loc, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private com.g2sky.pgd.intf.thrift.common.DeviceLocation loc;
+      public setSingleLocation_call(com.g2sky.pgd.intf.thrift.common.DeviceLocation loc, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.loc = loc;
       }
@@ -240,7 +379,7 @@ public class AppService {
       }
     }
 
-    public void setBatchLocation(List<DeviceLocation> locs, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void setBatchLocation(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       setBatchLocation_call method_call = new setBatchLocation_call(locs, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -248,8 +387,8 @@ public class AppService {
     }
 
     public static class setBatchLocation_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private List<DeviceLocation> locs;
-      public setBatchLocation_call(List<DeviceLocation> locs, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs;
+      public setBatchLocation_call(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.locs = locs;
       }
@@ -291,7 +430,7 @@ public class AppService {
         prot.writeMessageEnd();
       }
 
-      public List<DeviceLocation> getResult() throws org.apache.thrift.TException {
+      public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -301,24 +440,219 @@ public class AppService {
       }
     }
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.CommCommandREQ req, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void setDeviceAddress(String imsi, String ip, int port, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      sendAsyncCommandREQ_call method_call = new sendAsyncCommandREQ_call(req, resultHandler, this, ___protocolFactory, ___transport);
+      setDeviceAddress_call method_call = new setDeviceAddress_call(imsi, ip, port, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class sendAsyncCommandREQ_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private com.g2sky.pgd.intf.thrift.common.CommCommandREQ req;
-      public sendAsyncCommandREQ_call(com.g2sky.pgd.intf.thrift.common.CommCommandREQ req, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class setDeviceAddress_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String imsi;
+      private String ip;
+      private int port;
+      public setDeviceAddress_call(String imsi, String ip, int port, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.req = req;
+        this.imsi = imsi;
+        this.ip = ip;
+        this.port = port;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("sendAsyncCommandREQ", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        sendAsyncCommandREQ_args args = new sendAsyncCommandREQ_args();
-        args.setReq(req);
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setDeviceAddress", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        setDeviceAddress_args args = new setDeviceAddress_args();
+        args.setImsi(imsi);
+        args.setIp(ip);
+        args.setPort(port);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_setDeviceAddress();
+      }
+    }
+
+    public void setEncryptionFactor(String imsi, byte encryptionFactor, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      setEncryptionFactor_call method_call = new setEncryptionFactor_call(imsi, encryptionFactor, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class setEncryptionFactor_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String imsi;
+      private byte encryptionFactor;
+      public setEncryptionFactor_call(String imsi, byte encryptionFactor, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.imsi = imsi;
+        this.encryptionFactor = encryptionFactor;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setEncryptionFactor", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        setEncryptionFactor_args args = new setEncryptionFactor_args();
+        args.setImsi(imsi);
+        args.setEncryptionFactor(encryptionFactor);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_setEncryptionFactor();
+      }
+    }
+
+    public void setTimeStamp(List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      setTimeStamp_call method_call = new setTimeStamp_call(timestamplist, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class setTimeStamp_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist;
+      public setTimeStamp_call(List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.timestamplist = timestamplist;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setTimeStamp", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        setTimeStamp_args args = new setTimeStamp_args();
+        args.setTimestamplist(timestamplist);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_setTimeStamp();
+      }
+    }
+
+    public void getAllDevicesInfo(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      getAllDevicesInfo_call method_call = new getAllDevicesInfo_call(resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class getAllDevicesInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
+      public getAllDevicesInfo_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getAllDevicesInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getAllDevicesInfo_args args = new getAllDevicesInfo_args();
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_getAllDevicesInfo();
+      }
+    }
+
+    public void getAllFirmwareFilesInfo(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      getAllFirmwareFilesInfo_call method_call = new getAllFirmwareFilesInfo_call(resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class getAllFirmwareFilesInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
+      public getAllFirmwareFilesInfo_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getAllFirmwareFilesInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getAllFirmwareFilesInfo_args args = new getAllFirmwareFilesInfo_args();
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_getAllFirmwareFilesInfo();
+      }
+    }
+
+    public void registerDevice(com.g2sky.pgd.intf.thrift.common.RegisterInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      registerDevice_call method_call = new registerDevice_call(info, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class registerDevice_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.g2sky.pgd.intf.thrift.common.RegisterInfo info;
+      public registerDevice_call(com.g2sky.pgd.intf.thrift.common.RegisterInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.info = info;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("registerDevice", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        registerDevice_args args = new registerDevice_args();
+        args.setInfo(info);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_registerDevice();
+      }
+    }
+
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      processAsyncCommand_call method_call = new processAsyncCommand_call(command, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class processAsyncCommand_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.g2sky.pgd.intf.thrift.common.CommandMsg command;
+      public processAsyncCommand_call(com.g2sky.pgd.intf.thrift.common.CommandMsg command, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.command = command;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("processAsyncCommand", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        processAsyncCommand_args args = new processAsyncCommand_args();
+        args.setCommand(command);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -329,39 +663,7 @@ public class AppService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_sendAsyncCommandREQ();
-      }
-    }
-
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
-      checkReady();
-      sendAsyncCommandRSP_call method_call = new sendAsyncCommandRSP_call(rsp, resultHandler, this, ___protocolFactory, ___transport);
-      this.___currentMethod = method_call;
-      ___manager.call(method_call);
-    }
-
-    public static class sendAsyncCommandRSP_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp;
-      public sendAsyncCommandRSP_call(com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
-        super(client, protocolFactory, transport, resultHandler, false);
-        this.rsp = rsp;
-      }
-
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("sendAsyncCommandRSP", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        sendAsyncCommandRSP_args args = new sendAsyncCommandRSP_args();
-        args.setRsp(rsp);
-        args.write(prot);
-        prot.writeMessageEnd();
-      }
-
-      public void getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
-          throw new IllegalStateException("Method call not finished!");
-        }
-        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
-        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_sendAsyncCommandRSP();
+        (new Client(prot)).recv_processAsyncCommand();
       }
     }
 
@@ -381,8 +683,13 @@ public class AppService {
       processMap.put("setSingleLocation", new setSingleLocation());
       processMap.put("setBatchLocation", new setBatchLocation());
       processMap.put("pullAllLocationInfo", new pullAllLocationInfo());
-      processMap.put("sendAsyncCommandREQ", new sendAsyncCommandREQ());
-      processMap.put("sendAsyncCommandRSP", new sendAsyncCommandRSP());
+      processMap.put("setDeviceAddress", new setDeviceAddress());
+      processMap.put("setEncryptionFactor", new setEncryptionFactor());
+      processMap.put("setTimeStamp", new setTimeStamp());
+      processMap.put("getAllDevicesInfo", new getAllDevicesInfo());
+      processMap.put("getAllFirmwareFilesInfo", new getAllFirmwareFilesInfo());
+      processMap.put("registerDevice", new registerDevice());
+      processMap.put("processAsyncCommand", new processAsyncCommand());
       return processMap;
     }
 
@@ -448,42 +755,146 @@ public class AppService {
       }
     }
 
-    public static class sendAsyncCommandREQ<I extends Iface> extends org.apache.thrift.ProcessFunction<I, sendAsyncCommandREQ_args> {
-      public sendAsyncCommandREQ() {
-        super("sendAsyncCommandREQ");
+    public static class setDeviceAddress<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setDeviceAddress_args> {
+      public setDeviceAddress() {
+        super("setDeviceAddress");
       }
 
-      public sendAsyncCommandREQ_args getEmptyArgsInstance() {
-        return new sendAsyncCommandREQ_args();
+      public setDeviceAddress_args getEmptyArgsInstance() {
+        return new setDeviceAddress_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public sendAsyncCommandREQ_result getResult(I iface, sendAsyncCommandREQ_args args) throws org.apache.thrift.TException {
-        sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
-        iface.sendAsyncCommandREQ(args.req);
+      public setDeviceAddress_result getResult(I iface, setDeviceAddress_args args) throws org.apache.thrift.TException {
+        setDeviceAddress_result result = new setDeviceAddress_result();
+        result.success = iface.setDeviceAddress(args.imsi, args.ip, args.port);
+        result.setSuccessIsSet(true);
         return result;
       }
     }
 
-    public static class sendAsyncCommandRSP<I extends Iface> extends org.apache.thrift.ProcessFunction<I, sendAsyncCommandRSP_args> {
-      public sendAsyncCommandRSP() {
-        super("sendAsyncCommandRSP");
+    public static class setEncryptionFactor<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setEncryptionFactor_args> {
+      public setEncryptionFactor() {
+        super("setEncryptionFactor");
       }
 
-      public sendAsyncCommandRSP_args getEmptyArgsInstance() {
-        return new sendAsyncCommandRSP_args();
+      public setEncryptionFactor_args getEmptyArgsInstance() {
+        return new setEncryptionFactor_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public sendAsyncCommandRSP_result getResult(I iface, sendAsyncCommandRSP_args args) throws org.apache.thrift.TException {
-        sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
-        iface.sendAsyncCommandRSP(args.rsp);
+      public setEncryptionFactor_result getResult(I iface, setEncryptionFactor_args args) throws org.apache.thrift.TException {
+        setEncryptionFactor_result result = new setEncryptionFactor_result();
+        result.success = iface.setEncryptionFactor(args.imsi, args.encryptionFactor);
+        result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    public static class setTimeStamp<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setTimeStamp_args> {
+      public setTimeStamp() {
+        super("setTimeStamp");
+      }
+
+      public setTimeStamp_args getEmptyArgsInstance() {
+        return new setTimeStamp_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public setTimeStamp_result getResult(I iface, setTimeStamp_args args) throws org.apache.thrift.TException {
+        setTimeStamp_result result = new setTimeStamp_result();
+        result.success = iface.setTimeStamp(args.timestamplist);
+        result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    public static class getAllDevicesInfo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getAllDevicesInfo_args> {
+      public getAllDevicesInfo() {
+        super("getAllDevicesInfo");
+      }
+
+      public getAllDevicesInfo_args getEmptyArgsInstance() {
+        return new getAllDevicesInfo_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public getAllDevicesInfo_result getResult(I iface, getAllDevicesInfo_args args) throws org.apache.thrift.TException {
+        getAllDevicesInfo_result result = new getAllDevicesInfo_result();
+        result.success = iface.getAllDevicesInfo();
+        return result;
+      }
+    }
+
+    public static class getAllFirmwareFilesInfo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getAllFirmwareFilesInfo_args> {
+      public getAllFirmwareFilesInfo() {
+        super("getAllFirmwareFilesInfo");
+      }
+
+      public getAllFirmwareFilesInfo_args getEmptyArgsInstance() {
+        return new getAllFirmwareFilesInfo_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public getAllFirmwareFilesInfo_result getResult(I iface, getAllFirmwareFilesInfo_args args) throws org.apache.thrift.TException {
+        getAllFirmwareFilesInfo_result result = new getAllFirmwareFilesInfo_result();
+        result.success = iface.getAllFirmwareFilesInfo();
+        return result;
+      }
+    }
+
+    public static class registerDevice<I extends Iface> extends org.apache.thrift.ProcessFunction<I, registerDevice_args> {
+      public registerDevice() {
+        super("registerDevice");
+      }
+
+      public registerDevice_args getEmptyArgsInstance() {
+        return new registerDevice_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public registerDevice_result getResult(I iface, registerDevice_args args) throws org.apache.thrift.TException {
+        registerDevice_result result = new registerDevice_result();
+        result.success = iface.registerDevice(args.info);
+        result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    public static class processAsyncCommand<I extends Iface> extends org.apache.thrift.ProcessFunction<I, processAsyncCommand_args> {
+      public processAsyncCommand() {
+        super("processAsyncCommand");
+      }
+
+      public processAsyncCommand_args getEmptyArgsInstance() {
+        return new processAsyncCommand_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public processAsyncCommand_result getResult(I iface, processAsyncCommand_args args) throws org.apache.thrift.TException {
+        processAsyncCommand_result result = new processAsyncCommand_result();
+        iface.processAsyncCommand(args.command);
         return result;
       }
     }
@@ -504,8 +915,13 @@ public class AppService {
       processMap.put("setSingleLocation", new setSingleLocation());
       processMap.put("setBatchLocation", new setBatchLocation());
       processMap.put("pullAllLocationInfo", new pullAllLocationInfo());
-      processMap.put("sendAsyncCommandREQ", new sendAsyncCommandREQ());
-      processMap.put("sendAsyncCommandRSP", new sendAsyncCommandRSP());
+      processMap.put("setDeviceAddress", new setDeviceAddress());
+      processMap.put("setEncryptionFactor", new setEncryptionFactor());
+      processMap.put("setTimeStamp", new setTimeStamp());
+      processMap.put("getAllDevicesInfo", new getAllDevicesInfo());
+      processMap.put("getAllFirmwareFilesInfo", new getAllFirmwareFilesInfo());
+      processMap.put("registerDevice", new registerDevice());
+      processMap.put("processAsyncCommand", new processAsyncCommand());
       return processMap;
     }
 
@@ -613,7 +1029,7 @@ public class AppService {
       }
     }
 
-    public static class pullAllLocationInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, pullAllLocationInfo_args, List<DeviceLocation>> {
+    public static class pullAllLocationInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, pullAllLocationInfo_args, List<com.g2sky.pgd.intf.thrift.common.DeviceLocation>> {
       public pullAllLocationInfo() {
         super("pullAllLocationInfo");
       }
@@ -622,10 +1038,10 @@ public class AppService {
         return new pullAllLocationInfo_args();
       }
 
-      public AsyncMethodCallback<List<DeviceLocation>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.DeviceLocation>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<List<DeviceLocation>>() { 
-          public void onComplete(List<DeviceLocation> o) {
+        return new AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.DeviceLocation>>() { 
+          public void onComplete(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> o) {
             pullAllLocationInfo_result result = new pullAllLocationInfo_result();
             result.success = o;
             try {
@@ -659,25 +1075,27 @@ public class AppService {
         return false;
       }
 
-      public void start(I iface, pullAllLocationInfo_args args, org.apache.thrift.async.AsyncMethodCallback<List<DeviceLocation>> resultHandler) throws TException {
+      public void start(I iface, pullAllLocationInfo_args args, org.apache.thrift.async.AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.DeviceLocation>> resultHandler) throws TException {
         iface.pullAllLocationInfo(resultHandler);
       }
     }
 
-    public static class sendAsyncCommandREQ<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, sendAsyncCommandREQ_args, Void> {
-      public sendAsyncCommandREQ() {
-        super("sendAsyncCommandREQ");
+    public static class setDeviceAddress<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setDeviceAddress_args, Boolean> {
+      public setDeviceAddress() {
+        super("setDeviceAddress");
       }
 
-      public sendAsyncCommandREQ_args getEmptyArgsInstance() {
-        return new sendAsyncCommandREQ_args();
+      public setDeviceAddress_args getEmptyArgsInstance() {
+        return new setDeviceAddress_args();
       }
 
-      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<Void>() { 
-          public void onComplete(Void o) {
-            sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
+        return new AsyncMethodCallback<Boolean>() { 
+          public void onComplete(Boolean o) {
+            setDeviceAddress_result result = new setDeviceAddress_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -689,7 +1107,7 @@ public class AppService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
+            setDeviceAddress_result result = new setDeviceAddress_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -709,25 +1127,27 @@ public class AppService {
         return false;
       }
 
-      public void start(I iface, sendAsyncCommandREQ_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.sendAsyncCommandREQ(args.req,resultHandler);
+      public void start(I iface, setDeviceAddress_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.setDeviceAddress(args.imsi, args.ip, args.port,resultHandler);
       }
     }
 
-    public static class sendAsyncCommandRSP<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, sendAsyncCommandRSP_args, Void> {
-      public sendAsyncCommandRSP() {
-        super("sendAsyncCommandRSP");
+    public static class setEncryptionFactor<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setEncryptionFactor_args, Boolean> {
+      public setEncryptionFactor() {
+        super("setEncryptionFactor");
       }
 
-      public sendAsyncCommandRSP_args getEmptyArgsInstance() {
-        return new sendAsyncCommandRSP_args();
+      public setEncryptionFactor_args getEmptyArgsInstance() {
+        return new setEncryptionFactor_args();
       }
 
-      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<Void>() { 
-          public void onComplete(Void o) {
-            sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
+        return new AsyncMethodCallback<Boolean>() { 
+          public void onComplete(Boolean o) {
+            setEncryptionFactor_result result = new setEncryptionFactor_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -739,7 +1159,7 @@ public class AppService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
+            setEncryptionFactor_result result = new setEncryptionFactor_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -759,8 +1179,264 @@ public class AppService {
         return false;
       }
 
-      public void start(I iface, sendAsyncCommandRSP_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.sendAsyncCommandRSP(args.rsp,resultHandler);
+      public void start(I iface, setEncryptionFactor_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.setEncryptionFactor(args.imsi, args.encryptionFactor,resultHandler);
+      }
+    }
+
+    public static class setTimeStamp<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setTimeStamp_args, Boolean> {
+      public setTimeStamp() {
+        super("setTimeStamp");
+      }
+
+      public setTimeStamp_args getEmptyArgsInstance() {
+        return new setTimeStamp_args();
+      }
+
+      public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<Boolean>() { 
+          public void onComplete(Boolean o) {
+            setTimeStamp_result result = new setTimeStamp_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            setTimeStamp_result result = new setTimeStamp_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, setTimeStamp_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.setTimeStamp(args.timestamplist,resultHandler);
+      }
+    }
+
+    public static class getAllDevicesInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getAllDevicesInfo_args, List<com.g2sky.pgd.intf.thrift.common.DeviceInfo>> {
+      public getAllDevicesInfo() {
+        super("getAllDevicesInfo");
+      }
+
+      public getAllDevicesInfo_args getEmptyArgsInstance() {
+        return new getAllDevicesInfo_args();
+      }
+
+      public AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.DeviceInfo>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.DeviceInfo>>() { 
+          public void onComplete(List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> o) {
+            getAllDevicesInfo_result result = new getAllDevicesInfo_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            getAllDevicesInfo_result result = new getAllDevicesInfo_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, getAllDevicesInfo_args args, org.apache.thrift.async.AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.DeviceInfo>> resultHandler) throws TException {
+        iface.getAllDevicesInfo(resultHandler);
+      }
+    }
+
+    public static class getAllFirmwareFilesInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getAllFirmwareFilesInfo_args, List<com.g2sky.pgd.intf.thrift.common.Fileinfo>> {
+      public getAllFirmwareFilesInfo() {
+        super("getAllFirmwareFilesInfo");
+      }
+
+      public getAllFirmwareFilesInfo_args getEmptyArgsInstance() {
+        return new getAllFirmwareFilesInfo_args();
+      }
+
+      public AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.Fileinfo>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.Fileinfo>>() { 
+          public void onComplete(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> o) {
+            getAllFirmwareFilesInfo_result result = new getAllFirmwareFilesInfo_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            getAllFirmwareFilesInfo_result result = new getAllFirmwareFilesInfo_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, getAllFirmwareFilesInfo_args args, org.apache.thrift.async.AsyncMethodCallback<List<com.g2sky.pgd.intf.thrift.common.Fileinfo>> resultHandler) throws TException {
+        iface.getAllFirmwareFilesInfo(resultHandler);
+      }
+    }
+
+    public static class registerDevice<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, registerDevice_args, Boolean> {
+      public registerDevice() {
+        super("registerDevice");
+      }
+
+      public registerDevice_args getEmptyArgsInstance() {
+        return new registerDevice_args();
+      }
+
+      public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<Boolean>() { 
+          public void onComplete(Boolean o) {
+            registerDevice_result result = new registerDevice_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            registerDevice_result result = new registerDevice_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, registerDevice_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.registerDevice(args.info,resultHandler);
+      }
+    }
+
+    public static class processAsyncCommand<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, processAsyncCommand_args, Void> {
+      public processAsyncCommand() {
+        super("processAsyncCommand");
+      }
+
+      public processAsyncCommand_args getEmptyArgsInstance() {
+        return new processAsyncCommand_args();
+      }
+
+      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
+            processAsyncCommand_result result = new processAsyncCommand_result();
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            processAsyncCommand_result result = new processAsyncCommand_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, processAsyncCommand_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.processAsyncCommand(args.command,resultHandler);
       }
     }
 
@@ -777,7 +1453,7 @@ public class AppService {
       schemes.put(TupleScheme.class, new setSingleLocation_argsTupleSchemeFactory());
     }
 
-    public DeviceLocation loc; // required
+    public com.g2sky.pgd.intf.thrift.common.DeviceLocation loc; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -842,7 +1518,7 @@ public class AppService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.LOC, new org.apache.thrift.meta_data.FieldMetaData("loc", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DeviceLocation.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.DeviceLocation.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setSingleLocation_args.class, metaDataMap);
     }
@@ -851,7 +1527,7 @@ public class AppService {
     }
 
     public setSingleLocation_args(
-      DeviceLocation loc)
+      com.g2sky.pgd.intf.thrift.common.DeviceLocation loc)
     {
       this();
       this.loc = loc;
@@ -862,7 +1538,7 @@ public class AppService {
      */
     public setSingleLocation_args(setSingleLocation_args other) {
       if (other.isSetLoc()) {
-        this.loc = new DeviceLocation(other.loc);
+        this.loc = new com.g2sky.pgd.intf.thrift.common.DeviceLocation(other.loc);
       }
     }
 
@@ -875,11 +1551,11 @@ public class AppService {
       this.loc = null;
     }
 
-    public DeviceLocation getLoc() {
+    public com.g2sky.pgd.intf.thrift.common.DeviceLocation getLoc() {
       return this.loc;
     }
 
-    public setSingleLocation_args setLoc(DeviceLocation loc) {
+    public setSingleLocation_args setLoc(com.g2sky.pgd.intf.thrift.common.DeviceLocation loc) {
       this.loc = loc;
       return this;
     }
@@ -905,7 +1581,7 @@ public class AppService {
         if (value == null) {
           unsetLoc();
         } else {
-          setLoc((DeviceLocation)value);
+          setLoc((com.g2sky.pgd.intf.thrift.common.DeviceLocation)value);
         }
         break;
 
@@ -1057,7 +1733,7 @@ public class AppService {
           switch (schemeField.id) {
             case 1: // LOC
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.loc = new DeviceLocation();
+                struct.loc = new com.g2sky.pgd.intf.thrift.common.DeviceLocation();
                 struct.loc.read(iprot);
                 struct.setLocIsSet(true);
               } else { 
@@ -1116,7 +1792,7 @@ public class AppService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.loc = new DeviceLocation();
+          struct.loc = new com.g2sky.pgd.intf.thrift.common.DeviceLocation();
           struct.loc.read(iprot);
           struct.setLocIsSet(true);
         }
@@ -1490,7 +2166,7 @@ public class AppService {
       schemes.put(TupleScheme.class, new setBatchLocation_argsTupleSchemeFactory());
     }
 
-    public List<DeviceLocation> locs; // required
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -1556,7 +2232,7 @@ public class AppService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.LOCS, new org.apache.thrift.meta_data.FieldMetaData("locs", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DeviceLocation.class))));
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.DeviceLocation.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setBatchLocation_args.class, metaDataMap);
     }
@@ -1565,7 +2241,7 @@ public class AppService {
     }
 
     public setBatchLocation_args(
-      List<DeviceLocation> locs)
+      List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs)
     {
       this();
       this.locs = locs;
@@ -1576,9 +2252,9 @@ public class AppService {
      */
     public setBatchLocation_args(setBatchLocation_args other) {
       if (other.isSetLocs()) {
-        List<DeviceLocation> __this__locs = new ArrayList<DeviceLocation>(other.locs.size());
-        for (DeviceLocation other_element : other.locs) {
-          __this__locs.add(new DeviceLocation(other_element));
+        List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> __this__locs = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>(other.locs.size());
+        for (com.g2sky.pgd.intf.thrift.common.DeviceLocation other_element : other.locs) {
+          __this__locs.add(new com.g2sky.pgd.intf.thrift.common.DeviceLocation(other_element));
         }
         this.locs = __this__locs;
       }
@@ -1597,22 +2273,22 @@ public class AppService {
       return (this.locs == null) ? 0 : this.locs.size();
     }
 
-    public java.util.Iterator<DeviceLocation> getLocsIterator() {
+    public java.util.Iterator<com.g2sky.pgd.intf.thrift.common.DeviceLocation> getLocsIterator() {
       return (this.locs == null) ? null : this.locs.iterator();
     }
 
-    public void addToLocs(DeviceLocation elem) {
+    public void addToLocs(com.g2sky.pgd.intf.thrift.common.DeviceLocation elem) {
       if (this.locs == null) {
-        this.locs = new ArrayList<DeviceLocation>();
+        this.locs = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>();
       }
       this.locs.add(elem);
     }
 
-    public List<DeviceLocation> getLocs() {
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> getLocs() {
       return this.locs;
     }
 
-    public setBatchLocation_args setLocs(List<DeviceLocation> locs) {
+    public setBatchLocation_args setLocs(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> locs) {
       this.locs = locs;
       return this;
     }
@@ -1638,7 +2314,7 @@ public class AppService {
         if (value == null) {
           unsetLocs();
         } else {
-          setLocs((List<DeviceLocation>)value);
+          setLocs((List<com.g2sky.pgd.intf.thrift.common.DeviceLocation>)value);
         }
         break;
 
@@ -1789,11 +2465,11 @@ public class AppService {
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
                   org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
-                  struct.locs = new ArrayList<DeviceLocation>(_list0.size);
+                  struct.locs = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>(_list0.size);
                   for (int _i1 = 0; _i1 < _list0.size; ++_i1)
                   {
-                    DeviceLocation _elem2;
-                    _elem2 = new DeviceLocation();
+                    com.g2sky.pgd.intf.thrift.common.DeviceLocation _elem2;
+                    _elem2 = new com.g2sky.pgd.intf.thrift.common.DeviceLocation();
                     _elem2.read(iprot);
                     struct.locs.add(_elem2);
                   }
@@ -1823,7 +2499,7 @@ public class AppService {
           oprot.writeFieldBegin(LOCS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.locs.size()));
-            for (DeviceLocation _iter3 : struct.locs)
+            for (com.g2sky.pgd.intf.thrift.common.DeviceLocation _iter3 : struct.locs)
             {
               _iter3.write(oprot);
             }
@@ -1856,7 +2532,7 @@ public class AppService {
         if (struct.isSetLocs()) {
           {
             oprot.writeI32(struct.locs.size());
-            for (DeviceLocation _iter4 : struct.locs)
+            for (com.g2sky.pgd.intf.thrift.common.DeviceLocation _iter4 : struct.locs)
             {
               _iter4.write(oprot);
             }
@@ -1871,11 +2547,11 @@ public class AppService {
         if (incoming.get(0)) {
           {
             org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.locs = new ArrayList<DeviceLocation>(_list5.size);
+            struct.locs = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>(_list5.size);
             for (int _i6 = 0; _i6 < _list5.size; ++_i6)
             {
-              DeviceLocation _elem7;
-              _elem7 = new DeviceLocation();
+              com.g2sky.pgd.intf.thrift.common.DeviceLocation _elem7;
+              _elem7 = new com.g2sky.pgd.intf.thrift.common.DeviceLocation();
               _elem7.read(iprot);
               struct.locs.add(_elem7);
             }
@@ -2498,7 +3174,7 @@ public class AppService {
       schemes.put(TupleScheme.class, new pullAllLocationInfo_resultTupleSchemeFactory());
     }
 
-    public List<DeviceLocation> success; // required
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -2564,7 +3240,7 @@ public class AppService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DeviceLocation.class))));
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.DeviceLocation.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(pullAllLocationInfo_result.class, metaDataMap);
     }
@@ -2573,7 +3249,7 @@ public class AppService {
     }
 
     public pullAllLocationInfo_result(
-      List<DeviceLocation> success)
+      List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> success)
     {
       this();
       this.success = success;
@@ -2584,9 +3260,9 @@ public class AppService {
      */
     public pullAllLocationInfo_result(pullAllLocationInfo_result other) {
       if (other.isSetSuccess()) {
-        List<DeviceLocation> __this__success = new ArrayList<DeviceLocation>(other.success.size());
-        for (DeviceLocation other_element : other.success) {
-          __this__success.add(new DeviceLocation(other_element));
+        List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> __this__success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>(other.success.size());
+        for (com.g2sky.pgd.intf.thrift.common.DeviceLocation other_element : other.success) {
+          __this__success.add(new com.g2sky.pgd.intf.thrift.common.DeviceLocation(other_element));
         }
         this.success = __this__success;
       }
@@ -2605,22 +3281,22 @@ public class AppService {
       return (this.success == null) ? 0 : this.success.size();
     }
 
-    public java.util.Iterator<DeviceLocation> getSuccessIterator() {
+    public java.util.Iterator<com.g2sky.pgd.intf.thrift.common.DeviceLocation> getSuccessIterator() {
       return (this.success == null) ? null : this.success.iterator();
     }
 
-    public void addToSuccess(DeviceLocation elem) {
+    public void addToSuccess(com.g2sky.pgd.intf.thrift.common.DeviceLocation elem) {
       if (this.success == null) {
-        this.success = new ArrayList<DeviceLocation>();
+        this.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>();
       }
       this.success.add(elem);
     }
 
-    public List<DeviceLocation> getSuccess() {
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> getSuccess() {
       return this.success;
     }
 
-    public pullAllLocationInfo_result setSuccess(List<DeviceLocation> success) {
+    public pullAllLocationInfo_result setSuccess(List<com.g2sky.pgd.intf.thrift.common.DeviceLocation> success) {
       this.success = success;
       return this;
     }
@@ -2646,7 +3322,7 @@ public class AppService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((List<DeviceLocation>)value);
+          setSuccess((List<com.g2sky.pgd.intf.thrift.common.DeviceLocation>)value);
         }
         break;
 
@@ -2797,11 +3473,11 @@ public class AppService {
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
                   org.apache.thrift.protocol.TList _list8 = iprot.readListBegin();
-                  struct.success = new ArrayList<DeviceLocation>(_list8.size);
+                  struct.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>(_list8.size);
                   for (int _i9 = 0; _i9 < _list8.size; ++_i9)
                   {
-                    DeviceLocation _elem10;
-                    _elem10 = new DeviceLocation();
+                    com.g2sky.pgd.intf.thrift.common.DeviceLocation _elem10;
+                    _elem10 = new com.g2sky.pgd.intf.thrift.common.DeviceLocation();
                     _elem10.read(iprot);
                     struct.success.add(_elem10);
                   }
@@ -2831,7 +3507,7 @@ public class AppService {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (DeviceLocation _iter11 : struct.success)
+            for (com.g2sky.pgd.intf.thrift.common.DeviceLocation _iter11 : struct.success)
             {
               _iter11.write(oprot);
             }
@@ -2864,7 +3540,7 @@ public class AppService {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (DeviceLocation _iter12 : struct.success)
+            for (com.g2sky.pgd.intf.thrift.common.DeviceLocation _iter12 : struct.success)
             {
               _iter12.write(oprot);
             }
@@ -2879,11 +3555,11 @@ public class AppService {
         if (incoming.get(0)) {
           {
             org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<DeviceLocation>(_list13.size);
+            struct.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceLocation>(_list13.size);
             for (int _i14 = 0; _i14 < _list13.size; ++_i14)
             {
-              DeviceLocation _elem15;
-              _elem15 = new DeviceLocation();
+              com.g2sky.pgd.intf.thrift.common.DeviceLocation _elem15;
+              _elem15 = new com.g2sky.pgd.intf.thrift.common.DeviceLocation();
               _elem15.read(iprot);
               struct.success.add(_elem15);
             }
@@ -2895,22 +3571,28 @@ public class AppService {
 
   }
 
-  public static class sendAsyncCommandREQ_args implements org.apache.thrift.TBase<sendAsyncCommandREQ_args, sendAsyncCommandREQ_args._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandREQ_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandREQ_args");
+  public static class setDeviceAddress_args implements org.apache.thrift.TBase<setDeviceAddress_args, setDeviceAddress_args._Fields>, java.io.Serializable, Cloneable, Comparable<setDeviceAddress_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setDeviceAddress_args");
 
-    private static final org.apache.thrift.protocol.TField REQ_FIELD_DESC = new org.apache.thrift.protocol.TField("req", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField IMSI_FIELD_DESC = new org.apache.thrift.protocol.TField("imsi", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField IP_FIELD_DESC = new org.apache.thrift.protocol.TField("ip", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField PORT_FIELD_DESC = new org.apache.thrift.protocol.TField("port", org.apache.thrift.protocol.TType.I32, (short)3);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandREQ_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandREQ_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new setDeviceAddress_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setDeviceAddress_argsTupleSchemeFactory());
     }
 
-    public com.g2sky.pgd.intf.thrift.common.CommCommandREQ req; // required
+    public String imsi; // required
+    public String ip; // required
+    public int port; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      REQ((short)1, "req");
+      IMSI((short)1, "imsi"),
+      IP((short)2, "ip"),
+      PORT((short)3, "port");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -2925,8 +3607,1714 @@ public class AppService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // REQ
-            return REQ;
+          case 1: // IMSI
+            return IMSI;
+          case 2: // IP
+            return IP;
+          case 3: // PORT
+            return PORT;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __PORT_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.IMSI, new org.apache.thrift.meta_data.FieldMetaData("imsi", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.IP, new org.apache.thrift.meta_data.FieldMetaData("ip", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.PORT, new org.apache.thrift.meta_data.FieldMetaData("port", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setDeviceAddress_args.class, metaDataMap);
+    }
+
+    public setDeviceAddress_args() {
+    }
+
+    public setDeviceAddress_args(
+      String imsi,
+      String ip,
+      int port)
+    {
+      this();
+      this.imsi = imsi;
+      this.ip = ip;
+      this.port = port;
+      setPortIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public setDeviceAddress_args(setDeviceAddress_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      if (other.isSetImsi()) {
+        this.imsi = other.imsi;
+      }
+      if (other.isSetIp()) {
+        this.ip = other.ip;
+      }
+      this.port = other.port;
+    }
+
+    public setDeviceAddress_args deepCopy() {
+      return new setDeviceAddress_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.imsi = null;
+      this.ip = null;
+      setPortIsSet(false);
+      this.port = 0;
+    }
+
+    public String getImsi() {
+      return this.imsi;
+    }
+
+    public setDeviceAddress_args setImsi(String imsi) {
+      this.imsi = imsi;
+      return this;
+    }
+
+    public void unsetImsi() {
+      this.imsi = null;
+    }
+
+    /** Returns true if field imsi is set (has been assigned a value) and false otherwise */
+    public boolean isSetImsi() {
+      return this.imsi != null;
+    }
+
+    public void setImsiIsSet(boolean value) {
+      if (!value) {
+        this.imsi = null;
+      }
+    }
+
+    public String getIp() {
+      return this.ip;
+    }
+
+    public setDeviceAddress_args setIp(String ip) {
+      this.ip = ip;
+      return this;
+    }
+
+    public void unsetIp() {
+      this.ip = null;
+    }
+
+    /** Returns true if field ip is set (has been assigned a value) and false otherwise */
+    public boolean isSetIp() {
+      return this.ip != null;
+    }
+
+    public void setIpIsSet(boolean value) {
+      if (!value) {
+        this.ip = null;
+      }
+    }
+
+    public int getPort() {
+      return this.port;
+    }
+
+    public setDeviceAddress_args setPort(int port) {
+      this.port = port;
+      setPortIsSet(true);
+      return this;
+    }
+
+    public void unsetPort() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __PORT_ISSET_ID);
+    }
+
+    /** Returns true if field port is set (has been assigned a value) and false otherwise */
+    public boolean isSetPort() {
+      return EncodingUtils.testBit(__isset_bitfield, __PORT_ISSET_ID);
+    }
+
+    public void setPortIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PORT_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case IMSI:
+        if (value == null) {
+          unsetImsi();
+        } else {
+          setImsi((String)value);
+        }
+        break;
+
+      case IP:
+        if (value == null) {
+          unsetIp();
+        } else {
+          setIp((String)value);
+        }
+        break;
+
+      case PORT:
+        if (value == null) {
+          unsetPort();
+        } else {
+          setPort((Integer)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case IMSI:
+        return getImsi();
+
+      case IP:
+        return getIp();
+
+      case PORT:
+        return Integer.valueOf(getPort());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case IMSI:
+        return isSetImsi();
+      case IP:
+        return isSetIp();
+      case PORT:
+        return isSetPort();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof setDeviceAddress_args)
+        return this.equals((setDeviceAddress_args)that);
+      return false;
+    }
+
+    public boolean equals(setDeviceAddress_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_imsi = true && this.isSetImsi();
+      boolean that_present_imsi = true && that.isSetImsi();
+      if (this_present_imsi || that_present_imsi) {
+        if (!(this_present_imsi && that_present_imsi))
+          return false;
+        if (!this.imsi.equals(that.imsi))
+          return false;
+      }
+
+      boolean this_present_ip = true && this.isSetIp();
+      boolean that_present_ip = true && that.isSetIp();
+      if (this_present_ip || that_present_ip) {
+        if (!(this_present_ip && that_present_ip))
+          return false;
+        if (!this.ip.equals(that.ip))
+          return false;
+      }
+
+      boolean this_present_port = true;
+      boolean that_present_port = true;
+      if (this_present_port || that_present_port) {
+        if (!(this_present_port && that_present_port))
+          return false;
+        if (this.port != that.port)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(setDeviceAddress_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetImsi()).compareTo(other.isSetImsi());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetImsi()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.imsi, other.imsi);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetIp()).compareTo(other.isSetIp());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetIp()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.ip, other.ip);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetPort()).compareTo(other.isSetPort());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPort()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.port, other.port);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("setDeviceAddress_args(");
+      boolean first = true;
+
+      sb.append("imsi:");
+      if (this.imsi == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.imsi);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("ip:");
+      if (this.ip == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.ip);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("port:");
+      sb.append(this.port);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setDeviceAddress_argsStandardSchemeFactory implements SchemeFactory {
+      public setDeviceAddress_argsStandardScheme getScheme() {
+        return new setDeviceAddress_argsStandardScheme();
+      }
+    }
+
+    private static class setDeviceAddress_argsStandardScheme extends StandardScheme<setDeviceAddress_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setDeviceAddress_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // IMSI
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.imsi = iprot.readString();
+                struct.setImsiIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // IP
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.ip = iprot.readString();
+                struct.setIpIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // PORT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.port = iprot.readI32();
+                struct.setPortIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setDeviceAddress_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.imsi != null) {
+          oprot.writeFieldBegin(IMSI_FIELD_DESC);
+          oprot.writeString(struct.imsi);
+          oprot.writeFieldEnd();
+        }
+        if (struct.ip != null) {
+          oprot.writeFieldBegin(IP_FIELD_DESC);
+          oprot.writeString(struct.ip);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldBegin(PORT_FIELD_DESC);
+        oprot.writeI32(struct.port);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setDeviceAddress_argsTupleSchemeFactory implements SchemeFactory {
+      public setDeviceAddress_argsTupleScheme getScheme() {
+        return new setDeviceAddress_argsTupleScheme();
+      }
+    }
+
+    private static class setDeviceAddress_argsTupleScheme extends TupleScheme<setDeviceAddress_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setDeviceAddress_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetImsi()) {
+          optionals.set(0);
+        }
+        if (struct.isSetIp()) {
+          optionals.set(1);
+        }
+        if (struct.isSetPort()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetImsi()) {
+          oprot.writeString(struct.imsi);
+        }
+        if (struct.isSetIp()) {
+          oprot.writeString(struct.ip);
+        }
+        if (struct.isSetPort()) {
+          oprot.writeI32(struct.port);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setDeviceAddress_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(3);
+        if (incoming.get(0)) {
+          struct.imsi = iprot.readString();
+          struct.setImsiIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.ip = iprot.readString();
+          struct.setIpIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.port = iprot.readI32();
+          struct.setPortIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class setDeviceAddress_result implements org.apache.thrift.TBase<setDeviceAddress_result, setDeviceAddress_result._Fields>, java.io.Serializable, Cloneable, Comparable<setDeviceAddress_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setDeviceAddress_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new setDeviceAddress_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setDeviceAddress_resultTupleSchemeFactory());
+    }
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setDeviceAddress_result.class, metaDataMap);
+    }
+
+    public setDeviceAddress_result() {
+    }
+
+    public setDeviceAddress_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public setDeviceAddress_result(setDeviceAddress_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
+    }
+
+    public setDeviceAddress_result deepCopy() {
+      return new setDeviceAddress_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public setDeviceAddress_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof setDeviceAddress_result)
+        return this.equals((setDeviceAddress_result)that);
+      return false;
+    }
+
+    public boolean equals(setDeviceAddress_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(setDeviceAddress_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("setDeviceAddress_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setDeviceAddress_resultStandardSchemeFactory implements SchemeFactory {
+      public setDeviceAddress_resultStandardScheme getScheme() {
+        return new setDeviceAddress_resultStandardScheme();
+      }
+    }
+
+    private static class setDeviceAddress_resultStandardScheme extends StandardScheme<setDeviceAddress_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setDeviceAddress_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setDeviceAddress_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setDeviceAddress_resultTupleSchemeFactory implements SchemeFactory {
+      public setDeviceAddress_resultTupleScheme getScheme() {
+        return new setDeviceAddress_resultTupleScheme();
+      }
+    }
+
+    private static class setDeviceAddress_resultTupleScheme extends TupleScheme<setDeviceAddress_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setDeviceAddress_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setDeviceAddress_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readBool();
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class setEncryptionFactor_args implements org.apache.thrift.TBase<setEncryptionFactor_args, setEncryptionFactor_args._Fields>, java.io.Serializable, Cloneable, Comparable<setEncryptionFactor_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setEncryptionFactor_args");
+
+    private static final org.apache.thrift.protocol.TField IMSI_FIELD_DESC = new org.apache.thrift.protocol.TField("imsi", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField ENCRYPTION_FACTOR_FIELD_DESC = new org.apache.thrift.protocol.TField("encryptionFactor", org.apache.thrift.protocol.TType.BYTE, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new setEncryptionFactor_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setEncryptionFactor_argsTupleSchemeFactory());
+    }
+
+    public String imsi; // required
+    public byte encryptionFactor; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      IMSI((short)1, "imsi"),
+      ENCRYPTION_FACTOR((short)2, "encryptionFactor");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // IMSI
+            return IMSI;
+          case 2: // ENCRYPTION_FACTOR
+            return ENCRYPTION_FACTOR;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __ENCRYPTIONFACTOR_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.IMSI, new org.apache.thrift.meta_data.FieldMetaData("imsi", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.ENCRYPTION_FACTOR, new org.apache.thrift.meta_data.FieldMetaData("encryptionFactor", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BYTE)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setEncryptionFactor_args.class, metaDataMap);
+    }
+
+    public setEncryptionFactor_args() {
+    }
+
+    public setEncryptionFactor_args(
+      String imsi,
+      byte encryptionFactor)
+    {
+      this();
+      this.imsi = imsi;
+      this.encryptionFactor = encryptionFactor;
+      setEncryptionFactorIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public setEncryptionFactor_args(setEncryptionFactor_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      if (other.isSetImsi()) {
+        this.imsi = other.imsi;
+      }
+      this.encryptionFactor = other.encryptionFactor;
+    }
+
+    public setEncryptionFactor_args deepCopy() {
+      return new setEncryptionFactor_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.imsi = null;
+      setEncryptionFactorIsSet(false);
+      this.encryptionFactor = 0;
+    }
+
+    public String getImsi() {
+      return this.imsi;
+    }
+
+    public setEncryptionFactor_args setImsi(String imsi) {
+      this.imsi = imsi;
+      return this;
+    }
+
+    public void unsetImsi() {
+      this.imsi = null;
+    }
+
+    /** Returns true if field imsi is set (has been assigned a value) and false otherwise */
+    public boolean isSetImsi() {
+      return this.imsi != null;
+    }
+
+    public void setImsiIsSet(boolean value) {
+      if (!value) {
+        this.imsi = null;
+      }
+    }
+
+    public byte getEncryptionFactor() {
+      return this.encryptionFactor;
+    }
+
+    public setEncryptionFactor_args setEncryptionFactor(byte encryptionFactor) {
+      this.encryptionFactor = encryptionFactor;
+      setEncryptionFactorIsSet(true);
+      return this;
+    }
+
+    public void unsetEncryptionFactor() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ENCRYPTIONFACTOR_ISSET_ID);
+    }
+
+    /** Returns true if field encryptionFactor is set (has been assigned a value) and false otherwise */
+    public boolean isSetEncryptionFactor() {
+      return EncodingUtils.testBit(__isset_bitfield, __ENCRYPTIONFACTOR_ISSET_ID);
+    }
+
+    public void setEncryptionFactorIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ENCRYPTIONFACTOR_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case IMSI:
+        if (value == null) {
+          unsetImsi();
+        } else {
+          setImsi((String)value);
+        }
+        break;
+
+      case ENCRYPTION_FACTOR:
+        if (value == null) {
+          unsetEncryptionFactor();
+        } else {
+          setEncryptionFactor((Byte)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case IMSI:
+        return getImsi();
+
+      case ENCRYPTION_FACTOR:
+        return Byte.valueOf(getEncryptionFactor());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case IMSI:
+        return isSetImsi();
+      case ENCRYPTION_FACTOR:
+        return isSetEncryptionFactor();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof setEncryptionFactor_args)
+        return this.equals((setEncryptionFactor_args)that);
+      return false;
+    }
+
+    public boolean equals(setEncryptionFactor_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_imsi = true && this.isSetImsi();
+      boolean that_present_imsi = true && that.isSetImsi();
+      if (this_present_imsi || that_present_imsi) {
+        if (!(this_present_imsi && that_present_imsi))
+          return false;
+        if (!this.imsi.equals(that.imsi))
+          return false;
+      }
+
+      boolean this_present_encryptionFactor = true;
+      boolean that_present_encryptionFactor = true;
+      if (this_present_encryptionFactor || that_present_encryptionFactor) {
+        if (!(this_present_encryptionFactor && that_present_encryptionFactor))
+          return false;
+        if (this.encryptionFactor != that.encryptionFactor)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(setEncryptionFactor_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetImsi()).compareTo(other.isSetImsi());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetImsi()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.imsi, other.imsi);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetEncryptionFactor()).compareTo(other.isSetEncryptionFactor());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetEncryptionFactor()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.encryptionFactor, other.encryptionFactor);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("setEncryptionFactor_args(");
+      boolean first = true;
+
+      sb.append("imsi:");
+      if (this.imsi == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.imsi);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("encryptionFactor:");
+      sb.append(this.encryptionFactor);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setEncryptionFactor_argsStandardSchemeFactory implements SchemeFactory {
+      public setEncryptionFactor_argsStandardScheme getScheme() {
+        return new setEncryptionFactor_argsStandardScheme();
+      }
+    }
+
+    private static class setEncryptionFactor_argsStandardScheme extends StandardScheme<setEncryptionFactor_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setEncryptionFactor_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // IMSI
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.imsi = iprot.readString();
+                struct.setImsiIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // ENCRYPTION_FACTOR
+              if (schemeField.type == org.apache.thrift.protocol.TType.BYTE) {
+                struct.encryptionFactor = iprot.readByte();
+                struct.setEncryptionFactorIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setEncryptionFactor_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.imsi != null) {
+          oprot.writeFieldBegin(IMSI_FIELD_DESC);
+          oprot.writeString(struct.imsi);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldBegin(ENCRYPTION_FACTOR_FIELD_DESC);
+        oprot.writeByte(struct.encryptionFactor);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setEncryptionFactor_argsTupleSchemeFactory implements SchemeFactory {
+      public setEncryptionFactor_argsTupleScheme getScheme() {
+        return new setEncryptionFactor_argsTupleScheme();
+      }
+    }
+
+    private static class setEncryptionFactor_argsTupleScheme extends TupleScheme<setEncryptionFactor_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setEncryptionFactor_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetImsi()) {
+          optionals.set(0);
+        }
+        if (struct.isSetEncryptionFactor()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetImsi()) {
+          oprot.writeString(struct.imsi);
+        }
+        if (struct.isSetEncryptionFactor()) {
+          oprot.writeByte(struct.encryptionFactor);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setEncryptionFactor_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.imsi = iprot.readString();
+          struct.setImsiIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.encryptionFactor = iprot.readByte();
+          struct.setEncryptionFactorIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class setEncryptionFactor_result implements org.apache.thrift.TBase<setEncryptionFactor_result, setEncryptionFactor_result._Fields>, java.io.Serializable, Cloneable, Comparable<setEncryptionFactor_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setEncryptionFactor_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new setEncryptionFactor_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setEncryptionFactor_resultTupleSchemeFactory());
+    }
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setEncryptionFactor_result.class, metaDataMap);
+    }
+
+    public setEncryptionFactor_result() {
+    }
+
+    public setEncryptionFactor_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public setEncryptionFactor_result(setEncryptionFactor_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
+    }
+
+    public setEncryptionFactor_result deepCopy() {
+      return new setEncryptionFactor_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public setEncryptionFactor_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof setEncryptionFactor_result)
+        return this.equals((setEncryptionFactor_result)that);
+      return false;
+    }
+
+    public boolean equals(setEncryptionFactor_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(setEncryptionFactor_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("setEncryptionFactor_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setEncryptionFactor_resultStandardSchemeFactory implements SchemeFactory {
+      public setEncryptionFactor_resultStandardScheme getScheme() {
+        return new setEncryptionFactor_resultStandardScheme();
+      }
+    }
+
+    private static class setEncryptionFactor_resultStandardScheme extends StandardScheme<setEncryptionFactor_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setEncryptionFactor_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setEncryptionFactor_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setEncryptionFactor_resultTupleSchemeFactory implements SchemeFactory {
+      public setEncryptionFactor_resultTupleScheme getScheme() {
+        return new setEncryptionFactor_resultTupleScheme();
+      }
+    }
+
+    private static class setEncryptionFactor_resultTupleScheme extends TupleScheme<setEncryptionFactor_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setEncryptionFactor_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setEncryptionFactor_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readBool();
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class setTimeStamp_args implements org.apache.thrift.TBase<setTimeStamp_args, setTimeStamp_args._Fields>, java.io.Serializable, Cloneable, Comparable<setTimeStamp_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setTimeStamp_args");
+
+    private static final org.apache.thrift.protocol.TField TIMESTAMPLIST_FIELD_DESC = new org.apache.thrift.protocol.TField("timestamplist", org.apache.thrift.protocol.TType.LIST, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new setTimeStamp_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setTimeStamp_argsTupleSchemeFactory());
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      TIMESTAMPLIST((short)1, "timestamplist");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // TIMESTAMPLIST
+            return TIMESTAMPLIST;
           default:
             return null;
         }
@@ -2970,71 +5358,91 @@ public class AppService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.REQ, new org.apache.thrift.meta_data.FieldMetaData("req", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.CommCommandREQ.class)));
+      tmpMap.put(_Fields.TIMESTAMPLIST, new org.apache.thrift.meta_data.FieldMetaData("timestamplist", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandREQ_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setTimeStamp_args.class, metaDataMap);
     }
 
-    public sendAsyncCommandREQ_args() {
+    public setTimeStamp_args() {
     }
 
-    public sendAsyncCommandREQ_args(
-      com.g2sky.pgd.intf.thrift.common.CommCommandREQ req)
+    public setTimeStamp_args(
+      List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist)
     {
       this();
-      this.req = req;
+      this.timestamplist = timestamplist;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public sendAsyncCommandREQ_args(sendAsyncCommandREQ_args other) {
-      if (other.isSetReq()) {
-        this.req = new com.g2sky.pgd.intf.thrift.common.CommCommandREQ(other.req);
+    public setTimeStamp_args(setTimeStamp_args other) {
+      if (other.isSetTimestamplist()) {
+        List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> __this__timestamplist = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp>(other.timestamplist.size());
+        for (com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp other_element : other.timestamplist) {
+          __this__timestamplist.add(new com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp(other_element));
+        }
+        this.timestamplist = __this__timestamplist;
       }
     }
 
-    public sendAsyncCommandREQ_args deepCopy() {
-      return new sendAsyncCommandREQ_args(this);
+    public setTimeStamp_args deepCopy() {
+      return new setTimeStamp_args(this);
     }
 
     @Override
     public void clear() {
-      this.req = null;
+      this.timestamplist = null;
     }
 
-    public com.g2sky.pgd.intf.thrift.common.CommCommandREQ getReq() {
-      return this.req;
+    public int getTimestamplistSize() {
+      return (this.timestamplist == null) ? 0 : this.timestamplist.size();
     }
 
-    public sendAsyncCommandREQ_args setReq(com.g2sky.pgd.intf.thrift.common.CommCommandREQ req) {
-      this.req = req;
+    public java.util.Iterator<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> getTimestamplistIterator() {
+      return (this.timestamplist == null) ? null : this.timestamplist.iterator();
+    }
+
+    public void addToTimestamplist(com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp elem) {
+      if (this.timestamplist == null) {
+        this.timestamplist = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp>();
+      }
+      this.timestamplist.add(elem);
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> getTimestamplist() {
+      return this.timestamplist;
+    }
+
+    public setTimeStamp_args setTimestamplist(List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp> timestamplist) {
+      this.timestamplist = timestamplist;
       return this;
     }
 
-    public void unsetReq() {
-      this.req = null;
+    public void unsetTimestamplist() {
+      this.timestamplist = null;
     }
 
-    /** Returns true if field req is set (has been assigned a value) and false otherwise */
-    public boolean isSetReq() {
-      return this.req != null;
+    /** Returns true if field timestamplist is set (has been assigned a value) and false otherwise */
+    public boolean isSetTimestamplist() {
+      return this.timestamplist != null;
     }
 
-    public void setReqIsSet(boolean value) {
+    public void setTimestamplistIsSet(boolean value) {
       if (!value) {
-        this.req = null;
+        this.timestamplist = null;
       }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case REQ:
+      case TIMESTAMPLIST:
         if (value == null) {
-          unsetReq();
+          unsetTimestamplist();
         } else {
-          setReq((com.g2sky.pgd.intf.thrift.common.CommCommandREQ)value);
+          setTimestamplist((List<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp>)value);
         }
         break;
 
@@ -3043,8 +5451,8 @@ public class AppService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case REQ:
-        return getReq();
+      case TIMESTAMPLIST:
+        return getTimestamplist();
 
       }
       throw new IllegalStateException();
@@ -3057,8 +5465,8 @@ public class AppService {
       }
 
       switch (field) {
-      case REQ:
-        return isSetReq();
+      case TIMESTAMPLIST:
+        return isSetTimestamplist();
       }
       throw new IllegalStateException();
     }
@@ -3067,21 +5475,21 @@ public class AppService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof sendAsyncCommandREQ_args)
-        return this.equals((sendAsyncCommandREQ_args)that);
+      if (that instanceof setTimeStamp_args)
+        return this.equals((setTimeStamp_args)that);
       return false;
     }
 
-    public boolean equals(sendAsyncCommandREQ_args that) {
+    public boolean equals(setTimeStamp_args that) {
       if (that == null)
         return false;
 
-      boolean this_present_req = true && this.isSetReq();
-      boolean that_present_req = true && that.isSetReq();
-      if (this_present_req || that_present_req) {
-        if (!(this_present_req && that_present_req))
+      boolean this_present_timestamplist = true && this.isSetTimestamplist();
+      boolean that_present_timestamplist = true && that.isSetTimestamplist();
+      if (this_present_timestamplist || that_present_timestamplist) {
+        if (!(this_present_timestamplist && that_present_timestamplist))
           return false;
-        if (!this.req.equals(that.req))
+        if (!this.timestamplist.equals(that.timestamplist))
           return false;
       }
 
@@ -3094,19 +5502,19 @@ public class AppService {
     }
 
     @Override
-    public int compareTo(sendAsyncCommandREQ_args other) {
+    public int compareTo(setTimeStamp_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetReq()).compareTo(other.isSetReq());
+      lastComparison = Boolean.valueOf(isSetTimestamplist()).compareTo(other.isSetTimestamplist());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetReq()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.req, other.req);
+      if (isSetTimestamplist()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.timestamplist, other.timestamplist);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -3128,14 +5536,14 @@ public class AppService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandREQ_args(");
+      StringBuilder sb = new StringBuilder("setTimeStamp_args(");
       boolean first = true;
 
-      sb.append("req:");
-      if (this.req == null) {
+      sb.append("timestamplist:");
+      if (this.timestamplist == null) {
         sb.append("null");
       } else {
-        sb.append(this.req);
+        sb.append(this.timestamplist);
       }
       first = false;
       sb.append(")");
@@ -3145,9 +5553,6 @@ public class AppService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (req != null) {
-        req.validate();
-      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -3166,15 +5571,15 @@ public class AppService {
       }
     }
 
-    private static class sendAsyncCommandREQ_argsStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_argsStandardScheme getScheme() {
-        return new sendAsyncCommandREQ_argsStandardScheme();
+    private static class setTimeStamp_argsStandardSchemeFactory implements SchemeFactory {
+      public setTimeStamp_argsStandardScheme getScheme() {
+        return new setTimeStamp_argsStandardScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_argsStandardScheme extends StandardScheme<sendAsyncCommandREQ_args> {
+    private static class setTimeStamp_argsStandardScheme extends StandardScheme<setTimeStamp_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setTimeStamp_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3184,11 +5589,21 @@ public class AppService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // REQ
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.req = new com.g2sky.pgd.intf.thrift.common.CommCommandREQ();
-                struct.req.read(iprot);
-                struct.setReqIsSet(true);
+            case 1: // TIMESTAMPLIST
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
+                  struct.timestamplist = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp>(_list16.size);
+                  for (int _i17 = 0; _i17 < _list16.size; ++_i17)
+                  {
+                    com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp _elem18;
+                    _elem18 = new com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp();
+                    _elem18.read(iprot);
+                    struct.timestamplist.add(_elem18);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setTimestamplistIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -3204,13 +5619,20 @@ public class AppService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setTimeStamp_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.req != null) {
-          oprot.writeFieldBegin(REQ_FIELD_DESC);
-          struct.req.write(oprot);
+        if (struct.timestamplist != null) {
+          oprot.writeFieldBegin(TIMESTAMPLIST_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.timestamplist.size()));
+            for (com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp _iter19 : struct.timestamplist)
+            {
+              _iter19.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -3219,49 +5641,418 @@ public class AppService {
 
     }
 
-    private static class sendAsyncCommandREQ_argsTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_argsTupleScheme getScheme() {
-        return new sendAsyncCommandREQ_argsTupleScheme();
+    private static class setTimeStamp_argsTupleSchemeFactory implements SchemeFactory {
+      public setTimeStamp_argsTupleScheme getScheme() {
+        return new setTimeStamp_argsTupleScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_argsTupleScheme extends TupleScheme<sendAsyncCommandREQ_args> {
+    private static class setTimeStamp_argsTupleScheme extends TupleScheme<setTimeStamp_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, setTimeStamp_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetReq()) {
+        if (struct.isSetTimestamplist()) {
           optionals.set(0);
         }
         oprot.writeBitSet(optionals, 1);
-        if (struct.isSetReq()) {
-          struct.req.write(oprot);
+        if (struct.isSetTimestamplist()) {
+          {
+            oprot.writeI32(struct.timestamplist.size());
+            for (com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp _iter20 : struct.timestamplist)
+            {
+              _iter20.write(oprot);
+            }
+          }
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, setTimeStamp_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.req = new com.g2sky.pgd.intf.thrift.common.CommCommandREQ();
-          struct.req.read(iprot);
-          struct.setReqIsSet(true);
+          {
+            org.apache.thrift.protocol.TList _list21 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.timestamplist = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp>(_list21.size);
+            for (int _i22 = 0; _i22 < _list21.size; ++_i22)
+            {
+              com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp _elem23;
+              _elem23 = new com.g2sky.pgd.intf.thrift.common.DeviceTimeStamp();
+              _elem23.read(iprot);
+              struct.timestamplist.add(_elem23);
+            }
+          }
+          struct.setTimestamplistIsSet(true);
         }
       }
     }
 
   }
 
-  public static class sendAsyncCommandREQ_result implements org.apache.thrift.TBase<sendAsyncCommandREQ_result, sendAsyncCommandREQ_result._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandREQ_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandREQ_result");
+  public static class setTimeStamp_result implements org.apache.thrift.TBase<setTimeStamp_result, setTimeStamp_result._Fields>, java.io.Serializable, Cloneable, Comparable<setTimeStamp_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setTimeStamp_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new setTimeStamp_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setTimeStamp_resultTupleSchemeFactory());
+    }
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setTimeStamp_result.class, metaDataMap);
+    }
+
+    public setTimeStamp_result() {
+    }
+
+    public setTimeStamp_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public setTimeStamp_result(setTimeStamp_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
+    }
+
+    public setTimeStamp_result deepCopy() {
+      return new setTimeStamp_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public setTimeStamp_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof setTimeStamp_result)
+        return this.equals((setTimeStamp_result)that);
+      return false;
+    }
+
+    public boolean equals(setTimeStamp_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(setTimeStamp_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("setTimeStamp_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setTimeStamp_resultStandardSchemeFactory implements SchemeFactory {
+      public setTimeStamp_resultStandardScheme getScheme() {
+        return new setTimeStamp_resultStandardScheme();
+      }
+    }
+
+    private static class setTimeStamp_resultStandardScheme extends StandardScheme<setTimeStamp_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setTimeStamp_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setTimeStamp_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setTimeStamp_resultTupleSchemeFactory implements SchemeFactory {
+      public setTimeStamp_resultTupleScheme getScheme() {
+        return new setTimeStamp_resultTupleScheme();
+      }
+    }
+
+    private static class setTimeStamp_resultTupleScheme extends TupleScheme<setTimeStamp_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setTimeStamp_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setTimeStamp_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readBool();
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class getAllDevicesInfo_args implements org.apache.thrift.TBase<getAllDevicesInfo_args, getAllDevicesInfo_args._Fields>, java.io.Serializable, Cloneable, Comparable<getAllDevicesInfo_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAllDevicesInfo_args");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandREQ_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandREQ_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getAllDevicesInfo_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getAllDevicesInfo_argsTupleSchemeFactory());
     }
 
 
@@ -3324,20 +6115,20 @@ public class AppService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandREQ_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAllDevicesInfo_args.class, metaDataMap);
     }
 
-    public sendAsyncCommandREQ_result() {
+    public getAllDevicesInfo_args() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public sendAsyncCommandREQ_result(sendAsyncCommandREQ_result other) {
+    public getAllDevicesInfo_args(getAllDevicesInfo_args other) {
     }
 
-    public sendAsyncCommandREQ_result deepCopy() {
-      return new sendAsyncCommandREQ_result(this);
+    public getAllDevicesInfo_args deepCopy() {
+      return new getAllDevicesInfo_args(this);
     }
 
     @Override
@@ -3370,12 +6161,12 @@ public class AppService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof sendAsyncCommandREQ_result)
-        return this.equals((sendAsyncCommandREQ_result)that);
+      if (that instanceof getAllDevicesInfo_args)
+        return this.equals((getAllDevicesInfo_args)that);
       return false;
     }
 
-    public boolean equals(sendAsyncCommandREQ_result that) {
+    public boolean equals(getAllDevicesInfo_args that) {
       if (that == null)
         return false;
 
@@ -3388,7 +6179,7 @@ public class AppService {
     }
 
     @Override
-    public int compareTo(sendAsyncCommandREQ_result other) {
+    public int compareTo(getAllDevicesInfo_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -3408,11 +6199,11 @@ public class AppService {
 
     public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
-      }
+    }
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandREQ_result(");
+      StringBuilder sb = new StringBuilder("getAllDevicesInfo_args(");
       boolean first = true;
 
       sb.append(")");
@@ -3440,15 +6231,15 @@ public class AppService {
       }
     }
 
-    private static class sendAsyncCommandREQ_resultStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_resultStandardScheme getScheme() {
-        return new sendAsyncCommandREQ_resultStandardScheme();
+    private static class getAllDevicesInfo_argsStandardSchemeFactory implements SchemeFactory {
+      public getAllDevicesInfo_argsStandardScheme getScheme() {
+        return new getAllDevicesInfo_argsStandardScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_resultStandardScheme extends StandardScheme<sendAsyncCommandREQ_result> {
+    private static class getAllDevicesInfo_argsStandardScheme extends StandardScheme<getAllDevicesInfo_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllDevicesInfo_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3469,7 +6260,7 @@ public class AppService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllDevicesInfo_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3479,43 +6270,43 @@ public class AppService {
 
     }
 
-    private static class sendAsyncCommandREQ_resultTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_resultTupleScheme getScheme() {
-        return new sendAsyncCommandREQ_resultTupleScheme();
+    private static class getAllDevicesInfo_argsTupleSchemeFactory implements SchemeFactory {
+      public getAllDevicesInfo_argsTupleScheme getScheme() {
+        return new getAllDevicesInfo_argsTupleScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_resultTupleScheme extends TupleScheme<sendAsyncCommandREQ_result> {
+    private static class getAllDevicesInfo_argsTupleScheme extends TupleScheme<getAllDevicesInfo_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAllDevicesInfo_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAllDevicesInfo_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class sendAsyncCommandRSP_args implements org.apache.thrift.TBase<sendAsyncCommandRSP_args, sendAsyncCommandRSP_args._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandRSP_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandRSP_args");
+  public static class getAllDevicesInfo_result implements org.apache.thrift.TBase<getAllDevicesInfo_result, getAllDevicesInfo_result._Fields>, java.io.Serializable, Cloneable, Comparable<getAllDevicesInfo_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAllDevicesInfo_result");
 
-    private static final org.apache.thrift.protocol.TField RSP_FIELD_DESC = new org.apache.thrift.protocol.TField("rsp", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.LIST, (short)0);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandRSP_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandRSP_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getAllDevicesInfo_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getAllDevicesInfo_resultTupleSchemeFactory());
     }
 
-    public com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp; // required
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      RSP((short)1, "rsp");
+      SUCCESS((short)0, "success");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -3530,8 +6321,8 @@ public class AppService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // RSP
-            return RSP;
+          case 0: // SUCCESS
+            return SUCCESS;
           default:
             return null;
         }
@@ -3575,71 +6366,91 @@ public class AppService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.RSP, new org.apache.thrift.meta_data.FieldMetaData("rsp", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.AppCommandRSP.class)));
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.DeviceInfo.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandRSP_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAllDevicesInfo_result.class, metaDataMap);
     }
 
-    public sendAsyncCommandRSP_args() {
+    public getAllDevicesInfo_result() {
     }
 
-    public sendAsyncCommandRSP_args(
-      com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp)
+    public getAllDevicesInfo_result(
+      List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> success)
     {
       this();
-      this.rsp = rsp;
+      this.success = success;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public sendAsyncCommandRSP_args(sendAsyncCommandRSP_args other) {
-      if (other.isSetRsp()) {
-        this.rsp = new com.g2sky.pgd.intf.thrift.common.AppCommandRSP(other.rsp);
+    public getAllDevicesInfo_result(getAllDevicesInfo_result other) {
+      if (other.isSetSuccess()) {
+        List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> __this__success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceInfo>(other.success.size());
+        for (com.g2sky.pgd.intf.thrift.common.DeviceInfo other_element : other.success) {
+          __this__success.add(new com.g2sky.pgd.intf.thrift.common.DeviceInfo(other_element));
+        }
+        this.success = __this__success;
       }
     }
 
-    public sendAsyncCommandRSP_args deepCopy() {
-      return new sendAsyncCommandRSP_args(this);
+    public getAllDevicesInfo_result deepCopy() {
+      return new getAllDevicesInfo_result(this);
     }
 
     @Override
     public void clear() {
-      this.rsp = null;
+      this.success = null;
     }
 
-    public com.g2sky.pgd.intf.thrift.common.AppCommandRSP getRsp() {
-      return this.rsp;
+    public int getSuccessSize() {
+      return (this.success == null) ? 0 : this.success.size();
     }
 
-    public sendAsyncCommandRSP_args setRsp(com.g2sky.pgd.intf.thrift.common.AppCommandRSP rsp) {
-      this.rsp = rsp;
+    public java.util.Iterator<com.g2sky.pgd.intf.thrift.common.DeviceInfo> getSuccessIterator() {
+      return (this.success == null) ? null : this.success.iterator();
+    }
+
+    public void addToSuccess(com.g2sky.pgd.intf.thrift.common.DeviceInfo elem) {
+      if (this.success == null) {
+        this.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceInfo>();
+      }
+      this.success.add(elem);
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> getSuccess() {
+      return this.success;
+    }
+
+    public getAllDevicesInfo_result setSuccess(List<com.g2sky.pgd.intf.thrift.common.DeviceInfo> success) {
+      this.success = success;
       return this;
     }
 
-    public void unsetRsp() {
-      this.rsp = null;
+    public void unsetSuccess() {
+      this.success = null;
     }
 
-    /** Returns true if field rsp is set (has been assigned a value) and false otherwise */
-    public boolean isSetRsp() {
-      return this.rsp != null;
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
     }
 
-    public void setRspIsSet(boolean value) {
+    public void setSuccessIsSet(boolean value) {
       if (!value) {
-        this.rsp = null;
+        this.success = null;
       }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case RSP:
+      case SUCCESS:
         if (value == null) {
-          unsetRsp();
+          unsetSuccess();
         } else {
-          setRsp((com.g2sky.pgd.intf.thrift.common.AppCommandRSP)value);
+          setSuccess((List<com.g2sky.pgd.intf.thrift.common.DeviceInfo>)value);
         }
         break;
 
@@ -3648,8 +6459,8 @@ public class AppService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case RSP:
-        return getRsp();
+      case SUCCESS:
+        return getSuccess();
 
       }
       throw new IllegalStateException();
@@ -3662,8 +6473,8 @@ public class AppService {
       }
 
       switch (field) {
-      case RSP:
-        return isSetRsp();
+      case SUCCESS:
+        return isSetSuccess();
       }
       throw new IllegalStateException();
     }
@@ -3672,21 +6483,21 @@ public class AppService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof sendAsyncCommandRSP_args)
-        return this.equals((sendAsyncCommandRSP_args)that);
+      if (that instanceof getAllDevicesInfo_result)
+        return this.equals((getAllDevicesInfo_result)that);
       return false;
     }
 
-    public boolean equals(sendAsyncCommandRSP_args that) {
+    public boolean equals(getAllDevicesInfo_result that) {
       if (that == null)
         return false;
 
-      boolean this_present_rsp = true && this.isSetRsp();
-      boolean that_present_rsp = true && that.isSetRsp();
-      if (this_present_rsp || that_present_rsp) {
-        if (!(this_present_rsp && that_present_rsp))
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
           return false;
-        if (!this.rsp.equals(that.rsp))
+        if (!this.success.equals(that.success))
           return false;
       }
 
@@ -3699,19 +6510,19 @@ public class AppService {
     }
 
     @Override
-    public int compareTo(sendAsyncCommandRSP_args other) {
+    public int compareTo(getAllDevicesInfo_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetRsp()).compareTo(other.isSetRsp());
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetRsp()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.rsp, other.rsp);
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -3729,18 +6540,18 @@ public class AppService {
 
     public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
-    }
+      }
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandRSP_args(");
+      StringBuilder sb = new StringBuilder("getAllDevicesInfo_result(");
       boolean first = true;
 
-      sb.append("rsp:");
-      if (this.rsp == null) {
+      sb.append("success:");
+      if (this.success == null) {
         sb.append("null");
       } else {
-        sb.append(this.rsp);
+        sb.append(this.success);
       }
       first = false;
       sb.append(")");
@@ -3750,9 +6561,6 @@ public class AppService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (rsp != null) {
-        rsp.validate();
-      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -3771,15 +6579,15 @@ public class AppService {
       }
     }
 
-    private static class sendAsyncCommandRSP_argsStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_argsStandardScheme getScheme() {
-        return new sendAsyncCommandRSP_argsStandardScheme();
+    private static class getAllDevicesInfo_resultStandardSchemeFactory implements SchemeFactory {
+      public getAllDevicesInfo_resultStandardScheme getScheme() {
+        return new getAllDevicesInfo_resultStandardScheme();
       }
     }
 
-    private static class sendAsyncCommandRSP_argsStandardScheme extends StandardScheme<sendAsyncCommandRSP_args> {
+    private static class getAllDevicesInfo_resultStandardScheme extends StandardScheme<getAllDevicesInfo_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllDevicesInfo_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3789,11 +6597,21 @@ public class AppService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // RSP
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.rsp = new com.g2sky.pgd.intf.thrift.common.AppCommandRSP();
-                struct.rsp.read(iprot);
-                struct.setRspIsSet(true);
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list24 = iprot.readListBegin();
+                  struct.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceInfo>(_list24.size);
+                  for (int _i25 = 0; _i25 < _list24.size; ++_i25)
+                  {
+                    com.g2sky.pgd.intf.thrift.common.DeviceInfo _elem26;
+                    _elem26 = new com.g2sky.pgd.intf.thrift.common.DeviceInfo();
+                    _elem26.read(iprot);
+                    struct.success.add(_elem26);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setSuccessIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -3809,13 +6627,20 @@ public class AppService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllDevicesInfo_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.rsp != null) {
-          oprot.writeFieldBegin(RSP_FIELD_DESC);
-          struct.rsp.write(oprot);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
+            for (com.g2sky.pgd.intf.thrift.common.DeviceInfo _iter27 : struct.success)
+            {
+              _iter27.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -3824,49 +6649,64 @@ public class AppService {
 
     }
 
-    private static class sendAsyncCommandRSP_argsTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_argsTupleScheme getScheme() {
-        return new sendAsyncCommandRSP_argsTupleScheme();
+    private static class getAllDevicesInfo_resultTupleSchemeFactory implements SchemeFactory {
+      public getAllDevicesInfo_resultTupleScheme getScheme() {
+        return new getAllDevicesInfo_resultTupleScheme();
       }
     }
 
-    private static class sendAsyncCommandRSP_argsTupleScheme extends TupleScheme<sendAsyncCommandRSP_args> {
+    private static class getAllDevicesInfo_resultTupleScheme extends TupleScheme<getAllDevicesInfo_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAllDevicesInfo_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetRsp()) {
+        if (struct.isSetSuccess()) {
           optionals.set(0);
         }
         oprot.writeBitSet(optionals, 1);
-        if (struct.isSetRsp()) {
-          struct.rsp.write(oprot);
+        if (struct.isSetSuccess()) {
+          {
+            oprot.writeI32(struct.success.size());
+            for (com.g2sky.pgd.intf.thrift.common.DeviceInfo _iter28 : struct.success)
+            {
+              _iter28.write(oprot);
+            }
+          }
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAllDevicesInfo_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.rsp = new com.g2sky.pgd.intf.thrift.common.AppCommandRSP();
-          struct.rsp.read(iprot);
-          struct.setRspIsSet(true);
+          {
+            org.apache.thrift.protocol.TList _list29 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.DeviceInfo>(_list29.size);
+            for (int _i30 = 0; _i30 < _list29.size; ++_i30)
+            {
+              com.g2sky.pgd.intf.thrift.common.DeviceInfo _elem31;
+              _elem31 = new com.g2sky.pgd.intf.thrift.common.DeviceInfo();
+              _elem31.read(iprot);
+              struct.success.add(_elem31);
+            }
+          }
+          struct.setSuccessIsSet(true);
         }
       }
     }
 
   }
 
-  public static class sendAsyncCommandRSP_result implements org.apache.thrift.TBase<sendAsyncCommandRSP_result, sendAsyncCommandRSP_result._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandRSP_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandRSP_result");
+  public static class getAllFirmwareFilesInfo_args implements org.apache.thrift.TBase<getAllFirmwareFilesInfo_args, getAllFirmwareFilesInfo_args._Fields>, java.io.Serializable, Cloneable, Comparable<getAllFirmwareFilesInfo_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAllFirmwareFilesInfo_args");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandRSP_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandRSP_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getAllFirmwareFilesInfo_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getAllFirmwareFilesInfo_argsTupleSchemeFactory());
     }
 
 
@@ -3929,20 +6769,20 @@ public class AppService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandRSP_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAllFirmwareFilesInfo_args.class, metaDataMap);
     }
 
-    public sendAsyncCommandRSP_result() {
+    public getAllFirmwareFilesInfo_args() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public sendAsyncCommandRSP_result(sendAsyncCommandRSP_result other) {
+    public getAllFirmwareFilesInfo_args(getAllFirmwareFilesInfo_args other) {
     }
 
-    public sendAsyncCommandRSP_result deepCopy() {
-      return new sendAsyncCommandRSP_result(this);
+    public getAllFirmwareFilesInfo_args deepCopy() {
+      return new getAllFirmwareFilesInfo_args(this);
     }
 
     @Override
@@ -3975,12 +6815,12 @@ public class AppService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof sendAsyncCommandRSP_result)
-        return this.equals((sendAsyncCommandRSP_result)that);
+      if (that instanceof getAllFirmwareFilesInfo_args)
+        return this.equals((getAllFirmwareFilesInfo_args)that);
       return false;
     }
 
-    public boolean equals(sendAsyncCommandRSP_result that) {
+    public boolean equals(getAllFirmwareFilesInfo_args that) {
       if (that == null)
         return false;
 
@@ -3993,7 +6833,7 @@ public class AppService {
     }
 
     @Override
-    public int compareTo(sendAsyncCommandRSP_result other) {
+    public int compareTo(getAllFirmwareFilesInfo_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -4013,11 +6853,11 @@ public class AppService {
 
     public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
-      }
+    }
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandRSP_result(");
+      StringBuilder sb = new StringBuilder("getAllFirmwareFilesInfo_args(");
       boolean first = true;
 
       sb.append(")");
@@ -4045,15 +6885,15 @@ public class AppService {
       }
     }
 
-    private static class sendAsyncCommandRSP_resultStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_resultStandardScheme getScheme() {
-        return new sendAsyncCommandRSP_resultStandardScheme();
+    private static class getAllFirmwareFilesInfo_argsStandardSchemeFactory implements SchemeFactory {
+      public getAllFirmwareFilesInfo_argsStandardScheme getScheme() {
+        return new getAllFirmwareFilesInfo_argsStandardScheme();
       }
     }
 
-    private static class sendAsyncCommandRSP_resultStandardScheme extends StandardScheme<sendAsyncCommandRSP_result> {
+    private static class getAllFirmwareFilesInfo_argsStandardScheme extends StandardScheme<getAllFirmwareFilesInfo_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4074,7 +6914,7 @@ public class AppService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4084,21 +6924,1747 @@ public class AppService {
 
     }
 
-    private static class sendAsyncCommandRSP_resultTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_resultTupleScheme getScheme() {
-        return new sendAsyncCommandRSP_resultTupleScheme();
+    private static class getAllFirmwareFilesInfo_argsTupleSchemeFactory implements SchemeFactory {
+      public getAllFirmwareFilesInfo_argsTupleScheme getScheme() {
+        return new getAllFirmwareFilesInfo_argsTupleScheme();
       }
     }
 
-    private static class sendAsyncCommandRSP_resultTupleScheme extends TupleScheme<sendAsyncCommandRSP_result> {
+    private static class getAllFirmwareFilesInfo_argsTupleScheme extends TupleScheme<getAllFirmwareFilesInfo_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+      }
+    }
+
+  }
+
+  public static class getAllFirmwareFilesInfo_result implements org.apache.thrift.TBase<getAllFirmwareFilesInfo_result, getAllFirmwareFilesInfo_result._Fields>, java.io.Serializable, Cloneable, Comparable<getAllFirmwareFilesInfo_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAllFirmwareFilesInfo_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.LIST, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new getAllFirmwareFilesInfo_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getAllFirmwareFilesInfo_resultTupleSchemeFactory());
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.Fileinfo.class))));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAllFirmwareFilesInfo_result.class, metaDataMap);
+    }
+
+    public getAllFirmwareFilesInfo_result() {
+    }
+
+    public getAllFirmwareFilesInfo_result(
+      List<com.g2sky.pgd.intf.thrift.common.Fileinfo> success)
+    {
+      this();
+      this.success = success;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public getAllFirmwareFilesInfo_result(getAllFirmwareFilesInfo_result other) {
+      if (other.isSetSuccess()) {
+        List<com.g2sky.pgd.intf.thrift.common.Fileinfo> __this__success = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>(other.success.size());
+        for (com.g2sky.pgd.intf.thrift.common.Fileinfo other_element : other.success) {
+          __this__success.add(new com.g2sky.pgd.intf.thrift.common.Fileinfo(other_element));
+        }
+        this.success = __this__success;
+      }
+    }
+
+    public getAllFirmwareFilesInfo_result deepCopy() {
+      return new getAllFirmwareFilesInfo_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+    }
+
+    public int getSuccessSize() {
+      return (this.success == null) ? 0 : this.success.size();
+    }
+
+    public java.util.Iterator<com.g2sky.pgd.intf.thrift.common.Fileinfo> getSuccessIterator() {
+      return (this.success == null) ? null : this.success.iterator();
+    }
+
+    public void addToSuccess(com.g2sky.pgd.intf.thrift.common.Fileinfo elem) {
+      if (this.success == null) {
+        this.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>();
+      }
+      this.success.add(elem);
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> getSuccess() {
+      return this.success;
+    }
+
+    public getAllFirmwareFilesInfo_result setSuccess(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((List<com.g2sky.pgd.intf.thrift.common.Fileinfo>)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof getAllFirmwareFilesInfo_result)
+        return this.equals((getAllFirmwareFilesInfo_result)that);
+      return false;
+    }
+
+    public boolean equals(getAllFirmwareFilesInfo_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(getAllFirmwareFilesInfo_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("getAllFirmwareFilesInfo_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class getAllFirmwareFilesInfo_resultStandardSchemeFactory implements SchemeFactory {
+      public getAllFirmwareFilesInfo_resultStandardScheme getScheme() {
+        return new getAllFirmwareFilesInfo_resultStandardScheme();
+      }
+    }
+
+    private static class getAllFirmwareFilesInfo_resultStandardScheme extends StandardScheme<getAllFirmwareFilesInfo_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list32 = iprot.readListBegin();
+                  struct.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>(_list32.size);
+                  for (int _i33 = 0; _i33 < _list32.size; ++_i33)
+                  {
+                    com.g2sky.pgd.intf.thrift.common.Fileinfo _elem34;
+                    _elem34 = new com.g2sky.pgd.intf.thrift.common.Fileinfo();
+                    _elem34.read(iprot);
+                    struct.success.add(_elem34);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
+            for (com.g2sky.pgd.intf.thrift.common.Fileinfo _iter35 : struct.success)
+            {
+              _iter35.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class getAllFirmwareFilesInfo_resultTupleSchemeFactory implements SchemeFactory {
+      public getAllFirmwareFilesInfo_resultTupleScheme getScheme() {
+        return new getAllFirmwareFilesInfo_resultTupleScheme();
+      }
+    }
+
+    private static class getAllFirmwareFilesInfo_resultTupleScheme extends TupleScheme<getAllFirmwareFilesInfo_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          {
+            oprot.writeI32(struct.success.size());
+            for (com.g2sky.pgd.intf.thrift.common.Fileinfo _iter36 : struct.success)
+            {
+              _iter36.write(oprot);
+            }
+          }
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          {
+            org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>(_list37.size);
+            for (int _i38 = 0; _i38 < _list37.size; ++_i38)
+            {
+              com.g2sky.pgd.intf.thrift.common.Fileinfo _elem39;
+              _elem39 = new com.g2sky.pgd.intf.thrift.common.Fileinfo();
+              _elem39.read(iprot);
+              struct.success.add(_elem39);
+            }
+          }
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class registerDevice_args implements org.apache.thrift.TBase<registerDevice_args, registerDevice_args._Fields>, java.io.Serializable, Cloneable, Comparable<registerDevice_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("registerDevice_args");
+
+    private static final org.apache.thrift.protocol.TField INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("info", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new registerDevice_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new registerDevice_argsTupleSchemeFactory());
+    }
+
+    public com.g2sky.pgd.intf.thrift.common.RegisterInfo info; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      INFO((short)1, "info");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // INFO
+            return INFO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.INFO, new org.apache.thrift.meta_data.FieldMetaData("info", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.RegisterInfo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(registerDevice_args.class, metaDataMap);
+    }
+
+    public registerDevice_args() {
+    }
+
+    public registerDevice_args(
+      com.g2sky.pgd.intf.thrift.common.RegisterInfo info)
+    {
+      this();
+      this.info = info;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public registerDevice_args(registerDevice_args other) {
+      if (other.isSetInfo()) {
+        this.info = new com.g2sky.pgd.intf.thrift.common.RegisterInfo(other.info);
+      }
+    }
+
+    public registerDevice_args deepCopy() {
+      return new registerDevice_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.info = null;
+    }
+
+    public com.g2sky.pgd.intf.thrift.common.RegisterInfo getInfo() {
+      return this.info;
+    }
+
+    public registerDevice_args setInfo(com.g2sky.pgd.intf.thrift.common.RegisterInfo info) {
+      this.info = info;
+      return this;
+    }
+
+    public void unsetInfo() {
+      this.info = null;
+    }
+
+    /** Returns true if field info is set (has been assigned a value) and false otherwise */
+    public boolean isSetInfo() {
+      return this.info != null;
+    }
+
+    public void setInfoIsSet(boolean value) {
+      if (!value) {
+        this.info = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case INFO:
+        if (value == null) {
+          unsetInfo();
+        } else {
+          setInfo((com.g2sky.pgd.intf.thrift.common.RegisterInfo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case INFO:
+        return getInfo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case INFO:
+        return isSetInfo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof registerDevice_args)
+        return this.equals((registerDevice_args)that);
+      return false;
+    }
+
+    public boolean equals(registerDevice_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_info = true && this.isSetInfo();
+      boolean that_present_info = true && that.isSetInfo();
+      if (this_present_info || that_present_info) {
+        if (!(this_present_info && that_present_info))
+          return false;
+        if (!this.info.equals(that.info))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(registerDevice_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetInfo()).compareTo(other.isSetInfo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetInfo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.info, other.info);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("registerDevice_args(");
+      boolean first = true;
+
+      sb.append("info:");
+      if (this.info == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.info);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (info != null) {
+        info.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class registerDevice_argsStandardSchemeFactory implements SchemeFactory {
+      public registerDevice_argsStandardScheme getScheme() {
+        return new registerDevice_argsStandardScheme();
+      }
+    }
+
+    private static class registerDevice_argsStandardScheme extends StandardScheme<registerDevice_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, registerDevice_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // INFO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.info = new com.g2sky.pgd.intf.thrift.common.RegisterInfo();
+                struct.info.read(iprot);
+                struct.setInfoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, registerDevice_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.info != null) {
+          oprot.writeFieldBegin(INFO_FIELD_DESC);
+          struct.info.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class registerDevice_argsTupleSchemeFactory implements SchemeFactory {
+      public registerDevice_argsTupleScheme getScheme() {
+        return new registerDevice_argsTupleScheme();
+      }
+    }
+
+    private static class registerDevice_argsTupleScheme extends TupleScheme<registerDevice_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, registerDevice_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetInfo()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetInfo()) {
+          struct.info.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, registerDevice_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.info = new com.g2sky.pgd.intf.thrift.common.RegisterInfo();
+          struct.info.read(iprot);
+          struct.setInfoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class registerDevice_result implements org.apache.thrift.TBase<registerDevice_result, registerDevice_result._Fields>, java.io.Serializable, Cloneable, Comparable<registerDevice_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("registerDevice_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new registerDevice_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new registerDevice_resultTupleSchemeFactory());
+    }
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(registerDevice_result.class, metaDataMap);
+    }
+
+    public registerDevice_result() {
+    }
+
+    public registerDevice_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public registerDevice_result(registerDevice_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
+    }
+
+    public registerDevice_result deepCopy() {
+      return new registerDevice_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public registerDevice_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof registerDevice_result)
+        return this.equals((registerDevice_result)that);
+      return false;
+    }
+
+    public boolean equals(registerDevice_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(registerDevice_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("registerDevice_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class registerDevice_resultStandardSchemeFactory implements SchemeFactory {
+      public registerDevice_resultStandardScheme getScheme() {
+        return new registerDevice_resultStandardScheme();
+      }
+    }
+
+    private static class registerDevice_resultStandardScheme extends StandardScheme<registerDevice_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, registerDevice_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, registerDevice_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class registerDevice_resultTupleSchemeFactory implements SchemeFactory {
+      public registerDevice_resultTupleScheme getScheme() {
+        return new registerDevice_resultTupleScheme();
+      }
+    }
+
+    private static class registerDevice_resultTupleScheme extends TupleScheme<registerDevice_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, registerDevice_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, registerDevice_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readBool();
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class processAsyncCommand_args implements org.apache.thrift.TBase<processAsyncCommand_args, processAsyncCommand_args._Fields>, java.io.Serializable, Cloneable, Comparable<processAsyncCommand_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("processAsyncCommand_args");
+
+    private static final org.apache.thrift.protocol.TField COMMAND_FIELD_DESC = new org.apache.thrift.protocol.TField("command", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new processAsyncCommand_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new processAsyncCommand_argsTupleSchemeFactory());
+    }
+
+    public com.g2sky.pgd.intf.thrift.common.CommandMsg command; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      COMMAND((short)1, "command");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // COMMAND
+            return COMMAND;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.COMMAND, new org.apache.thrift.meta_data.FieldMetaData("command", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.CommandMsg.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(processAsyncCommand_args.class, metaDataMap);
+    }
+
+    public processAsyncCommand_args() {
+    }
+
+    public processAsyncCommand_args(
+      com.g2sky.pgd.intf.thrift.common.CommandMsg command)
+    {
+      this();
+      this.command = command;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public processAsyncCommand_args(processAsyncCommand_args other) {
+      if (other.isSetCommand()) {
+        this.command = new com.g2sky.pgd.intf.thrift.common.CommandMsg(other.command);
+      }
+    }
+
+    public processAsyncCommand_args deepCopy() {
+      return new processAsyncCommand_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.command = null;
+    }
+
+    public com.g2sky.pgd.intf.thrift.common.CommandMsg getCommand() {
+      return this.command;
+    }
+
+    public processAsyncCommand_args setCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) {
+      this.command = command;
+      return this;
+    }
+
+    public void unsetCommand() {
+      this.command = null;
+    }
+
+    /** Returns true if field command is set (has been assigned a value) and false otherwise */
+    public boolean isSetCommand() {
+      return this.command != null;
+    }
+
+    public void setCommandIsSet(boolean value) {
+      if (!value) {
+        this.command = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case COMMAND:
+        if (value == null) {
+          unsetCommand();
+        } else {
+          setCommand((com.g2sky.pgd.intf.thrift.common.CommandMsg)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case COMMAND:
+        return getCommand();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case COMMAND:
+        return isSetCommand();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof processAsyncCommand_args)
+        return this.equals((processAsyncCommand_args)that);
+      return false;
+    }
+
+    public boolean equals(processAsyncCommand_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_command = true && this.isSetCommand();
+      boolean that_present_command = true && that.isSetCommand();
+      if (this_present_command || that_present_command) {
+        if (!(this_present_command && that_present_command))
+          return false;
+        if (!this.command.equals(that.command))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(processAsyncCommand_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetCommand()).compareTo(other.isSetCommand());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCommand()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.command, other.command);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("processAsyncCommand_args(");
+      boolean first = true;
+
+      sb.append("command:");
+      if (this.command == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.command);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (command != null) {
+        command.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class processAsyncCommand_argsStandardSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_argsStandardScheme getScheme() {
+        return new processAsyncCommand_argsStandardScheme();
+      }
+    }
+
+    private static class processAsyncCommand_argsStandardScheme extends StandardScheme<processAsyncCommand_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // COMMAND
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.command = new com.g2sky.pgd.intf.thrift.common.CommandMsg();
+                struct.command.read(iprot);
+                struct.setCommandIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.command != null) {
+          oprot.writeFieldBegin(COMMAND_FIELD_DESC);
+          struct.command.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class processAsyncCommand_argsTupleSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_argsTupleScheme getScheme() {
+        return new processAsyncCommand_argsTupleScheme();
+      }
+    }
+
+    private static class processAsyncCommand_argsTupleScheme extends TupleScheme<processAsyncCommand_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetCommand()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetCommand()) {
+          struct.command.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.command = new com.g2sky.pgd.intf.thrift.common.CommandMsg();
+          struct.command.read(iprot);
+          struct.setCommandIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class processAsyncCommand_result implements org.apache.thrift.TBase<processAsyncCommand_result, processAsyncCommand_result._Fields>, java.io.Serializable, Cloneable, Comparable<processAsyncCommand_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("processAsyncCommand_result");
+
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new processAsyncCommand_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new processAsyncCommand_resultTupleSchemeFactory());
+    }
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(processAsyncCommand_result.class, metaDataMap);
+    }
+
+    public processAsyncCommand_result() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public processAsyncCommand_result(processAsyncCommand_result other) {
+    }
+
+    public processAsyncCommand_result deepCopy() {
+      return new processAsyncCommand_result(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof processAsyncCommand_result)
+        return this.equals((processAsyncCommand_result)that);
+      return false;
+    }
+
+    public boolean equals(processAsyncCommand_result that) {
+      if (that == null)
+        return false;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(processAsyncCommand_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("processAsyncCommand_result(");
+      boolean first = true;
+
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class processAsyncCommand_resultStandardSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_resultStandardScheme getScheme() {
+        return new processAsyncCommand_resultStandardScheme();
+      }
+    }
+
+    private static class processAsyncCommand_resultStandardScheme extends StandardScheme<processAsyncCommand_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class processAsyncCommand_resultTupleSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_resultTupleScheme getScheme() {
+        return new processAsyncCommand_resultTupleScheme();
+      }
+    }
+
+    private static class processAsyncCommand_resultTupleScheme extends TupleScheme<processAsyncCommand_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }

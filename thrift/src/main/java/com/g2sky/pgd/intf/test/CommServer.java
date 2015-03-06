@@ -1,4 +1,4 @@
-package com.g2sky.pgd.intf.thrift;
+package com.g2sky.pgd.intf.test;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -8,20 +8,17 @@ import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
 
-import com.g2sky.pgd.intf.thrift.appservice.AppService;
-import com.g2sky.pgd.intf.thrift.appservice.AppService.Iface;
-import com.g2sky.pgd.intf.thrift.impl.AppServiceImpl;
+import com.g2sky.pgd.intf.test.impl.CommServiceImpl;
+import com.g2sky.pgd.intf.thrift.commservice.CommService;
+import com.g2sky.pgd.intf.thrift.commservice.CommService.Iface;
 
-public class AppServer {
-
-	// private static final Logger log =
-	// Logger.getLogger(LocationServiceImpl.class);
-
+public class CommServer {
+	private static final int serverPort = 9091;
 	private static TServer tServer = null;
 
 	private static AtomicBoolean started = new AtomicBoolean(false);
 
-	private AppServer() {
+	private CommServer() {
 
 	}
 
@@ -53,10 +50,8 @@ public class AppServer {
 		if (tServer == null) {
 			synchronized (AppServer.class) {
 				if (tServer == null) {
-
-					TProcessor tprocessor = new AppService.Processor<Iface>(new AppServiceImpl());
-
-					TServerSocket serverTransport = new TServerSocket(8091);
+					TProcessor tprocessor = new CommService.Processor<Iface>(new CommServiceImpl());
+					TServerSocket serverTransport = new TServerSocket(serverPort);
 					TThreadPoolServer.Args ttpsArgs = new TThreadPoolServer.Args(serverTransport);
 					ttpsArgs.processor(tprocessor);
 					ttpsArgs.protocolFactory(new TBinaryProtocol.Factory());
@@ -67,5 +62,4 @@ public class AppServer {
 		}
 		return tServer;
 	}
-
 }

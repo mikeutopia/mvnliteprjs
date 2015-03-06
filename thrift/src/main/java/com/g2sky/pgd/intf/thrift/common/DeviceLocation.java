@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.g2sky.pgd.intf.thrift.appservice;
+package com.g2sky.pgd.intf.thrift.common;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, DeviceLocation._Fields>, java.io.Serializable, Cloneable, Comparable<DeviceLocation> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("DeviceLocation");
 
-  private static final org.apache.thrift.protocol.TField IMEI_FIELD_DESC = new org.apache.thrift.protocol.TField("IMEI", org.apache.thrift.protocol.TType.STRING, (short)1);
-  private static final org.apache.thrift.protocol.TField LOCATION_FIELD_DESC = new org.apache.thrift.protocol.TField("location", org.apache.thrift.protocol.TType.STRUCT, (short)2);
-  private static final org.apache.thrift.protocol.TField TIMESTAMP_FIELD_DESC = new org.apache.thrift.protocol.TField("timestamp", org.apache.thrift.protocol.TType.I64, (short)3);
+  private static final org.apache.thrift.protocol.TField IMSI_FIELD_DESC = new org.apache.thrift.protocol.TField("imsi", org.apache.thrift.protocol.TType.STRING, (short)1);
+  private static final org.apache.thrift.protocol.TField TIMESTAMP_FIELD_DESC = new org.apache.thrift.protocol.TField("timestamp", org.apache.thrift.protocol.TType.I64, (short)2);
+  private static final org.apache.thrift.protocol.TField ORIGINAL_MSG_BODY_FIELD_DESC = new org.apache.thrift.protocol.TField("originalMsgBody", org.apache.thrift.protocol.TType.STRING, (short)3);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -45,15 +45,15 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
     schemes.put(TupleScheme.class, new DeviceLocationTupleSchemeFactory());
   }
 
-  public String IMEI; // required
-  public Location location; // required
+  public String imsi; // required
   public long timestamp; // required
+  public ByteBuffer originalMsgBody; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    IMEI((short)1, "IMEI"),
-    LOCATION((short)2, "location"),
-    TIMESTAMP((short)3, "timestamp");
+    IMSI((short)1, "imsi"),
+    TIMESTAMP((short)2, "timestamp"),
+    ORIGINAL_MSG_BODY((short)3, "originalMsgBody");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -68,12 +68,12 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // IMEI
-          return IMEI;
-        case 2: // LOCATION
-          return LOCATION;
-        case 3: // TIMESTAMP
+        case 1: // IMSI
+          return IMSI;
+        case 2: // TIMESTAMP
           return TIMESTAMP;
+        case 3: // ORIGINAL_MSG_BODY
+          return ORIGINAL_MSG_BODY;
         default:
           return null;
       }
@@ -119,12 +119,12 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.IMEI, new org.apache.thrift.meta_data.FieldMetaData("IMEI", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.IMSI, new org.apache.thrift.meta_data.FieldMetaData("imsi", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.LOCATION, new org.apache.thrift.meta_data.FieldMetaData("location", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Location.class)));
     tmpMap.put(_Fields.TIMESTAMP, new org.apache.thrift.meta_data.FieldMetaData("timestamp", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.ORIGINAL_MSG_BODY, new org.apache.thrift.meta_data.FieldMetaData("originalMsgBody", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , true)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DeviceLocation.class, metaDataMap);
   }
@@ -133,15 +133,15 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
   }
 
   public DeviceLocation(
-    String IMEI,
-    Location location,
-    long timestamp)
+    String imsi,
+    long timestamp,
+    ByteBuffer originalMsgBody)
   {
     this();
-    this.IMEI = IMEI;
-    this.location = location;
+    this.imsi = imsi;
     this.timestamp = timestamp;
     setTimestampIsSet(true);
+    this.originalMsgBody = originalMsgBody;
   }
 
   /**
@@ -149,13 +149,14 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
    */
   public DeviceLocation(DeviceLocation other) {
     __isset_bitfield = other.__isset_bitfield;
-    if (other.isSetIMEI()) {
-      this.IMEI = other.IMEI;
-    }
-    if (other.isSetLocation()) {
-      this.location = new Location(other.location);
+    if (other.isSetImsi()) {
+      this.imsi = other.imsi;
     }
     this.timestamp = other.timestamp;
+    if (other.isSetOriginalMsgBody()) {
+      this.originalMsgBody = org.apache.thrift.TBaseHelper.copyBinary(other.originalMsgBody);
+;
+    }
   }
 
   public DeviceLocation deepCopy() {
@@ -164,57 +165,33 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
 
   @Override
   public void clear() {
-    this.IMEI = null;
-    this.location = null;
+    this.imsi = null;
     setTimestampIsSet(false);
     this.timestamp = 0;
+    this.originalMsgBody = null;
   }
 
-  public String getIMEI() {
-    return this.IMEI;
+  public String getImsi() {
+    return this.imsi;
   }
 
-  public DeviceLocation setIMEI(String IMEI) {
-    this.IMEI = IMEI;
+  public DeviceLocation setImsi(String imsi) {
+    this.imsi = imsi;
     return this;
   }
 
-  public void unsetIMEI() {
-    this.IMEI = null;
+  public void unsetImsi() {
+    this.imsi = null;
   }
 
-  /** Returns true if field IMEI is set (has been assigned a value) and false otherwise */
-  public boolean isSetIMEI() {
-    return this.IMEI != null;
+  /** Returns true if field imsi is set (has been assigned a value) and false otherwise */
+  public boolean isSetImsi() {
+    return this.imsi != null;
   }
 
-  public void setIMEIIsSet(boolean value) {
+  public void setImsiIsSet(boolean value) {
     if (!value) {
-      this.IMEI = null;
-    }
-  }
-
-  public Location getLocation() {
-    return this.location;
-  }
-
-  public DeviceLocation setLocation(Location location) {
-    this.location = location;
-    return this;
-  }
-
-  public void unsetLocation() {
-    this.location = null;
-  }
-
-  /** Returns true if field location is set (has been assigned a value) and false otherwise */
-  public boolean isSetLocation() {
-    return this.location != null;
-  }
-
-  public void setLocationIsSet(boolean value) {
-    if (!value) {
-      this.location = null;
+      this.imsi = null;
     }
   }
 
@@ -241,21 +218,47 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __TIMESTAMP_ISSET_ID, value);
   }
 
+  public byte[] getOriginalMsgBody() {
+    setOriginalMsgBody(org.apache.thrift.TBaseHelper.rightSize(originalMsgBody));
+    return originalMsgBody == null ? null : originalMsgBody.array();
+  }
+
+  public ByteBuffer bufferForOriginalMsgBody() {
+    return originalMsgBody;
+  }
+
+  public DeviceLocation setOriginalMsgBody(byte[] originalMsgBody) {
+    setOriginalMsgBody(originalMsgBody == null ? (ByteBuffer)null : ByteBuffer.wrap(originalMsgBody));
+    return this;
+  }
+
+  public DeviceLocation setOriginalMsgBody(ByteBuffer originalMsgBody) {
+    this.originalMsgBody = originalMsgBody;
+    return this;
+  }
+
+  public void unsetOriginalMsgBody() {
+    this.originalMsgBody = null;
+  }
+
+  /** Returns true if field originalMsgBody is set (has been assigned a value) and false otherwise */
+  public boolean isSetOriginalMsgBody() {
+    return this.originalMsgBody != null;
+  }
+
+  public void setOriginalMsgBodyIsSet(boolean value) {
+    if (!value) {
+      this.originalMsgBody = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
-    case IMEI:
+    case IMSI:
       if (value == null) {
-        unsetIMEI();
+        unsetImsi();
       } else {
-        setIMEI((String)value);
-      }
-      break;
-
-    case LOCATION:
-      if (value == null) {
-        unsetLocation();
-      } else {
-        setLocation((Location)value);
+        setImsi((String)value);
       }
       break;
 
@@ -267,19 +270,27 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
       }
       break;
 
+    case ORIGINAL_MSG_BODY:
+      if (value == null) {
+        unsetOriginalMsgBody();
+      } else {
+        setOriginalMsgBody((ByteBuffer)value);
+      }
+      break;
+
     }
   }
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
-    case IMEI:
-      return getIMEI();
-
-    case LOCATION:
-      return getLocation();
+    case IMSI:
+      return getImsi();
 
     case TIMESTAMP:
       return Long.valueOf(getTimestamp());
+
+    case ORIGINAL_MSG_BODY:
+      return getOriginalMsgBody();
 
     }
     throw new IllegalStateException();
@@ -292,12 +303,12 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
     }
 
     switch (field) {
-    case IMEI:
-      return isSetIMEI();
-    case LOCATION:
-      return isSetLocation();
+    case IMSI:
+      return isSetImsi();
     case TIMESTAMP:
       return isSetTimestamp();
+    case ORIGINAL_MSG_BODY:
+      return isSetOriginalMsgBody();
     }
     throw new IllegalStateException();
   }
@@ -315,21 +326,12 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
     if (that == null)
       return false;
 
-    boolean this_present_IMEI = true && this.isSetIMEI();
-    boolean that_present_IMEI = true && that.isSetIMEI();
-    if (this_present_IMEI || that_present_IMEI) {
-      if (!(this_present_IMEI && that_present_IMEI))
+    boolean this_present_imsi = true && this.isSetImsi();
+    boolean that_present_imsi = true && that.isSetImsi();
+    if (this_present_imsi || that_present_imsi) {
+      if (!(this_present_imsi && that_present_imsi))
         return false;
-      if (!this.IMEI.equals(that.IMEI))
-        return false;
-    }
-
-    boolean this_present_location = true && this.isSetLocation();
-    boolean that_present_location = true && that.isSetLocation();
-    if (this_present_location || that_present_location) {
-      if (!(this_present_location && that_present_location))
-        return false;
-      if (!this.location.equals(that.location))
+      if (!this.imsi.equals(that.imsi))
         return false;
     }
 
@@ -339,6 +341,15 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
       if (!(this_present_timestamp && that_present_timestamp))
         return false;
       if (this.timestamp != that.timestamp)
+        return false;
+    }
+
+    boolean this_present_originalMsgBody = true && this.isSetOriginalMsgBody();
+    boolean that_present_originalMsgBody = true && that.isSetOriginalMsgBody();
+    if (this_present_originalMsgBody || that_present_originalMsgBody) {
+      if (!(this_present_originalMsgBody && that_present_originalMsgBody))
+        return false;
+      if (!this.originalMsgBody.equals(that.originalMsgBody))
         return false;
     }
 
@@ -358,22 +369,12 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
 
     int lastComparison = 0;
 
-    lastComparison = Boolean.valueOf(isSetIMEI()).compareTo(other.isSetIMEI());
+    lastComparison = Boolean.valueOf(isSetImsi()).compareTo(other.isSetImsi());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetIMEI()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.IMEI, other.IMEI);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetLocation()).compareTo(other.isSetLocation());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetLocation()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.location, other.location);
+    if (isSetImsi()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.imsi, other.imsi);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -384,6 +385,16 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
     }
     if (isSetTimestamp()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.timestamp, other.timestamp);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetOriginalMsgBody()).compareTo(other.isSetOriginalMsgBody());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetOriginalMsgBody()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.originalMsgBody, other.originalMsgBody);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -408,24 +419,24 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
     StringBuilder sb = new StringBuilder("DeviceLocation(");
     boolean first = true;
 
-    sb.append("IMEI:");
-    if (this.IMEI == null) {
+    sb.append("imsi:");
+    if (this.imsi == null) {
       sb.append("null");
     } else {
-      sb.append(this.IMEI);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("location:");
-    if (this.location == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.location);
+      sb.append(this.imsi);
     }
     first = false;
     if (!first) sb.append(", ");
     sb.append("timestamp:");
     sb.append(this.timestamp);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("originalMsgBody:");
+    if (this.originalMsgBody == null) {
+      sb.append("null");
+    } else {
+      org.apache.thrift.TBaseHelper.toString(this.originalMsgBody, sb);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -434,9 +445,6 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (location != null) {
-      location.validate();
-    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -475,27 +483,26 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
           break;
         }
         switch (schemeField.id) {
-          case 1: // IMEI
+          case 1: // IMSI
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.IMEI = iprot.readString();
-              struct.setIMEIIsSet(true);
+              struct.imsi = iprot.readString();
+              struct.setImsiIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // LOCATION
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.location = new Location();
-              struct.location.read(iprot);
-              struct.setLocationIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 3: // TIMESTAMP
+          case 2: // TIMESTAMP
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
               struct.timestamp = iprot.readI64();
               struct.setTimestampIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 3: // ORIGINAL_MSG_BODY
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.originalMsgBody = iprot.readBinary();
+              struct.setOriginalMsgBodyIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -515,19 +522,19 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.IMEI != null) {
-        oprot.writeFieldBegin(IMEI_FIELD_DESC);
-        oprot.writeString(struct.IMEI);
-        oprot.writeFieldEnd();
-      }
-      if (struct.location != null) {
-        oprot.writeFieldBegin(LOCATION_FIELD_DESC);
-        struct.location.write(oprot);
+      if (struct.imsi != null) {
+        oprot.writeFieldBegin(IMSI_FIELD_DESC);
+        oprot.writeString(struct.imsi);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldBegin(TIMESTAMP_FIELD_DESC);
       oprot.writeI64(struct.timestamp);
       oprot.writeFieldEnd();
+      if (struct.originalMsgBody != null) {
+        oprot.writeFieldBegin(ORIGINAL_MSG_BODY_FIELD_DESC);
+        oprot.writeBinary(struct.originalMsgBody);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -546,24 +553,24 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
     public void write(org.apache.thrift.protocol.TProtocol prot, DeviceLocation struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetIMEI()) {
+      if (struct.isSetImsi()) {
         optionals.set(0);
       }
-      if (struct.isSetLocation()) {
+      if (struct.isSetTimestamp()) {
         optionals.set(1);
       }
-      if (struct.isSetTimestamp()) {
+      if (struct.isSetOriginalMsgBody()) {
         optionals.set(2);
       }
       oprot.writeBitSet(optionals, 3);
-      if (struct.isSetIMEI()) {
-        oprot.writeString(struct.IMEI);
-      }
-      if (struct.isSetLocation()) {
-        struct.location.write(oprot);
+      if (struct.isSetImsi()) {
+        oprot.writeString(struct.imsi);
       }
       if (struct.isSetTimestamp()) {
         oprot.writeI64(struct.timestamp);
+      }
+      if (struct.isSetOriginalMsgBody()) {
+        oprot.writeBinary(struct.originalMsgBody);
       }
     }
 
@@ -572,17 +579,16 @@ public class DeviceLocation implements org.apache.thrift.TBase<DeviceLocation, D
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(3);
       if (incoming.get(0)) {
-        struct.IMEI = iprot.readString();
-        struct.setIMEIIsSet(true);
+        struct.imsi = iprot.readString();
+        struct.setImsiIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.location = new Location();
-        struct.location.read(iprot);
-        struct.setLocationIsSet(true);
-      }
-      if (incoming.get(2)) {
         struct.timestamp = iprot.readI64();
         struct.setTimestampIsSet(true);
+      }
+      if (incoming.get(2)) {
+        struct.originalMsgBody = iprot.readBinary();
+        struct.setOriginalMsgBodyIsSet(true);
       }
     }
   }

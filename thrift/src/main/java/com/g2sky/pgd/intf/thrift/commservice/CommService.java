@@ -36,17 +36,17 @@ public class CommService {
 
   public interface Iface extends com.g2sky.pgd.intf.thrift.baseoam.IBaseOAMService.Iface {
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.AppCommandREQ req) throws org.apache.thrift.TException;
+    public boolean setAllFirmwareFilesInfo(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist) throws org.apache.thrift.TException;
 
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp) throws org.apache.thrift.TException;
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface extends com.g2sky.pgd.intf.thrift.baseoam.IBaseOAMService .AsyncIface {
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.AppCommandREQ req, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void setAllFirmwareFilesInfo(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -70,43 +70,46 @@ public class CommService {
       super(iprot, oprot);
     }
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.AppCommandREQ req) throws org.apache.thrift.TException
+    public boolean setAllFirmwareFilesInfo(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist) throws org.apache.thrift.TException
     {
-      send_sendAsyncCommandREQ(req);
-      recv_sendAsyncCommandREQ();
+      send_setAllFirmwareFilesInfo(fileinfolist);
+      return recv_setAllFirmwareFilesInfo();
     }
 
-    public void send_sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.AppCommandREQ req) throws org.apache.thrift.TException
+    public void send_setAllFirmwareFilesInfo(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist) throws org.apache.thrift.TException
     {
-      sendAsyncCommandREQ_args args = new sendAsyncCommandREQ_args();
-      args.setReq(req);
-      sendBase("sendAsyncCommandREQ", args);
+      setAllFirmwareFilesInfo_args args = new setAllFirmwareFilesInfo_args();
+      args.setFileinfolist(fileinfolist);
+      sendBase("setAllFirmwareFilesInfo", args);
     }
 
-    public void recv_sendAsyncCommandREQ() throws org.apache.thrift.TException
+    public boolean recv_setAllFirmwareFilesInfo() throws org.apache.thrift.TException
     {
-      sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
-      receiveBase(result, "sendAsyncCommandREQ");
-      return;
+      setAllFirmwareFilesInfo_result result = new setAllFirmwareFilesInfo_result();
+      receiveBase(result, "setAllFirmwareFilesInfo");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "setAllFirmwareFilesInfo failed: unknown result");
     }
 
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp) throws org.apache.thrift.TException
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) throws org.apache.thrift.TException
     {
-      send_sendAsyncCommandRSP(rsp);
-      recv_sendAsyncCommandRSP();
+      send_processAsyncCommand(command);
+      recv_processAsyncCommand();
     }
 
-    public void send_sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp) throws org.apache.thrift.TException
+    public void send_processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) throws org.apache.thrift.TException
     {
-      sendAsyncCommandRSP_args args = new sendAsyncCommandRSP_args();
-      args.setRsp(rsp);
-      sendBase("sendAsyncCommandRSP", args);
+      processAsyncCommand_args args = new processAsyncCommand_args();
+      args.setCommand(command);
+      sendBase("processAsyncCommand", args);
     }
 
-    public void recv_sendAsyncCommandRSP() throws org.apache.thrift.TException
+    public void recv_processAsyncCommand() throws org.apache.thrift.TException
     {
-      sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
-      receiveBase(result, "sendAsyncCommandRSP");
+      processAsyncCommand_result result = new processAsyncCommand_result();
+      receiveBase(result, "processAsyncCommand");
       return;
     }
 
@@ -128,24 +131,56 @@ public class CommService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void sendAsyncCommandREQ(com.g2sky.pgd.intf.thrift.common.AppCommandREQ req, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void setAllFirmwareFilesInfo(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      sendAsyncCommandREQ_call method_call = new sendAsyncCommandREQ_call(req, resultHandler, this, ___protocolFactory, ___transport);
+      setAllFirmwareFilesInfo_call method_call = new setAllFirmwareFilesInfo_call(fileinfolist, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class sendAsyncCommandREQ_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private com.g2sky.pgd.intf.thrift.common.AppCommandREQ req;
-      public sendAsyncCommandREQ_call(com.g2sky.pgd.intf.thrift.common.AppCommandREQ req, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class setAllFirmwareFilesInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist;
+      public setAllFirmwareFilesInfo_call(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.req = req;
+        this.fileinfolist = fileinfolist;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("sendAsyncCommandREQ", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        sendAsyncCommandREQ_args args = new sendAsyncCommandREQ_args();
-        args.setReq(req);
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setAllFirmwareFilesInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        setAllFirmwareFilesInfo_args args = new setAllFirmwareFilesInfo_args();
+        args.setFileinfolist(fileinfolist);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_setAllFirmwareFilesInfo();
+      }
+    }
+
+    public void processAsyncCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      processAsyncCommand_call method_call = new processAsyncCommand_call(command, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class processAsyncCommand_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private com.g2sky.pgd.intf.thrift.common.CommandMsg command;
+      public processAsyncCommand_call(com.g2sky.pgd.intf.thrift.common.CommandMsg command, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.command = command;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("processAsyncCommand", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        processAsyncCommand_args args = new processAsyncCommand_args();
+        args.setCommand(command);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -156,39 +191,7 @@ public class CommService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_sendAsyncCommandREQ();
-      }
-    }
-
-    public void sendAsyncCommandRSP(com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
-      checkReady();
-      sendAsyncCommandRSP_call method_call = new sendAsyncCommandRSP_call(rsp, resultHandler, this, ___protocolFactory, ___transport);
-      this.___currentMethod = method_call;
-      ___manager.call(method_call);
-    }
-
-    public static class sendAsyncCommandRSP_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp;
-      public sendAsyncCommandRSP_call(com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
-        super(client, protocolFactory, transport, resultHandler, false);
-        this.rsp = rsp;
-      }
-
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("sendAsyncCommandRSP", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        sendAsyncCommandRSP_args args = new sendAsyncCommandRSP_args();
-        args.setRsp(rsp);
-        args.write(prot);
-        prot.writeMessageEnd();
-      }
-
-      public void getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
-          throw new IllegalStateException("Method call not finished!");
-        }
-        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
-        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_sendAsyncCommandRSP();
+        (new Client(prot)).recv_processAsyncCommand();
       }
     }
 
@@ -205,47 +208,48 @@ public class CommService {
     }
 
     private static <I extends Iface> Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> getProcessMap(Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
-      processMap.put("sendAsyncCommandREQ", new sendAsyncCommandREQ());
-      processMap.put("sendAsyncCommandRSP", new sendAsyncCommandRSP());
+      processMap.put("setAllFirmwareFilesInfo", new setAllFirmwareFilesInfo());
+      processMap.put("processAsyncCommand", new processAsyncCommand());
       return processMap;
     }
 
-    public static class sendAsyncCommandREQ<I extends Iface> extends org.apache.thrift.ProcessFunction<I, sendAsyncCommandREQ_args> {
-      public sendAsyncCommandREQ() {
-        super("sendAsyncCommandREQ");
+    public static class setAllFirmwareFilesInfo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setAllFirmwareFilesInfo_args> {
+      public setAllFirmwareFilesInfo() {
+        super("setAllFirmwareFilesInfo");
       }
 
-      public sendAsyncCommandREQ_args getEmptyArgsInstance() {
-        return new sendAsyncCommandREQ_args();
+      public setAllFirmwareFilesInfo_args getEmptyArgsInstance() {
+        return new setAllFirmwareFilesInfo_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public sendAsyncCommandREQ_result getResult(I iface, sendAsyncCommandREQ_args args) throws org.apache.thrift.TException {
-        sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
-        iface.sendAsyncCommandREQ(args.req);
+      public setAllFirmwareFilesInfo_result getResult(I iface, setAllFirmwareFilesInfo_args args) throws org.apache.thrift.TException {
+        setAllFirmwareFilesInfo_result result = new setAllFirmwareFilesInfo_result();
+        result.success = iface.setAllFirmwareFilesInfo(args.fileinfolist);
+        result.setSuccessIsSet(true);
         return result;
       }
     }
 
-    public static class sendAsyncCommandRSP<I extends Iface> extends org.apache.thrift.ProcessFunction<I, sendAsyncCommandRSP_args> {
-      public sendAsyncCommandRSP() {
-        super("sendAsyncCommandRSP");
+    public static class processAsyncCommand<I extends Iface> extends org.apache.thrift.ProcessFunction<I, processAsyncCommand_args> {
+      public processAsyncCommand() {
+        super("processAsyncCommand");
       }
 
-      public sendAsyncCommandRSP_args getEmptyArgsInstance() {
-        return new sendAsyncCommandRSP_args();
+      public processAsyncCommand_args getEmptyArgsInstance() {
+        return new processAsyncCommand_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public sendAsyncCommandRSP_result getResult(I iface, sendAsyncCommandRSP_args args) throws org.apache.thrift.TException {
-        sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
-        iface.sendAsyncCommandRSP(args.rsp);
+      public processAsyncCommand_result getResult(I iface, processAsyncCommand_args args) throws org.apache.thrift.TException {
+        processAsyncCommand_result result = new processAsyncCommand_result();
+        iface.processAsyncCommand(args.command);
         return result;
       }
     }
@@ -263,25 +267,27 @@ public class CommService {
     }
 
     private static <I extends AsyncIface> Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
-      processMap.put("sendAsyncCommandREQ", new sendAsyncCommandREQ());
-      processMap.put("sendAsyncCommandRSP", new sendAsyncCommandRSP());
+      processMap.put("setAllFirmwareFilesInfo", new setAllFirmwareFilesInfo());
+      processMap.put("processAsyncCommand", new processAsyncCommand());
       return processMap;
     }
 
-    public static class sendAsyncCommandREQ<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, sendAsyncCommandREQ_args, Void> {
-      public sendAsyncCommandREQ() {
-        super("sendAsyncCommandREQ");
+    public static class setAllFirmwareFilesInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setAllFirmwareFilesInfo_args, Boolean> {
+      public setAllFirmwareFilesInfo() {
+        super("setAllFirmwareFilesInfo");
       }
 
-      public sendAsyncCommandREQ_args getEmptyArgsInstance() {
-        return new sendAsyncCommandREQ_args();
+      public setAllFirmwareFilesInfo_args getEmptyArgsInstance() {
+        return new setAllFirmwareFilesInfo_args();
       }
 
-      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<Void>() { 
-          public void onComplete(Void o) {
-            sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
+        return new AsyncMethodCallback<Boolean>() { 
+          public void onComplete(Boolean o) {
+            setAllFirmwareFilesInfo_result result = new setAllFirmwareFilesInfo_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -293,7 +299,7 @@ public class CommService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            sendAsyncCommandREQ_result result = new sendAsyncCommandREQ_result();
+            setAllFirmwareFilesInfo_result result = new setAllFirmwareFilesInfo_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -313,25 +319,25 @@ public class CommService {
         return false;
       }
 
-      public void start(I iface, sendAsyncCommandREQ_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.sendAsyncCommandREQ(args.req,resultHandler);
+      public void start(I iface, setAllFirmwareFilesInfo_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.setAllFirmwareFilesInfo(args.fileinfolist,resultHandler);
       }
     }
 
-    public static class sendAsyncCommandRSP<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, sendAsyncCommandRSP_args, Void> {
-      public sendAsyncCommandRSP() {
-        super("sendAsyncCommandRSP");
+    public static class processAsyncCommand<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, processAsyncCommand_args, Void> {
+      public processAsyncCommand() {
+        super("processAsyncCommand");
       }
 
-      public sendAsyncCommandRSP_args getEmptyArgsInstance() {
-        return new sendAsyncCommandRSP_args();
+      public processAsyncCommand_args getEmptyArgsInstance() {
+        return new processAsyncCommand_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
+            processAsyncCommand_result result = new processAsyncCommand_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -343,7 +349,7 @@ public class CommService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            sendAsyncCommandRSP_result result = new sendAsyncCommandRSP_result();
+            processAsyncCommand_result result = new processAsyncCommand_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -363,29 +369,29 @@ public class CommService {
         return false;
       }
 
-      public void start(I iface, sendAsyncCommandRSP_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.sendAsyncCommandRSP(args.rsp,resultHandler);
+      public void start(I iface, processAsyncCommand_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.processAsyncCommand(args.command,resultHandler);
       }
     }
 
   }
 
-  public static class sendAsyncCommandREQ_args implements org.apache.thrift.TBase<sendAsyncCommandREQ_args, sendAsyncCommandREQ_args._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandREQ_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandREQ_args");
+  public static class setAllFirmwareFilesInfo_args implements org.apache.thrift.TBase<setAllFirmwareFilesInfo_args, setAllFirmwareFilesInfo_args._Fields>, java.io.Serializable, Cloneable, Comparable<setAllFirmwareFilesInfo_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setAllFirmwareFilesInfo_args");
 
-    private static final org.apache.thrift.protocol.TField REQ_FIELD_DESC = new org.apache.thrift.protocol.TField("req", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField FILEINFOLIST_FIELD_DESC = new org.apache.thrift.protocol.TField("fileinfolist", org.apache.thrift.protocol.TType.LIST, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandREQ_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandREQ_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new setAllFirmwareFilesInfo_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setAllFirmwareFilesInfo_argsTupleSchemeFactory());
     }
 
-    public com.g2sky.pgd.intf.thrift.common.AppCommandREQ req; // required
+    public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      REQ((short)1, "req");
+      FILEINFOLIST((short)1, "fileinfolist");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -400,8 +406,8 @@ public class CommService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // REQ
-            return REQ;
+          case 1: // FILEINFOLIST
+            return FILEINFOLIST;
           default:
             return null;
         }
@@ -445,71 +451,91 @@ public class CommService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.REQ, new org.apache.thrift.meta_data.FieldMetaData("req", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.AppCommandREQ.class)));
+      tmpMap.put(_Fields.FILEINFOLIST, new org.apache.thrift.meta_data.FieldMetaData("fileinfolist", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.Fileinfo.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandREQ_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setAllFirmwareFilesInfo_args.class, metaDataMap);
     }
 
-    public sendAsyncCommandREQ_args() {
+    public setAllFirmwareFilesInfo_args() {
     }
 
-    public sendAsyncCommandREQ_args(
-      com.g2sky.pgd.intf.thrift.common.AppCommandREQ req)
+    public setAllFirmwareFilesInfo_args(
+      List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist)
     {
       this();
-      this.req = req;
+      this.fileinfolist = fileinfolist;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public sendAsyncCommandREQ_args(sendAsyncCommandREQ_args other) {
-      if (other.isSetReq()) {
-        this.req = new com.g2sky.pgd.intf.thrift.common.AppCommandREQ(other.req);
+    public setAllFirmwareFilesInfo_args(setAllFirmwareFilesInfo_args other) {
+      if (other.isSetFileinfolist()) {
+        List<com.g2sky.pgd.intf.thrift.common.Fileinfo> __this__fileinfolist = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>(other.fileinfolist.size());
+        for (com.g2sky.pgd.intf.thrift.common.Fileinfo other_element : other.fileinfolist) {
+          __this__fileinfolist.add(new com.g2sky.pgd.intf.thrift.common.Fileinfo(other_element));
+        }
+        this.fileinfolist = __this__fileinfolist;
       }
     }
 
-    public sendAsyncCommandREQ_args deepCopy() {
-      return new sendAsyncCommandREQ_args(this);
+    public setAllFirmwareFilesInfo_args deepCopy() {
+      return new setAllFirmwareFilesInfo_args(this);
     }
 
     @Override
     public void clear() {
-      this.req = null;
+      this.fileinfolist = null;
     }
 
-    public com.g2sky.pgd.intf.thrift.common.AppCommandREQ getReq() {
-      return this.req;
+    public int getFileinfolistSize() {
+      return (this.fileinfolist == null) ? 0 : this.fileinfolist.size();
     }
 
-    public sendAsyncCommandREQ_args setReq(com.g2sky.pgd.intf.thrift.common.AppCommandREQ req) {
-      this.req = req;
+    public java.util.Iterator<com.g2sky.pgd.intf.thrift.common.Fileinfo> getFileinfolistIterator() {
+      return (this.fileinfolist == null) ? null : this.fileinfolist.iterator();
+    }
+
+    public void addToFileinfolist(com.g2sky.pgd.intf.thrift.common.Fileinfo elem) {
+      if (this.fileinfolist == null) {
+        this.fileinfolist = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>();
+      }
+      this.fileinfolist.add(elem);
+    }
+
+    public List<com.g2sky.pgd.intf.thrift.common.Fileinfo> getFileinfolist() {
+      return this.fileinfolist;
+    }
+
+    public setAllFirmwareFilesInfo_args setFileinfolist(List<com.g2sky.pgd.intf.thrift.common.Fileinfo> fileinfolist) {
+      this.fileinfolist = fileinfolist;
       return this;
     }
 
-    public void unsetReq() {
-      this.req = null;
+    public void unsetFileinfolist() {
+      this.fileinfolist = null;
     }
 
-    /** Returns true if field req is set (has been assigned a value) and false otherwise */
-    public boolean isSetReq() {
-      return this.req != null;
+    /** Returns true if field fileinfolist is set (has been assigned a value) and false otherwise */
+    public boolean isSetFileinfolist() {
+      return this.fileinfolist != null;
     }
 
-    public void setReqIsSet(boolean value) {
+    public void setFileinfolistIsSet(boolean value) {
       if (!value) {
-        this.req = null;
+        this.fileinfolist = null;
       }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case REQ:
+      case FILEINFOLIST:
         if (value == null) {
-          unsetReq();
+          unsetFileinfolist();
         } else {
-          setReq((com.g2sky.pgd.intf.thrift.common.AppCommandREQ)value);
+          setFileinfolist((List<com.g2sky.pgd.intf.thrift.common.Fileinfo>)value);
         }
         break;
 
@@ -518,8 +544,8 @@ public class CommService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case REQ:
-        return getReq();
+      case FILEINFOLIST:
+        return getFileinfolist();
 
       }
       throw new IllegalStateException();
@@ -532,8 +558,8 @@ public class CommService {
       }
 
       switch (field) {
-      case REQ:
-        return isSetReq();
+      case FILEINFOLIST:
+        return isSetFileinfolist();
       }
       throw new IllegalStateException();
     }
@@ -542,21 +568,21 @@ public class CommService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof sendAsyncCommandREQ_args)
-        return this.equals((sendAsyncCommandREQ_args)that);
+      if (that instanceof setAllFirmwareFilesInfo_args)
+        return this.equals((setAllFirmwareFilesInfo_args)that);
       return false;
     }
 
-    public boolean equals(sendAsyncCommandREQ_args that) {
+    public boolean equals(setAllFirmwareFilesInfo_args that) {
       if (that == null)
         return false;
 
-      boolean this_present_req = true && this.isSetReq();
-      boolean that_present_req = true && that.isSetReq();
-      if (this_present_req || that_present_req) {
-        if (!(this_present_req && that_present_req))
+      boolean this_present_fileinfolist = true && this.isSetFileinfolist();
+      boolean that_present_fileinfolist = true && that.isSetFileinfolist();
+      if (this_present_fileinfolist || that_present_fileinfolist) {
+        if (!(this_present_fileinfolist && that_present_fileinfolist))
           return false;
-        if (!this.req.equals(that.req))
+        if (!this.fileinfolist.equals(that.fileinfolist))
           return false;
       }
 
@@ -569,19 +595,19 @@ public class CommService {
     }
 
     @Override
-    public int compareTo(sendAsyncCommandREQ_args other) {
+    public int compareTo(setAllFirmwareFilesInfo_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetReq()).compareTo(other.isSetReq());
+      lastComparison = Boolean.valueOf(isSetFileinfolist()).compareTo(other.isSetFileinfolist());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetReq()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.req, other.req);
+      if (isSetFileinfolist()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fileinfolist, other.fileinfolist);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -603,14 +629,14 @@ public class CommService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandREQ_args(");
+      StringBuilder sb = new StringBuilder("setAllFirmwareFilesInfo_args(");
       boolean first = true;
 
-      sb.append("req:");
-      if (this.req == null) {
+      sb.append("fileinfolist:");
+      if (this.fileinfolist == null) {
         sb.append("null");
       } else {
-        sb.append(this.req);
+        sb.append(this.fileinfolist);
       }
       first = false;
       sb.append(")");
@@ -620,8 +646,750 @@ public class CommService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (req != null) {
-        req.validate();
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setAllFirmwareFilesInfo_argsStandardSchemeFactory implements SchemeFactory {
+      public setAllFirmwareFilesInfo_argsStandardScheme getScheme() {
+        return new setAllFirmwareFilesInfo_argsStandardScheme();
+      }
+    }
+
+    private static class setAllFirmwareFilesInfo_argsStandardScheme extends StandardScheme<setAllFirmwareFilesInfo_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // FILEINFOLIST
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
+                  struct.fileinfolist = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>(_list0.size);
+                  for (int _i1 = 0; _i1 < _list0.size; ++_i1)
+                  {
+                    com.g2sky.pgd.intf.thrift.common.Fileinfo _elem2;
+                    _elem2 = new com.g2sky.pgd.intf.thrift.common.Fileinfo();
+                    _elem2.read(iprot);
+                    struct.fileinfolist.add(_elem2);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setFileinfolistIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.fileinfolist != null) {
+          oprot.writeFieldBegin(FILEINFOLIST_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.fileinfolist.size()));
+            for (com.g2sky.pgd.intf.thrift.common.Fileinfo _iter3 : struct.fileinfolist)
+            {
+              _iter3.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setAllFirmwareFilesInfo_argsTupleSchemeFactory implements SchemeFactory {
+      public setAllFirmwareFilesInfo_argsTupleScheme getScheme() {
+        return new setAllFirmwareFilesInfo_argsTupleScheme();
+      }
+    }
+
+    private static class setAllFirmwareFilesInfo_argsTupleScheme extends TupleScheme<setAllFirmwareFilesInfo_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetFileinfolist()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetFileinfolist()) {
+          {
+            oprot.writeI32(struct.fileinfolist.size());
+            for (com.g2sky.pgd.intf.thrift.common.Fileinfo _iter4 : struct.fileinfolist)
+            {
+              _iter4.write(oprot);
+            }
+          }
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setAllFirmwareFilesInfo_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          {
+            org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.fileinfolist = new ArrayList<com.g2sky.pgd.intf.thrift.common.Fileinfo>(_list5.size);
+            for (int _i6 = 0; _i6 < _list5.size; ++_i6)
+            {
+              com.g2sky.pgd.intf.thrift.common.Fileinfo _elem7;
+              _elem7 = new com.g2sky.pgd.intf.thrift.common.Fileinfo();
+              _elem7.read(iprot);
+              struct.fileinfolist.add(_elem7);
+            }
+          }
+          struct.setFileinfolistIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class setAllFirmwareFilesInfo_result implements org.apache.thrift.TBase<setAllFirmwareFilesInfo_result, setAllFirmwareFilesInfo_result._Fields>, java.io.Serializable, Cloneable, Comparable<setAllFirmwareFilesInfo_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setAllFirmwareFilesInfo_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new setAllFirmwareFilesInfo_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setAllFirmwareFilesInfo_resultTupleSchemeFactory());
+    }
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setAllFirmwareFilesInfo_result.class, metaDataMap);
+    }
+
+    public setAllFirmwareFilesInfo_result() {
+    }
+
+    public setAllFirmwareFilesInfo_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public setAllFirmwareFilesInfo_result(setAllFirmwareFilesInfo_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
+    }
+
+    public setAllFirmwareFilesInfo_result deepCopy() {
+      return new setAllFirmwareFilesInfo_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public setAllFirmwareFilesInfo_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof setAllFirmwareFilesInfo_result)
+        return this.equals((setAllFirmwareFilesInfo_result)that);
+      return false;
+    }
+
+    public boolean equals(setAllFirmwareFilesInfo_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(setAllFirmwareFilesInfo_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("setAllFirmwareFilesInfo_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setAllFirmwareFilesInfo_resultStandardSchemeFactory implements SchemeFactory {
+      public setAllFirmwareFilesInfo_resultStandardScheme getScheme() {
+        return new setAllFirmwareFilesInfo_resultStandardScheme();
+      }
+    }
+
+    private static class setAllFirmwareFilesInfo_resultStandardScheme extends StandardScheme<setAllFirmwareFilesInfo_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setAllFirmwareFilesInfo_resultTupleSchemeFactory implements SchemeFactory {
+      public setAllFirmwareFilesInfo_resultTupleScheme getScheme() {
+        return new setAllFirmwareFilesInfo_resultTupleScheme();
+      }
+    }
+
+    private static class setAllFirmwareFilesInfo_resultTupleScheme extends TupleScheme<setAllFirmwareFilesInfo_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setAllFirmwareFilesInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readBool();
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class processAsyncCommand_args implements org.apache.thrift.TBase<processAsyncCommand_args, processAsyncCommand_args._Fields>, java.io.Serializable, Cloneable, Comparable<processAsyncCommand_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("processAsyncCommand_args");
+
+    private static final org.apache.thrift.protocol.TField COMMAND_FIELD_DESC = new org.apache.thrift.protocol.TField("command", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new processAsyncCommand_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new processAsyncCommand_argsTupleSchemeFactory());
+    }
+
+    public com.g2sky.pgd.intf.thrift.common.CommandMsg command; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      COMMAND((short)1, "command");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // COMMAND
+            return COMMAND;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.COMMAND, new org.apache.thrift.meta_data.FieldMetaData("command", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.CommandMsg.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(processAsyncCommand_args.class, metaDataMap);
+    }
+
+    public processAsyncCommand_args() {
+    }
+
+    public processAsyncCommand_args(
+      com.g2sky.pgd.intf.thrift.common.CommandMsg command)
+    {
+      this();
+      this.command = command;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public processAsyncCommand_args(processAsyncCommand_args other) {
+      if (other.isSetCommand()) {
+        this.command = new com.g2sky.pgd.intf.thrift.common.CommandMsg(other.command);
+      }
+    }
+
+    public processAsyncCommand_args deepCopy() {
+      return new processAsyncCommand_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.command = null;
+    }
+
+    public com.g2sky.pgd.intf.thrift.common.CommandMsg getCommand() {
+      return this.command;
+    }
+
+    public processAsyncCommand_args setCommand(com.g2sky.pgd.intf.thrift.common.CommandMsg command) {
+      this.command = command;
+      return this;
+    }
+
+    public void unsetCommand() {
+      this.command = null;
+    }
+
+    /** Returns true if field command is set (has been assigned a value) and false otherwise */
+    public boolean isSetCommand() {
+      return this.command != null;
+    }
+
+    public void setCommandIsSet(boolean value) {
+      if (!value) {
+        this.command = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case COMMAND:
+        if (value == null) {
+          unsetCommand();
+        } else {
+          setCommand((com.g2sky.pgd.intf.thrift.common.CommandMsg)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case COMMAND:
+        return getCommand();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case COMMAND:
+        return isSetCommand();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof processAsyncCommand_args)
+        return this.equals((processAsyncCommand_args)that);
+      return false;
+    }
+
+    public boolean equals(processAsyncCommand_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_command = true && this.isSetCommand();
+      boolean that_present_command = true && that.isSetCommand();
+      if (this_present_command || that_present_command) {
+        if (!(this_present_command && that_present_command))
+          return false;
+        if (!this.command.equals(that.command))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(processAsyncCommand_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetCommand()).compareTo(other.isSetCommand());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCommand()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.command, other.command);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("processAsyncCommand_args(");
+      boolean first = true;
+
+      sb.append("command:");
+      if (this.command == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.command);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (command != null) {
+        command.validate();
       }
     }
 
@@ -641,15 +1409,15 @@ public class CommService {
       }
     }
 
-    private static class sendAsyncCommandREQ_argsStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_argsStandardScheme getScheme() {
-        return new sendAsyncCommandREQ_argsStandardScheme();
+    private static class processAsyncCommand_argsStandardSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_argsStandardScheme getScheme() {
+        return new processAsyncCommand_argsStandardScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_argsStandardScheme extends StandardScheme<sendAsyncCommandREQ_args> {
+    private static class processAsyncCommand_argsStandardScheme extends StandardScheme<processAsyncCommand_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -659,11 +1427,11 @@ public class CommService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // REQ
+            case 1: // COMMAND
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.req = new com.g2sky.pgd.intf.thrift.common.AppCommandREQ();
-                struct.req.read(iprot);
-                struct.setReqIsSet(true);
+                struct.command = new com.g2sky.pgd.intf.thrift.common.CommandMsg();
+                struct.command.read(iprot);
+                struct.setCommandIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -679,13 +1447,13 @@ public class CommService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.req != null) {
-          oprot.writeFieldBegin(REQ_FIELD_DESC);
-          struct.req.write(oprot);
+        if (struct.command != null) {
+          oprot.writeFieldBegin(COMMAND_FIELD_DESC);
+          struct.command.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -694,49 +1462,49 @@ public class CommService {
 
     }
 
-    private static class sendAsyncCommandREQ_argsTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_argsTupleScheme getScheme() {
-        return new sendAsyncCommandREQ_argsTupleScheme();
+    private static class processAsyncCommand_argsTupleSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_argsTupleScheme getScheme() {
+        return new processAsyncCommand_argsTupleScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_argsTupleScheme extends TupleScheme<sendAsyncCommandREQ_args> {
+    private static class processAsyncCommand_argsTupleScheme extends TupleScheme<processAsyncCommand_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetReq()) {
+        if (struct.isSetCommand()) {
           optionals.set(0);
         }
         oprot.writeBitSet(optionals, 1);
-        if (struct.isSetReq()) {
-          struct.req.write(oprot);
+        if (struct.isSetCommand()) {
+          struct.command.write(oprot);
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.req = new com.g2sky.pgd.intf.thrift.common.AppCommandREQ();
-          struct.req.read(iprot);
-          struct.setReqIsSet(true);
+          struct.command = new com.g2sky.pgd.intf.thrift.common.CommandMsg();
+          struct.command.read(iprot);
+          struct.setCommandIsSet(true);
         }
       }
     }
 
   }
 
-  public static class sendAsyncCommandREQ_result implements org.apache.thrift.TBase<sendAsyncCommandREQ_result, sendAsyncCommandREQ_result._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandREQ_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandREQ_result");
+  public static class processAsyncCommand_result implements org.apache.thrift.TBase<processAsyncCommand_result, processAsyncCommand_result._Fields>, java.io.Serializable, Cloneable, Comparable<processAsyncCommand_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("processAsyncCommand_result");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandREQ_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandREQ_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new processAsyncCommand_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new processAsyncCommand_resultTupleSchemeFactory());
     }
 
 
@@ -799,20 +1567,20 @@ public class CommService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandREQ_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(processAsyncCommand_result.class, metaDataMap);
     }
 
-    public sendAsyncCommandREQ_result() {
+    public processAsyncCommand_result() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public sendAsyncCommandREQ_result(sendAsyncCommandREQ_result other) {
+    public processAsyncCommand_result(processAsyncCommand_result other) {
     }
 
-    public sendAsyncCommandREQ_result deepCopy() {
-      return new sendAsyncCommandREQ_result(this);
+    public processAsyncCommand_result deepCopy() {
+      return new processAsyncCommand_result(this);
     }
 
     @Override
@@ -845,12 +1613,12 @@ public class CommService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof sendAsyncCommandREQ_result)
-        return this.equals((sendAsyncCommandREQ_result)that);
+      if (that instanceof processAsyncCommand_result)
+        return this.equals((processAsyncCommand_result)that);
       return false;
     }
 
-    public boolean equals(sendAsyncCommandREQ_result that) {
+    public boolean equals(processAsyncCommand_result that) {
       if (that == null)
         return false;
 
@@ -863,7 +1631,7 @@ public class CommService {
     }
 
     @Override
-    public int compareTo(sendAsyncCommandREQ_result other) {
+    public int compareTo(processAsyncCommand_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -887,7 +1655,7 @@ public class CommService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandREQ_result(");
+      StringBuilder sb = new StringBuilder("processAsyncCommand_result(");
       boolean first = true;
 
       sb.append(")");
@@ -915,15 +1683,15 @@ public class CommService {
       }
     }
 
-    private static class sendAsyncCommandREQ_resultStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_resultStandardScheme getScheme() {
-        return new sendAsyncCommandREQ_resultStandardScheme();
+    private static class processAsyncCommand_resultStandardSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_resultStandardScheme getScheme() {
+        return new processAsyncCommand_resultStandardScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_resultStandardScheme extends StandardScheme<sendAsyncCommandREQ_result> {
+    private static class processAsyncCommand_resultStandardScheme extends StandardScheme<processAsyncCommand_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -944,7 +1712,7 @@ public class CommService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -954,626 +1722,21 @@ public class CommService {
 
     }
 
-    private static class sendAsyncCommandREQ_resultTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandREQ_resultTupleScheme getScheme() {
-        return new sendAsyncCommandREQ_resultTupleScheme();
+    private static class processAsyncCommand_resultTupleSchemeFactory implements SchemeFactory {
+      public processAsyncCommand_resultTupleScheme getScheme() {
+        return new processAsyncCommand_resultTupleScheme();
       }
     }
 
-    private static class sendAsyncCommandREQ_resultTupleScheme extends TupleScheme<sendAsyncCommandREQ_result> {
+    private static class processAsyncCommand_resultTupleScheme extends TupleScheme<processAsyncCommand_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandREQ_result struct) throws org.apache.thrift.TException {
-        TTupleProtocol iprot = (TTupleProtocol) prot;
-      }
-    }
-
-  }
-
-  public static class sendAsyncCommandRSP_args implements org.apache.thrift.TBase<sendAsyncCommandRSP_args, sendAsyncCommandRSP_args._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandRSP_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandRSP_args");
-
-    private static final org.apache.thrift.protocol.TField RSP_FIELD_DESC = new org.apache.thrift.protocol.TField("rsp", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-
-    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
-    static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandRSP_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandRSP_argsTupleSchemeFactory());
-    }
-
-    public com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp; // required
-
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
-    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      RSP((short)1, "rsp");
-
-      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
-
-      static {
-        for (_Fields field : EnumSet.allOf(_Fields.class)) {
-          byName.put(field.getFieldName(), field);
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
-      public static _Fields findByThriftId(int fieldId) {
-        switch(fieldId) {
-          case 1: // RSP
-            return RSP;
-          default:
-            return null;
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, throwing an exception
-       * if it is not found.
-       */
-      public static _Fields findByThriftIdOrThrow(int fieldId) {
-        _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
-        return fields;
-      }
-
-      /**
-       * Find the _Fields constant that matches name, or null if its not found.
-       */
-      public static _Fields findByName(String name) {
-        return byName.get(name);
-      }
-
-      private final short _thriftId;
-      private final String _fieldName;
-
-      _Fields(short thriftId, String fieldName) {
-        _thriftId = thriftId;
-        _fieldName = fieldName;
-      }
-
-      public short getThriftFieldId() {
-        return _thriftId;
-      }
-
-      public String getFieldName() {
-        return _fieldName;
-      }
-    }
-
-    // isset id assignments
-    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
-    static {
-      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.RSP, new org.apache.thrift.meta_data.FieldMetaData("rsp", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.g2sky.pgd.intf.thrift.common.CommCommandRSP.class)));
-      metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandRSP_args.class, metaDataMap);
-    }
-
-    public sendAsyncCommandRSP_args() {
-    }
-
-    public sendAsyncCommandRSP_args(
-      com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp)
-    {
-      this();
-      this.rsp = rsp;
-    }
-
-    /**
-     * Performs a deep copy on <i>other</i>.
-     */
-    public sendAsyncCommandRSP_args(sendAsyncCommandRSP_args other) {
-      if (other.isSetRsp()) {
-        this.rsp = new com.g2sky.pgd.intf.thrift.common.CommCommandRSP(other.rsp);
-      }
-    }
-
-    public sendAsyncCommandRSP_args deepCopy() {
-      return new sendAsyncCommandRSP_args(this);
-    }
-
-    @Override
-    public void clear() {
-      this.rsp = null;
-    }
-
-    public com.g2sky.pgd.intf.thrift.common.CommCommandRSP getRsp() {
-      return this.rsp;
-    }
-
-    public sendAsyncCommandRSP_args setRsp(com.g2sky.pgd.intf.thrift.common.CommCommandRSP rsp) {
-      this.rsp = rsp;
-      return this;
-    }
-
-    public void unsetRsp() {
-      this.rsp = null;
-    }
-
-    /** Returns true if field rsp is set (has been assigned a value) and false otherwise */
-    public boolean isSetRsp() {
-      return this.rsp != null;
-    }
-
-    public void setRspIsSet(boolean value) {
-      if (!value) {
-        this.rsp = null;
-      }
-    }
-
-    public void setFieldValue(_Fields field, Object value) {
-      switch (field) {
-      case RSP:
-        if (value == null) {
-          unsetRsp();
-        } else {
-          setRsp((com.g2sky.pgd.intf.thrift.common.CommCommandRSP)value);
-        }
-        break;
-
-      }
-    }
-
-    public Object getFieldValue(_Fields field) {
-      switch (field) {
-      case RSP:
-        return getRsp();
-
-      }
-      throw new IllegalStateException();
-    }
-
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
-    public boolean isSet(_Fields field) {
-      if (field == null) {
-        throw new IllegalArgumentException();
-      }
-
-      switch (field) {
-      case RSP:
-        return isSetRsp();
-      }
-      throw new IllegalStateException();
-    }
-
-    @Override
-    public boolean equals(Object that) {
-      if (that == null)
-        return false;
-      if (that instanceof sendAsyncCommandRSP_args)
-        return this.equals((sendAsyncCommandRSP_args)that);
-      return false;
-    }
-
-    public boolean equals(sendAsyncCommandRSP_args that) {
-      if (that == null)
-        return false;
-
-      boolean this_present_rsp = true && this.isSetRsp();
-      boolean that_present_rsp = true && that.isSetRsp();
-      if (this_present_rsp || that_present_rsp) {
-        if (!(this_present_rsp && that_present_rsp))
-          return false;
-        if (!this.rsp.equals(that.rsp))
-          return false;
-      }
-
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      return 0;
-    }
-
-    @Override
-    public int compareTo(sendAsyncCommandRSP_args other) {
-      if (!getClass().equals(other.getClass())) {
-        return getClass().getName().compareTo(other.getClass().getName());
-      }
-
-      int lastComparison = 0;
-
-      lastComparison = Boolean.valueOf(isSetRsp()).compareTo(other.isSetRsp());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetRsp()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.rsp, other.rsp);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      return 0;
-    }
-
-    public _Fields fieldForId(int fieldId) {
-      return _Fields.findByThriftId(fieldId);
-    }
-
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
-      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
-    }
-
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
-      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
-    }
-
-    @Override
-    public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandRSP_args(");
-      boolean first = true;
-
-      sb.append("rsp:");
-      if (this.rsp == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.rsp);
-      }
-      first = false;
-      sb.append(")");
-      return sb.toString();
-    }
-
-    public void validate() throws org.apache.thrift.TException {
-      // check for required fields
-      // check for sub-struct validity
-      if (rsp != null) {
-        rsp.validate();
-      }
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-      try {
-        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-      try {
-        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private static class sendAsyncCommandRSP_argsStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_argsStandardScheme getScheme() {
-        return new sendAsyncCommandRSP_argsStandardScheme();
-      }
-    }
-
-    private static class sendAsyncCommandRSP_argsStandardScheme extends StandardScheme<sendAsyncCommandRSP_args> {
-
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TField schemeField;
-        iprot.readStructBegin();
-        while (true)
-        {
-          schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
-            break;
-          }
-          switch (schemeField.id) {
-            case 1: // RSP
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.rsp = new com.g2sky.pgd.intf.thrift.common.CommCommandRSP();
-                struct.rsp.read(iprot);
-                struct.setRspIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            default:
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-          }
-          iprot.readFieldEnd();
-        }
-        iprot.readStructEnd();
-
-        // check for required fields of primitive type, which can't be checked in the validate method
-        struct.validate();
-      }
-
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
-        struct.validate();
-
-        oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.rsp != null) {
-          oprot.writeFieldBegin(RSP_FIELD_DESC);
-          struct.rsp.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        oprot.writeFieldStop();
-        oprot.writeStructEnd();
-      }
-
-    }
-
-    private static class sendAsyncCommandRSP_argsTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_argsTupleScheme getScheme() {
-        return new sendAsyncCommandRSP_argsTupleScheme();
-      }
-    }
-
-    private static class sendAsyncCommandRSP_argsTupleScheme extends TupleScheme<sendAsyncCommandRSP_args> {
-
-      @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
-        TTupleProtocol oprot = (TTupleProtocol) prot;
-        BitSet optionals = new BitSet();
-        if (struct.isSetRsp()) {
-          optionals.set(0);
-        }
-        oprot.writeBitSet(optionals, 1);
-        if (struct.isSetRsp()) {
-          struct.rsp.write(oprot);
-        }
-      }
-
-      @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_args struct) throws org.apache.thrift.TException {
-        TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
-        if (incoming.get(0)) {
-          struct.rsp = new com.g2sky.pgd.intf.thrift.common.CommCommandRSP();
-          struct.rsp.read(iprot);
-          struct.setRspIsSet(true);
-        }
-      }
-    }
-
-  }
-
-  public static class sendAsyncCommandRSP_result implements org.apache.thrift.TBase<sendAsyncCommandRSP_result, sendAsyncCommandRSP_result._Fields>, java.io.Serializable, Cloneable, Comparable<sendAsyncCommandRSP_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendAsyncCommandRSP_result");
-
-
-    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
-    static {
-      schemes.put(StandardScheme.class, new sendAsyncCommandRSP_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new sendAsyncCommandRSP_resultTupleSchemeFactory());
-    }
-
-
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
-    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
-
-      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
-
-      static {
-        for (_Fields field : EnumSet.allOf(_Fields.class)) {
-          byName.put(field.getFieldName(), field);
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
-      public static _Fields findByThriftId(int fieldId) {
-        switch(fieldId) {
-          default:
-            return null;
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, throwing an exception
-       * if it is not found.
-       */
-      public static _Fields findByThriftIdOrThrow(int fieldId) {
-        _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
-        return fields;
-      }
-
-      /**
-       * Find the _Fields constant that matches name, or null if its not found.
-       */
-      public static _Fields findByName(String name) {
-        return byName.get(name);
-      }
-
-      private final short _thriftId;
-      private final String _fieldName;
-
-      _Fields(short thriftId, String fieldName) {
-        _thriftId = thriftId;
-        _fieldName = fieldName;
-      }
-
-      public short getThriftFieldId() {
-        return _thriftId;
-      }
-
-      public String getFieldName() {
-        return _fieldName;
-      }
-    }
-    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
-    static {
-      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendAsyncCommandRSP_result.class, metaDataMap);
-    }
-
-    public sendAsyncCommandRSP_result() {
-    }
-
-    /**
-     * Performs a deep copy on <i>other</i>.
-     */
-    public sendAsyncCommandRSP_result(sendAsyncCommandRSP_result other) {
-    }
-
-    public sendAsyncCommandRSP_result deepCopy() {
-      return new sendAsyncCommandRSP_result(this);
-    }
-
-    @Override
-    public void clear() {
-    }
-
-    public void setFieldValue(_Fields field, Object value) {
-      switch (field) {
-      }
-    }
-
-    public Object getFieldValue(_Fields field) {
-      switch (field) {
-      }
-      throw new IllegalStateException();
-    }
-
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
-    public boolean isSet(_Fields field) {
-      if (field == null) {
-        throw new IllegalArgumentException();
-      }
-
-      switch (field) {
-      }
-      throw new IllegalStateException();
-    }
-
-    @Override
-    public boolean equals(Object that) {
-      if (that == null)
-        return false;
-      if (that instanceof sendAsyncCommandRSP_result)
-        return this.equals((sendAsyncCommandRSP_result)that);
-      return false;
-    }
-
-    public boolean equals(sendAsyncCommandRSP_result that) {
-      if (that == null)
-        return false;
-
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      return 0;
-    }
-
-    @Override
-    public int compareTo(sendAsyncCommandRSP_result other) {
-      if (!getClass().equals(other.getClass())) {
-        return getClass().getName().compareTo(other.getClass().getName());
-      }
-
-      int lastComparison = 0;
-
-      return 0;
-    }
-
-    public _Fields fieldForId(int fieldId) {
-      return _Fields.findByThriftId(fieldId);
-    }
-
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
-      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
-    }
-
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
-      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
-      }
-
-    @Override
-    public String toString() {
-      StringBuilder sb = new StringBuilder("sendAsyncCommandRSP_result(");
-      boolean first = true;
-
-      sb.append(")");
-      return sb.toString();
-    }
-
-    public void validate() throws org.apache.thrift.TException {
-      // check for required fields
-      // check for sub-struct validity
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-      try {
-        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-      try {
-        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private static class sendAsyncCommandRSP_resultStandardSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_resultStandardScheme getScheme() {
-        return new sendAsyncCommandRSP_resultStandardScheme();
-      }
-    }
-
-    private static class sendAsyncCommandRSP_resultStandardScheme extends StandardScheme<sendAsyncCommandRSP_result> {
-
-      public void read(org.apache.thrift.protocol.TProtocol iprot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TField schemeField;
-        iprot.readStructBegin();
-        while (true)
-        {
-          schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
-            break;
-          }
-          switch (schemeField.id) {
-            default:
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-          }
-          iprot.readFieldEnd();
-        }
-        iprot.readStructEnd();
-
-        // check for required fields of primitive type, which can't be checked in the validate method
-        struct.validate();
-      }
-
-      public void write(org.apache.thrift.protocol.TProtocol oprot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
-        struct.validate();
-
-        oprot.writeStructBegin(STRUCT_DESC);
-        oprot.writeFieldStop();
-        oprot.writeStructEnd();
-      }
-
-    }
-
-    private static class sendAsyncCommandRSP_resultTupleSchemeFactory implements SchemeFactory {
-      public sendAsyncCommandRSP_resultTupleScheme getScheme() {
-        return new sendAsyncCommandRSP_resultTupleScheme();
-      }
-    }
-
-    private static class sendAsyncCommandRSP_resultTupleScheme extends TupleScheme<sendAsyncCommandRSP_result> {
-
-      @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
-        TTupleProtocol oprot = (TTupleProtocol) prot;
-      }
-
-      @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, sendAsyncCommandRSP_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, processAsyncCommand_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }

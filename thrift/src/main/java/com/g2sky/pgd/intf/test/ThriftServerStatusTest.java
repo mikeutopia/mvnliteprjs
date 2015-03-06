@@ -1,4 +1,4 @@
-package com.g2sky.pgd.intf.thrift;
+package com.g2sky.pgd.intf.test;
 
 import org.apache.thrift.server.TServer;
 

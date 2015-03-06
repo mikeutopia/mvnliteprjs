@@ -32,36 +32,50 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields>, java.io.Serializable, Cloneable, Comparable<BaseMsg> {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("BaseMsg");
+public class CommandMsg implements org.apache.thrift.TBase<CommandMsg, CommandMsg._Fields>, java.io.Serializable, Cloneable, Comparable<CommandMsg> {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("CommandMsg");
 
-  private static final org.apache.thrift.protocol.TField VER_FIELD_DESC = new org.apache.thrift.protocol.TField("ver", org.apache.thrift.protocol.TType.I32, (short)1);
-  private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.I32, (short)2);
-  private static final org.apache.thrift.protocol.TField BODY_FIELD_DESC = new org.apache.thrift.protocol.TField("body", org.apache.thrift.protocol.TType.STRING, (short)3);
+  private static final org.apache.thrift.protocol.TField MSG_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("msgID", org.apache.thrift.protocol.TType.STRING, (short)1);
+  private static final org.apache.thrift.protocol.TField VER_FIELD_DESC = new org.apache.thrift.protocol.TField("ver", org.apache.thrift.protocol.TType.I32, (short)2);
+  private static final org.apache.thrift.protocol.TField CMD_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("cmdType", org.apache.thrift.protocol.TType.I32, (short)3);
+  private static final org.apache.thrift.protocol.TField MSG_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("msgType", org.apache.thrift.protocol.TType.I32, (short)4);
+  private static final org.apache.thrift.protocol.TField BODY_FIELD_DESC = new org.apache.thrift.protocol.TField("body", org.apache.thrift.protocol.TType.STRING, (short)5);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new BaseMsgStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new BaseMsgTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new CommandMsgStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new CommandMsgTupleSchemeFactory());
   }
 
+  public String msgID; // required
   public int ver; // required
+  /**
+   * 
+   * @see CmdType
+   */
+  public CmdType cmdType; // required
   /**
    * 
    * @see MsgType
    */
-  public MsgType type; // required
+  public MsgType msgType; // required
   public String body; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    VER((short)1, "ver"),
+    MSG_ID((short)1, "msgID"),
+    VER((short)2, "ver"),
+    /**
+     * 
+     * @see CmdType
+     */
+    CMD_TYPE((short)3, "cmdType"),
     /**
      * 
      * @see MsgType
      */
-    TYPE((short)2, "type"),
-    BODY((short)3, "body");
+    MSG_TYPE((short)4, "msgType"),
+    BODY((short)5, "body");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -76,11 +90,15 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // VER
+        case 1: // MSG_ID
+          return MSG_ID;
+        case 2: // VER
           return VER;
-        case 2: // TYPE
-          return TYPE;
-        case 3: // BODY
+        case 3: // CMD_TYPE
+          return CMD_TYPE;
+        case 4: // MSG_TYPE
+          return MSG_TYPE;
+        case 5: // BODY
           return BODY;
         default:
           return null;
@@ -127,62 +145,102 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+    tmpMap.put(_Fields.MSG_ID, new org.apache.thrift.meta_data.FieldMetaData("msgID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.VER, new org.apache.thrift.meta_data.FieldMetaData("ver", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
-    tmpMap.put(_Fields.TYPE, new org.apache.thrift.meta_data.FieldMetaData("type", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.CMD_TYPE, new org.apache.thrift.meta_data.FieldMetaData("cmdType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, CmdType.class)));
+    tmpMap.put(_Fields.MSG_TYPE, new org.apache.thrift.meta_data.FieldMetaData("msgType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, MsgType.class)));
     tmpMap.put(_Fields.BODY, new org.apache.thrift.meta_data.FieldMetaData("body", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BaseMsg.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(CommandMsg.class, metaDataMap);
   }
 
-  public BaseMsg() {
+  public CommandMsg() {
   }
 
-  public BaseMsg(
+  public CommandMsg(
+    String msgID,
     int ver,
-    MsgType type,
+    CmdType cmdType,
+    MsgType msgType,
     String body)
   {
     this();
+    this.msgID = msgID;
     this.ver = ver;
     setVerIsSet(true);
-    this.type = type;
+    this.cmdType = cmdType;
+    this.msgType = msgType;
     this.body = body;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public BaseMsg(BaseMsg other) {
+  public CommandMsg(CommandMsg other) {
     __isset_bitfield = other.__isset_bitfield;
+    if (other.isSetMsgID()) {
+      this.msgID = other.msgID;
+    }
     this.ver = other.ver;
-    if (other.isSetType()) {
-      this.type = other.type;
+    if (other.isSetCmdType()) {
+      this.cmdType = other.cmdType;
+    }
+    if (other.isSetMsgType()) {
+      this.msgType = other.msgType;
     }
     if (other.isSetBody()) {
       this.body = other.body;
     }
   }
 
-  public BaseMsg deepCopy() {
-    return new BaseMsg(this);
+  public CommandMsg deepCopy() {
+    return new CommandMsg(this);
   }
 
   @Override
   public void clear() {
+    this.msgID = null;
     setVerIsSet(false);
     this.ver = 0;
-    this.type = null;
+    this.cmdType = null;
+    this.msgType = null;
     this.body = null;
+  }
+
+  public String getMsgID() {
+    return this.msgID;
+  }
+
+  public CommandMsg setMsgID(String msgID) {
+    this.msgID = msgID;
+    return this;
+  }
+
+  public void unsetMsgID() {
+    this.msgID = null;
+  }
+
+  /** Returns true if field msgID is set (has been assigned a value) and false otherwise */
+  public boolean isSetMsgID() {
+    return this.msgID != null;
+  }
+
+  public void setMsgIDIsSet(boolean value) {
+    if (!value) {
+      this.msgID = null;
+    }
   }
 
   public int getVer() {
     return this.ver;
   }
 
-  public BaseMsg setVer(int ver) {
+  public CommandMsg setVer(int ver) {
     this.ver = ver;
     setVerIsSet(true);
     return this;
@@ -203,33 +261,65 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
 
   /**
    * 
-   * @see MsgType
+   * @see CmdType
    */
-  public MsgType getType() {
-    return this.type;
+  public CmdType getCmdType() {
+    return this.cmdType;
+  }
+
+  /**
+   * 
+   * @see CmdType
+   */
+  public CommandMsg setCmdType(CmdType cmdType) {
+    this.cmdType = cmdType;
+    return this;
+  }
+
+  public void unsetCmdType() {
+    this.cmdType = null;
+  }
+
+  /** Returns true if field cmdType is set (has been assigned a value) and false otherwise */
+  public boolean isSetCmdType() {
+    return this.cmdType != null;
+  }
+
+  public void setCmdTypeIsSet(boolean value) {
+    if (!value) {
+      this.cmdType = null;
+    }
   }
 
   /**
    * 
    * @see MsgType
    */
-  public BaseMsg setType(MsgType type) {
-    this.type = type;
+  public MsgType getMsgType() {
+    return this.msgType;
+  }
+
+  /**
+   * 
+   * @see MsgType
+   */
+  public CommandMsg setMsgType(MsgType msgType) {
+    this.msgType = msgType;
     return this;
   }
 
-  public void unsetType() {
-    this.type = null;
+  public void unsetMsgType() {
+    this.msgType = null;
   }
 
-  /** Returns true if field type is set (has been assigned a value) and false otherwise */
-  public boolean isSetType() {
-    return this.type != null;
+  /** Returns true if field msgType is set (has been assigned a value) and false otherwise */
+  public boolean isSetMsgType() {
+    return this.msgType != null;
   }
 
-  public void setTypeIsSet(boolean value) {
+  public void setMsgTypeIsSet(boolean value) {
     if (!value) {
-      this.type = null;
+      this.msgType = null;
     }
   }
 
@@ -237,7 +327,7 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
     return this.body;
   }
 
-  public BaseMsg setBody(String body) {
+  public CommandMsg setBody(String body) {
     this.body = body;
     return this;
   }
@@ -259,6 +349,14 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
+    case MSG_ID:
+      if (value == null) {
+        unsetMsgID();
+      } else {
+        setMsgID((String)value);
+      }
+      break;
+
     case VER:
       if (value == null) {
         unsetVer();
@@ -267,11 +365,19 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
       }
       break;
 
-    case TYPE:
+    case CMD_TYPE:
       if (value == null) {
-        unsetType();
+        unsetCmdType();
       } else {
-        setType((MsgType)value);
+        setCmdType((CmdType)value);
+      }
+      break;
+
+    case MSG_TYPE:
+      if (value == null) {
+        unsetMsgType();
+      } else {
+        setMsgType((MsgType)value);
       }
       break;
 
@@ -288,11 +394,17 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
+    case MSG_ID:
+      return getMsgID();
+
     case VER:
       return Integer.valueOf(getVer());
 
-    case TYPE:
-      return getType();
+    case CMD_TYPE:
+      return getCmdType();
+
+    case MSG_TYPE:
+      return getMsgType();
 
     case BODY:
       return getBody();
@@ -308,10 +420,14 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
     }
 
     switch (field) {
+    case MSG_ID:
+      return isSetMsgID();
     case VER:
       return isSetVer();
-    case TYPE:
-      return isSetType();
+    case CMD_TYPE:
+      return isSetCmdType();
+    case MSG_TYPE:
+      return isSetMsgType();
     case BODY:
       return isSetBody();
     }
@@ -322,14 +438,23 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof BaseMsg)
-      return this.equals((BaseMsg)that);
+    if (that instanceof CommandMsg)
+      return this.equals((CommandMsg)that);
     return false;
   }
 
-  public boolean equals(BaseMsg that) {
+  public boolean equals(CommandMsg that) {
     if (that == null)
       return false;
+
+    boolean this_present_msgID = true && this.isSetMsgID();
+    boolean that_present_msgID = true && that.isSetMsgID();
+    if (this_present_msgID || that_present_msgID) {
+      if (!(this_present_msgID && that_present_msgID))
+        return false;
+      if (!this.msgID.equals(that.msgID))
+        return false;
+    }
 
     boolean this_present_ver = true;
     boolean that_present_ver = true;
@@ -340,12 +465,21 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
         return false;
     }
 
-    boolean this_present_type = true && this.isSetType();
-    boolean that_present_type = true && that.isSetType();
-    if (this_present_type || that_present_type) {
-      if (!(this_present_type && that_present_type))
+    boolean this_present_cmdType = true && this.isSetCmdType();
+    boolean that_present_cmdType = true && that.isSetCmdType();
+    if (this_present_cmdType || that_present_cmdType) {
+      if (!(this_present_cmdType && that_present_cmdType))
         return false;
-      if (!this.type.equals(that.type))
+      if (!this.cmdType.equals(that.cmdType))
+        return false;
+    }
+
+    boolean this_present_msgType = true && this.isSetMsgType();
+    boolean that_present_msgType = true && that.isSetMsgType();
+    if (this_present_msgType || that_present_msgType) {
+      if (!(this_present_msgType && that_present_msgType))
+        return false;
+      if (!this.msgType.equals(that.msgType))
         return false;
     }
 
@@ -367,13 +501,23 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
   }
 
   @Override
-  public int compareTo(BaseMsg other) {
+  public int compareTo(CommandMsg other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
 
     int lastComparison = 0;
 
+    lastComparison = Boolean.valueOf(isSetMsgID()).compareTo(other.isSetMsgID());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetMsgID()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.msgID, other.msgID);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetVer()).compareTo(other.isSetVer());
     if (lastComparison != 0) {
       return lastComparison;
@@ -384,12 +528,22 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetType()).compareTo(other.isSetType());
+    lastComparison = Boolean.valueOf(isSetCmdType()).compareTo(other.isSetCmdType());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetType()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.type, other.type);
+    if (isSetCmdType()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.cmdType, other.cmdType);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetMsgType()).compareTo(other.isSetMsgType());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetMsgType()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.msgType, other.msgType);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -421,18 +575,34 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("BaseMsg(");
+    StringBuilder sb = new StringBuilder("CommandMsg(");
     boolean first = true;
 
+    sb.append("msgID:");
+    if (this.msgID == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.msgID);
+    }
+    first = false;
+    if (!first) sb.append(", ");
     sb.append("ver:");
     sb.append(this.ver);
     first = false;
     if (!first) sb.append(", ");
-    sb.append("type:");
-    if (this.type == null) {
+    sb.append("cmdType:");
+    if (this.cmdType == null) {
       sb.append("null");
     } else {
-      sb.append(this.type);
+      sb.append(this.cmdType);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("msgType:");
+    if (this.msgType == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.msgType);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -470,15 +640,15 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
     }
   }
 
-  private static class BaseMsgStandardSchemeFactory implements SchemeFactory {
-    public BaseMsgStandardScheme getScheme() {
-      return new BaseMsgStandardScheme();
+  private static class CommandMsgStandardSchemeFactory implements SchemeFactory {
+    public CommandMsgStandardScheme getScheme() {
+      return new CommandMsgStandardScheme();
     }
   }
 
-  private static class BaseMsgStandardScheme extends StandardScheme<BaseMsg> {
+  private static class CommandMsgStandardScheme extends StandardScheme<CommandMsg> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, BaseMsg struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, CommandMsg struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -488,7 +658,15 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
           break;
         }
         switch (schemeField.id) {
-          case 1: // VER
+          case 1: // MSG_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.msgID = iprot.readString();
+              struct.setMsgIDIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 2: // VER
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.ver = iprot.readI32();
               struct.setVerIsSet(true);
@@ -496,15 +674,23 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // TYPE
+          case 3: // CMD_TYPE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.type = MsgType.findByValue(iprot.readI32());
-              struct.setTypeIsSet(true);
+              struct.cmdType = CmdType.findByValue(iprot.readI32());
+              struct.setCmdTypeIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // BODY
+          case 4: // MSG_TYPE
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.msgType = MsgType.findByValue(iprot.readI32());
+              struct.setMsgTypeIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 5: // BODY
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.body = iprot.readString();
               struct.setBodyIsSet(true);
@@ -523,16 +709,26 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, BaseMsg struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, CommandMsg struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
+      if (struct.msgID != null) {
+        oprot.writeFieldBegin(MSG_ID_FIELD_DESC);
+        oprot.writeString(struct.msgID);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldBegin(VER_FIELD_DESC);
       oprot.writeI32(struct.ver);
       oprot.writeFieldEnd();
-      if (struct.type != null) {
-        oprot.writeFieldBegin(TYPE_FIELD_DESC);
-        oprot.writeI32(struct.type.getValue());
+      if (struct.cmdType != null) {
+        oprot.writeFieldBegin(CMD_TYPE_FIELD_DESC);
+        oprot.writeI32(struct.cmdType.getValue());
+        oprot.writeFieldEnd();
+      }
+      if (struct.msgType != null) {
+        oprot.writeFieldBegin(MSG_TYPE_FIELD_DESC);
+        oprot.writeI32(struct.msgType.getValue());
         oprot.writeFieldEnd();
       }
       if (struct.body != null) {
@@ -546,33 +742,45 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
 
   }
 
-  private static class BaseMsgTupleSchemeFactory implements SchemeFactory {
-    public BaseMsgTupleScheme getScheme() {
-      return new BaseMsgTupleScheme();
+  private static class CommandMsgTupleSchemeFactory implements SchemeFactory {
+    public CommandMsgTupleScheme getScheme() {
+      return new CommandMsgTupleScheme();
     }
   }
 
-  private static class BaseMsgTupleScheme extends TupleScheme<BaseMsg> {
+  private static class CommandMsgTupleScheme extends TupleScheme<CommandMsg> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, BaseMsg struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, CommandMsg struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetVer()) {
+      if (struct.isSetMsgID()) {
         optionals.set(0);
       }
-      if (struct.isSetType()) {
+      if (struct.isSetVer()) {
         optionals.set(1);
       }
-      if (struct.isSetBody()) {
+      if (struct.isSetCmdType()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetMsgType()) {
+        optionals.set(3);
+      }
+      if (struct.isSetBody()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
+      if (struct.isSetMsgID()) {
+        oprot.writeString(struct.msgID);
+      }
       if (struct.isSetVer()) {
         oprot.writeI32(struct.ver);
       }
-      if (struct.isSetType()) {
-        oprot.writeI32(struct.type.getValue());
+      if (struct.isSetCmdType()) {
+        oprot.writeI32(struct.cmdType.getValue());
+      }
+      if (struct.isSetMsgType()) {
+        oprot.writeI32(struct.msgType.getValue());
       }
       if (struct.isSetBody()) {
         oprot.writeString(struct.body);
@@ -580,18 +788,26 @@ public class BaseMsg implements org.apache.thrift.TBase<BaseMsg, BaseMsg._Fields
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, BaseMsg struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, CommandMsg struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(3);
+      BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
+        struct.msgID = iprot.readString();
+        struct.setMsgIDIsSet(true);
+      }
+      if (incoming.get(1)) {
         struct.ver = iprot.readI32();
         struct.setVerIsSet(true);
       }
-      if (incoming.get(1)) {
-        struct.type = MsgType.findByValue(iprot.readI32());
-        struct.setTypeIsSet(true);
-      }
       if (incoming.get(2)) {
+        struct.cmdType = CmdType.findByValue(iprot.readI32());
+        struct.setCmdTypeIsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.msgType = MsgType.findByValue(iprot.readI32());
+        struct.setMsgTypeIsSet(true);
+      }
+      if (incoming.get(4)) {
         struct.body = iprot.readString();
         struct.setBodyIsSet(true);
       }

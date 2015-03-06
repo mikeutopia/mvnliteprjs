@@ -1,13 +1,12 @@
-package com.g2sky.pgd.intf.thrift.impl;
+package com.g2sky.pgd.intf.test.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.thrift.TException;
 
-import com.g2sky.pgd.intf.thrift.AppSvrClient;
-import com.g2sky.pgd.intf.thrift.common.AppCommandREQ;
-import com.g2sky.pgd.intf.thrift.common.AppCommandRSP;
-import com.g2sky.pgd.intf.thrift.common.CommCommandRSP;
+import com.g2sky.pgd.intf.thrift.common.CommandMsg;
+import com.g2sky.pgd.intf.thrift.common.Fileinfo;
 import com.g2sky.pgd.intf.thrift.commservice.CommService.Iface;
 
 public class CommServiceImpl implements Iface {
@@ -79,18 +78,14 @@ public class CommServiceImpl implements Iface {
 	}
 
 	@Override
-	public void sendAsyncCommandREQ(AppCommandREQ req) throws TException {
-		System.out.println(req.toString());
-		AppCommandRSP rsp = new AppCommandRSP();
-		rsp.setReqID(req.getReqID());
-		rsp.setParameter(req.getParameter());
-		AppSvrClient.sendAsyncCommandRSP(rsp);
+	public boolean setAllFirmwareFilesInfo(List<Fileinfo> fileinfolist) throws TException {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
 
 	@Override
-	public void sendAsyncCommandRSP(CommCommandRSP rsp) throws TException {
+	public void processAsyncCommand(CommandMsg command) throws TException {
+		System.out.println(command);
 		// TODO Auto-generated method stub
 
 	}
