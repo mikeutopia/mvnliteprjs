@@ -4,6 +4,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ThriftUtils {
+	public static final String APP_SVR_IP = "127.0.0.1";
+	public static final int APP_SVR_PORT = 8090;
+	public static final int CLENT_TIMEOUT = 3000;
 	public static final long DAY_MILLIS = 24 * 60 * 60 * 1000;
 
 	public static Integer dayToInt(Date day) {

@@ -16,7 +16,7 @@ import com.g2sky.pgd.intf.thrift.appservice.AppService;
 import com.g2sky.pgd.intf.thrift.common.DeviceLocation;
 
 public class LocationClient {
-	public static final String SERVER_IP = "10.100.8.248";
+	public static final String SERVER_IP = "192.168.31.248";
 	public static final int SERVER_PORT = 8090;
 	public static final int TIMEOUT = 3000;
 	private static final long now = System.currentTimeMillis();
@@ -57,9 +57,9 @@ public class LocationClient {
 			// TProtocol protocol = new TJSONProtocol(transport);
 			AppService.Client client = new AppService.Client(protocol);
 			transport.open();
-			int secs = 10;
+			int secs = 300;
 			long startTime = System.currentTimeMillis();
-			int bc = 10;// secCnt=bc*10
+			int bc = 500;// secCnt=bc*10
 			long allCnt = 0L;
 			for (int i = 0; i < secs; i++) {
 				for (int j = 0; j < 10;) {
